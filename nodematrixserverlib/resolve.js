@@ -1,4 +1,4 @@
-var dns = require('dns');
+var dns = require("dns");
 
 var nsLookup = function(domain, timeout, callback) {
     var Called = false;
@@ -15,13 +15,14 @@ var nsLookup = function(domain, timeout, callback) {
     dns.resolveNs(domain, doCallback);
 };
 
-nsLookup('rocket.chat', 1000, function(err, addresses) {
-    console.log("Results for rocket.chat, timeout 1000:");
+nsLookup("rocket.chat", 1000, function(err, addresses) {
+    //console.log("Reults for rocket.chat, timeout 1000:");
     if (err) {
-        console.log("Err: " + err);
+        //console.log("Err: " + err);
         return;
     }
-    console.log(addresses);
+    
 });
 
 //more upgrades and improvements will come in the code
+//to implement mapping
