@@ -10,9 +10,9 @@ var nsLookup = function(domain, timeout, callback) {
         callback(err, domains);
     };
 
-    setTimeout(function() {
+    /*setTimeout(function() {
         doCallback(new Error, null);
-    }, timeout);
+    }, timeout);*/ //It is unsafe
 
     dns.resolveNs(domain, doCallback);
 };
