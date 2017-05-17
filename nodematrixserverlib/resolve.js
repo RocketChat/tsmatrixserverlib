@@ -26,5 +26,12 @@ nsLookup("rocket.chat", 1000, function(err, addresses) {
 
 });
 
+dns.lookupService("127.0.0.1", 22, function(err, hostname, service)  {
+  console.log(hostname, service);
+  // Prints: localhost ssh
+});
+
 //more upgrades and improvements will come in the code
 //to implement mapping
+//DNS module for nodejs is used here...
+//127.0.0.1 will be replaced by valid ip
