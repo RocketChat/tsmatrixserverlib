@@ -27,7 +27,7 @@ nsLookup("rocket.chat", 1000, function(err, addresses) {
 });
 
 dns.lookupService("127.0.0.1", 22, function(err, hostname, service)  {
-  console.log(hostname, service);
+  //console.log(hostname, service);
   // Prints: localhost ssh
 });
 dns.resolve4("localhost", function(err, rec) {
@@ -35,7 +35,7 @@ dns.resolve4("localhost", function(err, rec) {
     //console.log(chalk.red('* dns.resolve4(\'%s\'): err: %j'), HOSTNAME, err);
     return;
   }
-  console.log('* dns.resolve4(\'%s\')', rec);
+  //console.log('* dns.resolve4(\'%s\')', rec);
 });
 
 //more upgrades and improvements will come in the code
