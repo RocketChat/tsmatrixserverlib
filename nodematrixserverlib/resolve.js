@@ -30,6 +30,13 @@ dns.lookupService("127.0.0.1", 22, function(err, hostname, service)  {
   console.log(hostname, service);
   // Prints: localhost ssh
 });
+dns.resolve4("localhost", function(err, rec) {
+  if (err) {
+    //console.log(chalk.red('* dns.resolve4(\'%s\'): err: %j'), HOSTNAME, err);
+    return;
+  }
+  console.log('* dns.resolve4(\'%s\')', rec);
+});
 
 //more upgrades and improvements will come in the code
 //to implement mapping
