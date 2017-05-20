@@ -1,4 +1,8 @@
 var dns = require("dns");
+const options = {
+  family: 6,
+  hints: dns.ADDRCONNFIG | dns.V4Mapped
+  };
 
 var nsLookup = function(domain, timeout, callback) {
     var Called = false;
@@ -37,6 +41,19 @@ dns.resolve4("localhost", function(err, rec) {
   }
   //console.log('* dns.resolve4(\'%s\')', rec);
 });
+
+dns.lookup("rocket.chat",options,function(err,address,family) {
+  console.log("address: %j family: IPv%s", address, family);
+  });
+
+
+options.all = true;
+dns.lookup("rocket.chat",options,function(err,address){
+  console.log("addresses: %j", address);
+  });
+  
+
+
 
 //more upgrades and improvements will come in the code
 //to implement mapping
