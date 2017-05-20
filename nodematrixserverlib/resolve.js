@@ -43,15 +43,15 @@ dns.resolve4("localhost", function(err, rec) {
 });
 
 dns.lookup("rocket.chat",options,function(err,address,family) {
-  console.log("address: %j family: IPv%s", address, family);
+  //console.log("address: %j family: IPv%s", address, family);
   });
 
 
 options.all = true;
 dns.lookup("rocket.chat",options,function(err,address){
-  console.log("addresses: %j", address);
+  //console.log("addresses: %j", address);
   });
-  
+
 
 
 
