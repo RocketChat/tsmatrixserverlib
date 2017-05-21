@@ -1,6 +1,6 @@
 var net = require("net");
-var dns = require("dns")
-var exp = require("express")
+var dns = require("dns");
+var exp = require("express");
 var app = exp();
 
 
@@ -12,14 +12,14 @@ app.get("rocket.chat", function (req, res) {
     ) 
 , port = 80;
 
-app.use(function(req, res){
-    res.setTimeout(1000, function(){
-        //console.log('Request has timed out.');
-            res.send(408);
-        });
+// app.use(function(req, res){
+//     res.setTimeout(1000, function(){
+//         //console.log('Request has timed out.');
+//             res.send(408);
+//         });
 
     
-});
+// });
 dns.resolveCname(server, function(error, addresses) {
     var host = "", data = "";
 
@@ -29,12 +29,12 @@ dns.resolveCname(server, function(error, addresses) {
     var socket = net.createConnection(port, host, function() {
       socket.write("domain " + domain + "\r\n", "ascii");
     });
-socket.setEncoding('ascii');
+socket.setEncoding("ascii");
 
     socket.on("data", function(response) {
       data = data + response;
     }).on("close", function(error) {
-      if(error) data = 'nothing found';
+      if(error) data = "nothing found";
 
       res.header("Content-Type", "application/json");
       res.end(data, "utf-8");
