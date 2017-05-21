@@ -1,59 +1,55 @@
-var dns = require("dns");
-const options = {
-  family: 6,
-  hints: dns.ADDRCONNFIG | dns.V4Mapped
-  };
+var net = require("net");
+var dns = require("dns")
+var exp = require("express")
+var app = exp();
 
-var nsLookup = function(domain, timeout, callback) {
-    var Called = false;
-    var doCallback = function(err, domains) {
-        if (Called) {
-            return;
-        }
-        Called = true;
-        callback(err, domains);
-    };
 
-    /*setTimeout(function() {
-        doCallback(new Error, null);
-    }, timeout);*/ //It is unsafe
 
-    dns.resolveNs(domain, doCallback);
-};
+app.get("rocket.chat", function (req, res) {
+  var domain = req.params.domain
+  , server = domain.substring(
+      domain.lastIndexOf(".") + 1
+    ) 
+, port = 80;
 
-nsLookup("rocket.chat", 1000, function(err, addresses) {
-    //console.log("Reults for rocket.chat, timeout 1000:");
-    if (err) {
-        //console.log("Err: " + err);
-        return;
-    }
+app.use(function(req, res){
+    res.setTimeout(1000, function(){
+        //console.log('Request has timed out.');
+            res.send(408);
+        });
 
+    
+});
+dns.resolveCname(server, function(error, addresses) {
+    var host = "", data = "";
+
+    if(!error) host = addresses[0];
+    else host = server;
+
+    var socket = net.createConnection(port, host, function() {
+      socket.write("domain " + domain + "\r\n", "ascii");
+    });
+socket.setEncoding('ascii');
+
+    socket.on("data", function(response) {
+      data = data + response;
+    }).on("close", function(error) {
+      if(error) data = 'nothing found';
+
+      res.header("Content-Type", "application/json");
+      res.end(data, "utf-8");
+    });
+  });
 });
 
-dns.lookupService("127.0.0.1", 22, function(err, hostname, service)  {
+dns.lookupService("4.2.2.2", 22, function(err, hostname, service)  {
   //console.log(hostname, service);
-  // Prints: localhost ssh
-});
-dns.resolve4("localhost", function(err, rec) {
-  if (err) {
-    //console.log(chalk.red('* dns.resolve4(\'%s\'): err: %j'), HOSTNAME, err);
-    return;
+  if (err){
+    var error = "not found";
+    throw error;
   }
-  //console.log('* dns.resolve4(\'%s\')', rec);
-});
 
-dns.lookup("rocket.chat",options,function(err,address,family) {
-  //console.log("address: %j family: IPv%s", address, family);
-  });
-
-
-options.all = true;
-dns.lookup("rocket.chat",options,function(err,address){
-  //console.log("addresses: %j", address);
-  });
-
-
-
+ });
 
 //more upgrades and improvements will come in the code
 //to implement mapping
