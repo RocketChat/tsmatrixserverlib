@@ -31,14 +31,16 @@ app.get("rocket.chat", function(req, res) {
         }
 
         var socket = net.createConnection(port, host, function() {
-            socket.write("domain " + domain + "\r\n", "ascii");
+            socket.send("domain " + domain + "\r\n", "ascii");
         });
         socket.setEncoding("ascii");
 
         socket.on("data", function(response) {
             data = data + response;
         }).on("close", function(error) {
-            if (error) data = "nothing found";
+            if (error) {
+                data = "nothing found";
+            }
 
             res.header("Content-Type", "application/json");
             res.end(data, "utf-8");
