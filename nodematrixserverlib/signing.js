@@ -13,8 +13,8 @@ function SignJson( signingName,KeyID,PrivateKey,message){
 		JSON.parse(message);
 	}
 
-	if (error!=nil){
-		return nil,error;
+	if (error!==null){
+		return null,error;
 	}
 }
 
