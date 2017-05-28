@@ -5,8 +5,8 @@ function signJson(jsonObject, signatureName, signingKey) {
     var unsigned = delete jsonObject["unsigned"];
 
     var messageBytes = JSON.parse(jsonObject);
-    var signed = signing_key.sign(messageBytes);
-    var signatureBase64 = encode_base64(signed.signature);
+    var signed = signingKey.sign(messageBytes);
+    var signatureBase64 = btoa(signed.signature);
 
     var keyId = "%s:%s" % (signingKey.alg, signingKey.version);
 
@@ -27,12 +27,12 @@ function signatureIds(jsonObject, signatureName, supportedAlgorithms) {
 
 function verifySignedJson(jsonObject, signatureName, verifyKey) {
     try {
-        signatures = jsonObject["signatures"];
+        var signatures = jsonObject["signatures"];
     } catch (KeyError) {
         throw SignatureVerifyException("No signature on this object");
 
     }
-    keyId = "%s:%s" % (verifykey.alg, verifyKey.version);
+    var keyId = "%s:%s" % (verifykey.alg, verifyKey.version);
 
     try {
         var signatureB64 = signatures[signatureName][keyId];
@@ -41,7 +41,7 @@ function verifySignedJson(jsonObject, signatureName, verifyKey) {
     }
 
     try {
-        signature = decode_base64(signatureB64);
+        signature = atob(signatureB64);
     } catch(error) {
         throw SignatureVerifyException("Invalid signature base64");
     }
@@ -52,7 +52,7 @@ function verifySignedJson(jsonObject, signatureName, verifyKey) {
     message = JSON.parse(jsonObjectCopy);
 
     try {
-        verify_key.verify(message, signature);
+        verifyKey.verify(message, signature);
     } catch(error) {
         throw SignatureVerifyException("Unable to verify signature");
     }
