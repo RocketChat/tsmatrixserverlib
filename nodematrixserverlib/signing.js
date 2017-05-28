@@ -4,13 +4,13 @@ function signJson(jsonObject, signatureName, signingKey) {
     var signatures = delete jsonObject["signatures"];
     var unsigned = delete jsonObject["unsigned"];
 
-    var messageBytes = JSON.parse(json_object);
-    var signed = signing_key.sign(message_bytes);
+    var messageBytes = JSON.parse(jsonObject);
+    var signed = signing_key.sign(messageBytesb	ytes);
     var signatureBase64 = encode_base64(signed.signature);
 
-    var keyId = "%s:%s" % (signing_key.alg, signing_key.version);
+    var keyId = "%s:%s" % (signingKey.alg, signingKey.version);
 
-    signatures.setdefault(signature_name, {})[key_id] = signature_base64;
+    signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
     jsonObject["signatures"] = signatures;
     if (unsigned != null) {
         jsonObject["unsigned"] = unsigned;
