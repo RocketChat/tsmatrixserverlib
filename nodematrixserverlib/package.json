@@ -23,6 +23,7 @@
     "mocha": "^3.3.0"
   },
   "dependencies": {
+    "canonical-json": "0.0.4",
     "dns": "^0.2.2",
     "ed25519-supercop": "^1.0.2",
     "express": "^4.15.2",
