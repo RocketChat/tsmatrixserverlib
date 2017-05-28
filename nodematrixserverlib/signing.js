@@ -5,7 +5,7 @@ function signJson(jsonObject, signatureName, signingKey) {
     var unsigned = delete jsonObject["unsigned"];
 
     var messageBytes = JSON.parse(jsonObject);
-    var signed = signing_key.sign(messageBytesb	ytes);
+    var signed = signing_key.sign(messageBytes);
     var signatureBase64 = encode_base64(signed.signature);
 
     var keyId = "%s:%s" % (signingKey.alg, signingKey.version);
