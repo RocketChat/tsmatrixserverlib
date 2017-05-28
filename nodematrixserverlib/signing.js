@@ -1,8 +1,8 @@
 var canonical = require("canonical-json");
 
-function signJson(json_object, signature_name, signing_key) {
-    var signatures = delete json_object["signatures"];
-    var unsigned = delete json_object["unsigned"];
+function signJson(jsonObject, signatureName, signingKey) {
+    var signatures = delete jsonObject["signatures"];
+    var unsigned = delete jsonObject["unsigned"];
 
     var messageBytes = JSON.parse(json_object);
     var signed = signing_key.sign(message_bytes);
@@ -20,28 +20,28 @@ function signJson(json_object, signature_name, signing_key) {
 
 }
 
-function signatureIds(json_object, signature_name, supported_algorithms) {
-    var keyIds = jsonObject.signatures.signature_name.keys();
+function signatureIds(jsonObject, signatureName, supportedAlgorithms) {
+    var keyIds = jsonObject.signatures.signatureName.keys();
 
 }
 
-function verifySignedJson(json_object, signature_name, verify_key) {
+function verifySignedJson(jsonObject, signatureName, verifyKey) {
     try {
         signatures = jsonObject["signatures"];
     } catch (KeyError) {
         throw SignatureVerifyException("No signature on this object");
 
     }
-    keyId = "%s:%s" % (verify_key.alg, verify_key.version);
+    keyId = "%s:%s" % (verifykey.alg, verifyKey.version);
 
     try {
-        var signatureB64 = signatures[signature_name][key_id];
+        var signatureB64 = signatures[signatureName][keyId];
     } catch(error) {
         throw SignatureVerifyException("Missing signature");
     }
 
     try {
-        signature = decode_base64(signature_b64);
+        signature = decode_base64(signatureB64);
     } catch(error) {
         throw SignatureVerifyException("Invalid signature base64");
     }
