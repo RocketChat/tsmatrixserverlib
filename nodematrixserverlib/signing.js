@@ -28,3 +28,34 @@ function signatureIds(jsonObject, signatureName, supportedAlgorithms) {
 
 }
 
+function VerifyJson(jsonObject, signatureName, verifyKey) {
+    try {
+        var signatures = jsonObject["signatures"];
+    } catch (Error) {
+        throw new Error("No signatures on this object");
+    }
+
+    var keyId = "%s:%s" % (verifyKey.alg, verifyKey.version);
+
+    try {
+        var signatureB64 = signatures[signatureName][keyId];
+    } catch (Error) {
+        throw new Error("Missing signature for %s,%s" % (signatureName, keyId));
+
+    }
+
+    try {
+        var signature = Base64.decode(signatureB64);
+    } catch (Error) {
+        throw new Error("Invalid signature base64");
+    }
+    var dict = {};
+    var jsonObjectCopy = dict(jsonObject);
+    delete jsonObjectCopy["signatures"];
+    delete jsonObjectCopy["unsigned"];
+    var message = JSON.stringify(JSON.parse(jsonObjectCopy));
+
+
+
+
+}
