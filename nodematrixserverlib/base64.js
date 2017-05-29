@@ -4,7 +4,7 @@ var base64js = require("base64-js");
 // The bytes encoded using base64 when parsed as JSON.
 // When the bytes are parsed from JSON they are decoded from base64.
 function base64EncodingUTF8(str) {
-    var encoded = new TextEncoderLite('utf-8').encode(str);        
+    var encoded = new TextEncoderLite("utf-8").encode(str);        
     var b64Encoded = base64js.fromByteArray(encoded);
     var toJsonString = JSON.stringify(b64Encoded);
     return b64Encoded;
