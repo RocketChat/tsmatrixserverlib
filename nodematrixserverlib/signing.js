@@ -13,7 +13,7 @@ function signJson(jsonObject, signatureName, signingKey) {
 
     var keyId = "%s:%s" % (signingKey.alg, signingKey.version);
 
-    signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
+    //signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
     jsonObject["signatures"] = signatures;
     if (unsigned != null) {
         jsonObject["unsigned"] = unsigned;
