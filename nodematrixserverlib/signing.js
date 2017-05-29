@@ -30,12 +30,12 @@ function signatureIds(jsonObject, signatureName, supportedAlgorithms) {
 
 function VerifyJson(jsonObject, signatureName, verifyKey) {
     try {
-        var signatures = jsonObject["signatures"];
+        signatures = jsonObject["signatures"];
     } catch (Error) {
         throw new Error("No signatures on this object");
     }
 
-    var keyId = "%s:%s" % (verifyKey.alg, verifyKey.version);
+    keyId = "%s:%s" % (verifyKey.alg, verifyKey.version);
 
     try {
         var signatureB64 = signatures[signatureName][keyId];
@@ -45,7 +45,7 @@ function VerifyJson(jsonObject, signatureName, verifyKey) {
     }
 
     try {
-        var signature = Base64.decode(signatureB64);
+         signature = btoa(signatureB64);
     } catch (Error) {
         throw new Error("Invalid signature base64");
     }
