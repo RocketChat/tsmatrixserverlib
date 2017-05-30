@@ -1,4 +1,4 @@
-var ed = require("ed25519-supercop")
+var ed = require("ed25519-supercop");
 var seed = ed.createSeed();
 //console.log(seed);
 var keypair = ed.createKeyPair(seed);
