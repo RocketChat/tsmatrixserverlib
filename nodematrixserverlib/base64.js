@@ -1,5 +1,5 @@
 var base64js = require("base64-js");
-
+var TextEncoderLite = require("text-encoder-lite");
 // A Base64String is a string of bytes that are base64 encoded when used in JSON.
 // The bytes encoded using base64 when parsed as JSON.
 // When the bytes are parsed from JSON they are decoded from base64.
