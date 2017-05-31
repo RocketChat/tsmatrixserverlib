@@ -1,4 +1,4 @@
-var obj = {
+var input = {
     "b": "two",
     "a": 1
 }; //this is a json string used by matrix-org for test purposes
@@ -11,6 +11,7 @@ function CanonicalJSON(input, err) {
     for (var i = 0; i < input.length; i++) {
         var sorted = SortJSON(input);
     }
+    
     if (err != null) {
         return null;
     }
@@ -18,8 +19,10 @@ function CanonicalJSON(input, err) {
         return CompactJSON(sorted);
     }
 }
+function SortJSON(){
+JSON.stringify(input, Object.keys(input).sort());
 
-JSON.stringify(obj, Object.keys(obj).sort()); // has to be a function called sort SortJson
+} // has to be a function called sort SortJson
 
 //the basic idea is to reencode json and then arrange them into lexicographical order.
 //gophers has a very copmplex way to do it,but JS is somewhat simple :)
