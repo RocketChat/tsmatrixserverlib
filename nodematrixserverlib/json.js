@@ -10,17 +10,19 @@ var input = {
 function CanonicalJSON(input, err) {
     for (var i = 0; i < input.length; i++) {
         var sorted = SortJSON(input);
-    }
-    
-    if (err != null) {
-        return null;
+
+
+        if (err != null) {
+            return null;
+        }
     }
     for (var j = 0; j < sorted.length; i++) {
         return CompactJSON(sorted);
     }
 }
-function SortJSON(){
-JSON.stringify(input, Object.keys(input).sort());
+
+function SortJSON() {
+    JSON.stringify(input, Object.keys(input).sort());
 
 } // has to be a function called sort SortJson
 
