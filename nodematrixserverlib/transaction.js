@@ -21,6 +21,9 @@ function Destination(destination){
 var previousID = []; // array is created to store the list of previousID's
 var PDUs = [];
 
+exports.TransactionID = TransactionID;
+exports.Origin = Origin;
+
 // A TransactionID identifies a transaction sent by a matrix server to another
 // matrix server. The ID must be unique amoungst the transactions sent from the
 // origin server to the destination, but doesn't have to be globally unique.
