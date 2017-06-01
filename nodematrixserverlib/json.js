@@ -12,19 +12,19 @@ function sortJSON() {
 
 } // has to be a function called sort SortJson
 
-function CanonicalJSON(input, err) {
-    for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
-        var sorted = sortJSON(input);
+// function CanonicalJSON(input, err) {
+//     for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
+//         var sorted = sortJSON(input);
 
 
-        if (err != null) {
-            return null;
-        }
-    }
-    for (var j = 0; j < sorted.length; i++) {
-        return compactJSON(sorted);
-    }
-}
+//         if (err != null) {
+//             return null;
+//         }
+//     }
+//     for (var j = 0; j < sorted.length; i++) {
+//         //return compactJSON(sorted);
+//     }
+// }
 
 
 
