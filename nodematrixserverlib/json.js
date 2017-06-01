@@ -22,7 +22,7 @@ function CanonicalJSON(input, err) {
         }
     }
     for (var j = 0; j < sorted.length; i++) {
-        return CompactJSON(sorted);
+        return compactJSON(sorted);
     }
 }
 
