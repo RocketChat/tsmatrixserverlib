@@ -21,7 +21,7 @@
 
 
 function sortJSON(input) {
-    JSON.stringify(input, Object.keys(obj).sort());
+    JSON.stringify(input, Object.keys(input).sort());
 
 } // has to be a function called sort SortJson
 
@@ -29,29 +29,30 @@ function sortJSON(input) {
 //console.log(JSON.stringify(input, Object.keys(obj).sort()));
 
 
-function canonicalJSON(input, err) {
-    for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
-        var sorted = sortJSON(input);
+// function canonicalJSON(input, err) {
+//     for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
+//         var sorted = sortJSON(input);
 
 
-        if (err != null) {
-            return null;
-        }
-    }
-    for (var j = 0; j < sorted.length; i++) {
-        return compactJSON(sorted);
-    }
-}
+//         if (err != null) {
+//             return null;
+//         }
+//     }
+//     for (var j = 0; j < sorted.length; i++) {
+//         return compactJSON(sorted);
+//     }
+// }
 
 function compactJSON(input, output) {
     var i;
+    var c;
     for (i = 0; i < input.length; i++) {
         var c = input[i];
-        if (c <= ' ') {
+        if (c <= " ") {
             continue;
         }
         output.push(c);
-        if (c == '""') {
+        if (c == """") {
             for (i = 0; i < input.length; i++) {
                 c = input[i];
                 if (c == "\\") {
@@ -63,7 +64,7 @@ function compactJSON(input, output) {
                     } else {
                         output.push("\\", escape);
                     }
-                    if (c == '""') {
+                    if (c == """") {
                         break;
                     }
                 }
@@ -74,6 +75,7 @@ function compactJSON(input, output) {
 }
 
 function compactUnicodeEscape(input, output, index) {
+	var c;
     const ESCAPES = "uuuuuuuubtnufruuuuuuuuuuuuuuuuuu";
     const HEX = "0123456789ABCDEF";
     var inputLength = input.length;
@@ -82,15 +84,15 @@ function compactUnicodeEscape(input, output, index) {
     }
     c = readHexDigits(input[index]);
     index += 4;
-    if (c < ' ') {
+    if (c < " ") {
         escape = ESCAPES[c];
-        output.push(output, '\\', escape);
+        output.push(output, "\\", escape);
     }
-    if (escape == 'u') {
-        output.push("0", "0", ('0' + (c >> 4)), HEX[c & 0xF]);
+    if (escape == "u") {
+        output.push("0", "0", ("0" + (c >> 4)), HEX[c & 0xF]);
     } else if (c == '\\' || c == '"') {
         // Otherwise the character only needs escaping if it is a QUOTE '"' or BACKSLASH '\\'.
-        output.push(output, '\\', c);
+        output.push(output, "\\", c);
     } else if (c < 0xD800 || c >= 0xE000) {
         // If the character isn't a surrogate pair then encoded it directly as UTF-8.
         var buffer;
