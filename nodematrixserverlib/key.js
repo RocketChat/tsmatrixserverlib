@@ -13,8 +13,8 @@ function ServerKeys(Raw, FromServer, ServerKeyFields) {
 }
 
 function TLSFingerprint() {
-    const hash = crypto.createHash('sha256')
-        .digest('base64');
+    const hash = crypto.createHash("sha256")
+        .digest("base64");
     return hash;
 }
 
@@ -24,6 +24,7 @@ function VerifyKey() {
 }
 
 function OldVerifyKey(verifykey, ExpiredTS) {
+	var TimeStamp;
     this.verifykey = VerifyKey;
     this.ExpiredTS = TimeStamp;
 }

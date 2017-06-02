@@ -54,19 +54,19 @@ function compactJSON(input, output) {
             continue;
         }
         output.push(c);
-        if (c == " ") {
+        if (c ===" ") {
             for (i = 0; i < input.length; i++) {
                 c = input[i];
-                if (c == "\\") {
+                if (c === "\\") {
                     var escape = input[i];
-                    if (escape == "u") {
+                    if (escape === "u") {
                         compactUnicodeEscape(input, output, i);
-                    } else if (escape == "/") {
+                    } else if (escape === "/") {
                         output.push(escape);
                     } else {
                         output.push("\\", escape);
                     }
-                    if (c == " ") {
+                    if (c === " ") {
                         break;
                     }
                 }
@@ -90,7 +90,7 @@ function compactUnicodeEscape(input, output, index) {
         escape = ESCAPES[c];
         output.push(output, "\\", escape);
     }
-    if (escape == "u") {
+    if (escape ==="u") {
         output.push("0", "0", ("0" + (c >> 4)), HEX[c & 0xF]);
     } else if (c == '\\' || c == " ") {
         // Otherwise the character only needs escaping if it is a QUOTE '"' or BACKSLASH '\\'.
