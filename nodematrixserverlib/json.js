@@ -19,11 +19,13 @@
 //     return a.b.localeCompare(b.a);
 // });
 
-
 function sortJSON(input) {
-    JSON.stringify(input, Object.keys(input).sort());
+  var value =  JSON.stringify(input, Object.keys(input).sort());
+  return value;
+	   
 
 } // has to be a function called sort SortJson
+//console.log(JSON.stringify(input, Object.keys(input).sort()));
 
 
 //console.log(JSON.stringify(input, Object.keys(obj).sort()));
@@ -52,7 +54,7 @@ function compactJSON(input, output) {
             continue;
         }
         output.push(c);
-        if (c == """") {
+        if (c == " ") {
             for (i = 0; i < input.length; i++) {
                 c = input[i];
                 if (c == "\\") {
@@ -64,7 +66,7 @@ function compactJSON(input, output) {
                     } else {
                         output.push("\\", escape);
                     }
-                    if (c == """") {
+                    if (c == " ") {
                         break;
                     }
                 }
@@ -90,7 +92,7 @@ function compactUnicodeEscape(input, output, index) {
     }
     if (escape == "u") {
         output.push("0", "0", ("0" + (c >> 4)), HEX[c & 0xF]);
-    } else if (c == '\\' || c == '"') {
+    } else if (c == '\\' || c == " ") {
         // Otherwise the character only needs escaping if it is a QUOTE '"' or BACKSLASH '\\'.
         output.push(output, "\\", c);
     } else if (c < 0xD800 || c >= 0xE000) {
@@ -115,6 +117,12 @@ function compactUnicodeEscape(input, output, index) {
     }
     return output, index;
 }
+
+
+exports.sortJSON = sortJSON;
+// exports.compactJSON = compactJSON;
+// exports.compactUnicodeEscape = compactUnicodeEscape;
+
 //the basic idea is to reencode json and then arrange them into lexicographical order.
 //gophers has a very copmplex way to do it,but JS is somewhat simple :)
 // i guess there is nno need to use interfaces in js,as gophers use it to handle loosely handled or non-strictly typed json.
