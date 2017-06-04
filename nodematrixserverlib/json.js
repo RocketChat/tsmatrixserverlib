@@ -1,23 +1,23 @@
 
 
-// //console.log(JSON.stringify(JSON.parse(input)));
+//console.log(JSON.stringify(JSON.parse(input)));
 
-// // function sortFactory(prop) {
-// //    return function(a,b){ return a[prop].localeCompare(b[prop]); };
-// // }
-// // input.sort(function(a, b) {
-// //     return a.A.localeCompare(b.B);
-// // });
+ // function sortFactory(prop) {
+//    return function(a,b){ return a[prop].localeCompare(b[prop]); };
+ // }
+ // input.sort(function(a, b) {
+ //     return a.A.localeCompare(b.B);
+ // });
 
 
-// //console.log(obj);
-// // console.log(obj.sort(sortFactory('A'))); // sort by name property
-// // console.log(obj.sort(sortFactory('A'))); // sort by surname property
-// //this is a json string used by matrix-org for test purposes
+ //console.log(obj);
+ // console.log(obj.sort(sortFactory('A'))); // sort by name property
+ // console.log(obj.sort(sortFactory('A'))); // sort by surname property
+ //this is a json string used by matrix-org for test purposes
 
-// // input.sort(function(a, b) {
-// //     return a.b.localeCompare(b.a);
-// // });
+ // input.sort(function(a, b) {
+ //     return a.b.localeCompare(b.a);
+ // });
 
 // function sortJSON(input) {
 //   var value =  JSON.stringify(input, Object.keys(input).sort());
@@ -31,19 +31,19 @@
 // //console.log(JSON.stringify(input, Object.keys(obj).sort()));
 
 
-// // function canonicalJSON(input, err) {
-// //     for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
-// //         var sorted = sortJSON(input);
+ // function canonicalJSON(input, err) {
+ //     for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
+ //         var sorted = sortJSON(input);
 
 
-// //         if (err != null) {
-// //             return null;
-// //         }
-// //     }
-// //     for (var j = 0; j < sorted.length; i++) {
-// //         return compactJSON(sorted);
-// //     }
-// // }
+ //         if (err != null) {
+ //             return null;
+ //         }
+ //     }
+ //     for (var j = 0; j < sorted.length; i++) {
+ //         return compactJSON(sorted);
+ //     }
+ // }
 
 // function compactJSON(input, output) {
 //     var i;
