@@ -23,5 +23,9 @@
   }
 
 var SetContent: EventBuilder = function (Content: string) {
-      return JSON.stringify(Unsigned);
+      return JSON.stringify(Content);
   }
+
+var SetUnsigned: EventBuilder = function (Unsigned: string) {
+    return JSON.stringify(Unsigned);
+}
