@@ -1,28 +1,26 @@
-
-
 //console.log(JSON.stringify(JSON.parse(input)));
 
- // function sortFactory(prop) {
+// function sortFactory(prop) {
 //    return function(a,b){ return a[prop].localeCompare(b[prop]); };
- // }
- // input.sort(function(a, b) {
- //     return a.A.localeCompare(b.B);
- // });
+// }
+// input.sort(function(a, b) {
+//     return a.A.localeCompare(b.B);
+// });
 
 
- //console.log(obj);
- // console.log(obj.sort(sortFactory('A'))); // sort by name property
- // console.log(obj.sort(sortFactory('A'))); // sort by surname property
- //this is a json string used by matrix-org for test purposes
+//console.log(obj);
+// console.log(obj.sort(sortFactory('A'))); // sort by name property
+// console.log(obj.sort(sortFactory('A'))); // sort by surname property
+//this is a json string used by matrix-org for test purposes
 
- // input.sort(function(a, b) {
- //     return a.b.localeCompare(b.a);
- // });
+// input.sort(function(a, b) {
+//     return a.b.localeCompare(b.a);
+// });
 
 // function sortJSON(input) {
 //   var value =  JSON.stringify(input, Object.keys(input).sort());
 //   return value;
-	   
+
 
 // } // has to be a function called sort SortJson
 // //console.log(JSON.stringify(input, Object.keys(input).sort()));
@@ -31,19 +29,19 @@
 // //console.log(JSON.stringify(input, Object.keys(obj).sort()));
 
 
- // function canonicalJSON(input, err) {
- //     for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
- //         var sorted = sortJSON(input);
+// function canonicalJSON(input, err) {
+//     for (var i = 0; i < input.length; i++) { // i guess i have to use slices innstes creating forloops 
+//         var sorted = sortJSON(input);
 
 
- //         if (err != null) {
- //             return null;
- //         }
- //     }
- //     for (var j = 0; j < sorted.length; i++) {
- //         return compactJSON(sorted);
- //     }
- // }
+//         if (err != null) {
+//             return null;
+//         }
+//     }
+//     for (var j = 0; j < sorted.length; i++) {
+//         return compactJSON(sorted);
+//     }
+// }
 
 // function compactJSON(input, output) {
 //     var i;
@@ -119,9 +117,9 @@
 // }
 
 
-// exports.sortJSON = sortJSON;
-// // exports.compactJSON = compactJSON;
-// // exports.compactUnicodeEscape = compactUnicodeEscape;
+//exports.sortJSON = sortJSON;
+// exports.compactJSON = compactJSON;
+// exports.compactUnicodeEscape = compactUnicodeEscape;
 
-// //the basic idea is to reencode json and then arrange them into lexicographical order.
-// //gophers has a very copmplex way to do it,but JS is somewhat simple :)
+//the basic idea is to reencode json and then arrange them into lexicographical order.
+//gophers has a very copmplex way to do it,but JS is somewhat simple :)
