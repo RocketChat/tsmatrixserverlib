@@ -20,7 +20,8 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.3.0"
+    "mocha": "^3.3.0",
+		"typescript": "^2.3.4"
   },
   "dependencies": {
     "atob": "^2.0.3",
@@ -34,6 +35,7 @@
     "net": "^1.0.2",
     "request": "^2.81.0",
     "text-encoder-lite": "^1.0.0",
-    "text-encoding": "^0.6.4"
+    "text-encoding": "^0.6.4",
+   
   }
 }
