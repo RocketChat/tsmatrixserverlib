@@ -35,7 +35,7 @@
     "net": "^1.0.2",
     "request": "^2.81.0",
     "text-encoder-lite": "^1.0.0",
-    "text-encoding": "^0.6.4",
-   
+    "text-encoding": "^0.6.4"
+
   }
 }
