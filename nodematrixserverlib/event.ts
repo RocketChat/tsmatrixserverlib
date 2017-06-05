@@ -29,3 +29,19 @@ var SetContent: EventBuilder = function (Content: string) {
 var SetUnsigned: EventBuilder = function (Unsigned: string) {
     return JSON.stringify(Unsigned);
 }
+interface eventFields {
+    RoomID:string;
+    EventID:string;
+    Sender:string;
+    Type:string;
+    StateKey:string;
+    Content:string;
+    PrevEvents:EventReference[];
+    AuthEvents: EventReference[];
+    Redacts:string;
+    Depth:number;
+    Unsigned:string;
+    OriginServerTS:Timestamp;
+    Origin:ServerName;
+
+}
