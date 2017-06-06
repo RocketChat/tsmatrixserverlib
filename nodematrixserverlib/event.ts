@@ -45,3 +45,44 @@ interface eventFields {
     Origin:ServerName;
 
 }
+
+var emptyEventReferenceList:EventReference[];
+
+// there are few things here which i do not know Build() in golang
+
+let eventJSON:string= [];
+
+if (eventJSON === JSON.stringify(event)){
+    return;
+}
+if (eventJSON===addContentHashesToEvent(eventJSON)){
+    return;
+}
+
+if (eventJSON===signEvent(origin:string),keyID,privateKey,eventJSON){
+   return;
+}
+if (eventJSON ===CanonicalJSON(eventJSON)){
+   return;
+}
+result.eventJSON = eventJSON;
+
+var err;
+
+if (err === JSON.stringify(eventJSON,result.fields)){
+    return;
+}
+
+if (err === result.CheckFields()){
+   return;
+}
+return;
+}
+
+function newEventFromUntrustedJSON(eventJSON[]:Event){
+    let map = new Map<string, string>();
+    map.set("event", "rawJSON");
+    if (err === JSON.stringify(eventJSON,event)){
+        return;
+    }
+}
