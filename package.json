@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/rocketchat/Rocket.Chat.Federation/issues"
   },
-  "homepage": "https://github.com/rocketchat/Rocket.Chat.Federation"
+  "homepage": "https://github.com/rocketchat/Rocket.Chat.Federation",
+  "dependencies": {
+    
+  }
 }
