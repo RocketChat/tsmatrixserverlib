@@ -6,7 +6,7 @@ const FormatSync;
 interface ClientEvent {
   Content: string;
   EventID: string;
-  OriginServerTS: string;
+  OriginServerTS:Date;
   RoomID: string;
   Sender: string;
   StateKey: string;
