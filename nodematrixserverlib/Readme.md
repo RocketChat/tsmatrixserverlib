@@ -13,7 +13,7 @@ nodematrixserverlib is written in TypeScript, although calling client can be in 
 We selected TypeScript over JavaScript because:
 
 1) Golang is strongly typed, TypeScript adds type support to JavaScript; we feel this will make the porting exercise easier
-2) nodematrixserverlib will likely gain complexity over time with multiple contributors, and TypeScript is more suitable for larege complex project better than JavaScript
+2) nodematrixserverlib will likely gain complexity over time with multiple contributors, and TypeScript is more suitable for team collaborating on complex project
 
 The is work in progress.  We will update this page from time to time.
 
