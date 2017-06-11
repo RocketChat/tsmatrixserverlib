@@ -8,8 +8,7 @@
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "outDir":"JS-outputfiles/"
+    "experimentalDecorators": true
 
   },
   "files": [
