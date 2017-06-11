@@ -4,7 +4,7 @@
   "description": "federation server written in typescript",
   "main": "none",
   "scripts": {
-     "build": "tsc index.ts",
+     "build": "tsc index.ts --module commonjs",
     "test": "mocha -r ts-node/register test_ts/**/hello_test.ts"
   },
   "repository": {

@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "target": "ES2016",
+    "sourceMap": true,
     "module": "commonjs",
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "outDir":"JS-outputfiles/"
+
   },
   "files": [
        "index.ts"
