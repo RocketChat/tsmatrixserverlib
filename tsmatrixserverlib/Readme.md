@@ -17,5 +17,22 @@ We selected TypeScript over JavaScript because:
 
 The is work in progress.  We will update this page from time to time.
 
+#### Set up tsmatrixserverlib
+
+git clone<repository>.
+
+git checkout branchname(tsmatrixlib).
+
+cd tsmatrixserverlib
+
+npm install
+
+npm run start
+
+#### Running Tests
+
+npm test
+
+
 
 
