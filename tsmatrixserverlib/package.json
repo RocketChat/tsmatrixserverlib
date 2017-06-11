@@ -5,8 +5,8 @@
   "main": "none",
   "scripts": {
     "tsc": "tsc",
-   "tsc:w": "tsc -w --outDir build",
-     "start": "npm run tsc:w",
+    "tsc:w": "tsc -w --outDir build",
+    "start": "npm run tsc:w",
     "test": "mocha -r ts-node/register test_ts/**/hello_test.ts"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
     "ts-node": "^3.0.6",
+    "typescript": "^2.3.4",
     "typings": "^2.1.1"
   }
 }
