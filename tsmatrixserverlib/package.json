@@ -4,8 +4,11 @@
   "description": "federation server written in typescript",
   "main": "none",
   "scripts": {
-    "build": "tsc timestamp.ts base64.ts --outDir build",
-    "test": "mocha -r ts-node/register test_ts/**"
+    "compile:ts": "tsc --outDir ./build --module commonjs ./timestamp ./base64",
+    "pretest": "echo 'about to run the test...'",
+    "test": "mocha -r ts-node/register test_ts/**",
+    "posttest": "echo 'the tests has been run!'"
+
   },
   "repository": {
     "type": "git",

@@ -27,7 +27,7 @@ cd tsmatrixserverlib
 
 npm install
 
-npm run build
+npm run compile:ts
 
 #### Running Tests
 
