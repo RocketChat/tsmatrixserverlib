@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w --outDir build",
     "start": "npm run tsc:w",
-    "test": "mocha -r ts-node/register test_ts/**/hello_test.ts"
+    "test": "mocha -r ts-node/register test_ts/**/timestamp_test.ts"
   },
   "repository": {
     "type": "git",
