@@ -19,9 +19,9 @@ The is work in progress.  We will update this page from time to time.
 
 #### Set up tsmatrixserverlib
 
-git clone<repository>.
+git clone [a link](https://github.com/RocketChat/Rocket.Chat.Federation.git).
 
-git checkout branchname(tsmatrixlib).
+git checkout tsmatrixlib.
 
 cd tsmatrixserverlib
 
