@@ -19,7 +19,7 @@ The is work in progress.  We will update this page from time to time.
 
 #### Set up tsmatrixserverlib
 
-git clone [a link](https://github.com/RocketChat/Rocket.Chat.Federation.git).
+git clone [Federation Repo](https://github.com/RocketChat/Rocket.Chat.Federation.git).
 
 git checkout tsmatrixlib.
 
