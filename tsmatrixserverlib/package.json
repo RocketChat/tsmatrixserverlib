@@ -4,9 +4,7 @@
   "description": "federation server written in typescript",
   "main": "none",
   "scripts": {
-    "tsc": "tsc",
-    "tsc:w": "tsc -w --outDir build",
-    "start": "npm run tsc:w",
+    "build": "tsc timestamp.ts --outDir build",
     "test": "mocha -r ts-node/register test_ts/**/timestamp_test.ts"
   },
   "repository": {
