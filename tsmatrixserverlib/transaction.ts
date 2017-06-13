@@ -6,7 +6,7 @@ class Transaction {
   // server to the destination server in parallel so there may be more than
   // one previous transaction.
   constructor(public TransactionID: string, public ServerName: any, public Timestamp: string,
-    public PreviousIDs: Transaction[], public PDUs: Event[])
+  PreviousIds:any["previous_ids"],PDUs:any["pdus"]) {}
   // The room events pushed from the origin server to the destination server
   // by this transaction. The events should either be events that originate
   // on the origin server or be join m.room.member events.
@@ -18,5 +18,4 @@ class Transaction {
 // The ID must be safe to insert into a URL path segment. The ID should have a
 // format matching '^[0-9A-Za-z\-_]*$'
 
-let transactions = new Transaction("transaction_id", "origin", "destination",
-  "origin_server_ts", "previous_ids", "pdus");
+let transactions = new Transaction("transaction_id", "origin", "destination","previous_ids","pdus");
