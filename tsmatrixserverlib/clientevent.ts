@@ -1,4 +1,4 @@
-let EventFormat: number;
+const EventFormat: number;
 
 const FormatAll: EventFormat = iota;
 const FormatSync;
@@ -14,7 +14,7 @@ interface ClientEvent {
   Unsigned: string;
 }
 
-function ToClientEvents(serverEvs[]Event, format EventFormat): ClientEvent {
+export function ToClientEvents(serverEvs[]Event, format EventFormat): ClientEvent {
   var evs = ClientEvent.slice(0, serverEvs.length);
   for (var _i = 0; _i < serverEvs.length; _i++) {
     evs[i] = ToClientEvent(se, format);
@@ -23,9 +23,9 @@ function ToClientEvents(serverEvs[]Event, format EventFormat): ClientEvent {
 }
 let Event = new se;
 let EventFormat = new format;
-function ToClientEvent(se, format): ClientEvent {
-  var ce: ClientEvent{
-    Content: se.Content();
+function ToClientEvent(se: any, format: any): ClientEvent {
+    let ce: ClientEvent{
+    Content: se.Content:();
     Type: se.Type();
     StateKey: se.StateKey();
     Unsigned: se.Unsigned();
