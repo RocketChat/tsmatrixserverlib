@@ -2,6 +2,8 @@ import {baseEncoding} from '../base64';
 import {baseDecoding} from '../base64';
 import { expect } from 'chai';
 
+import {} from 'mocha';
+
 describe('function for encoding and decoding base64string', () => {
   it("must encode strings to base64", () => {
     let encoded = "this\xffis\xffa\xfftest";
