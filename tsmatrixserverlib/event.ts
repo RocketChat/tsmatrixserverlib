@@ -1,4 +1,4 @@
-interface StateKeyTuple {
+/*interface StateKeyTuple {
   EventType: string;
   StateKey: string;
 }
@@ -41,8 +41,8 @@ interface eventFields {
   Redacts: string;
   Depth: number;
   Unsigned: string;
-  OriginServerTS: Timestamp;
-  Origin: ServerName;
+  OriginServerTS: any;
+  Origin: any;
 
 }
 
@@ -109,4 +109,4 @@ function newEventFromUntrustedJSON(eventJSON[]:Event) {
     return;
   }
   return;
-}
+} */

@@ -8,7 +8,6 @@
     "pretest": "echo 'about to run the test...'",
     "test": "mocha -r ts-node/register test_ts/**",
     "posttest": "echo 'the tests has been run!'"
-
   },
   "repository": {
     "type": "git",
@@ -24,6 +23,7 @@
     "@types/chai": "^4.0.0",
     "@types/mocha": "^2.2.41",
     "chai": "^4.0.2",
+    "dns": "^0.2.2",
     "mocha": "^3.4.2",
     "ts-node": "^3.0.6",
     "typescript": "^2.3.4",

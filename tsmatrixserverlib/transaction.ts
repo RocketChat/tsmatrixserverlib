@@ -1,6 +1,6 @@
 // A Transaction is used to push data from one matrix server to another matrix
 // server.
-class Transaction {
+export class Transaction {
   // The IDs of the most recent transactions sent by the origin server to
   // the destination server. Multiple transactions can be sent by the origin
   // server to the destination server in parallel so there may be more than

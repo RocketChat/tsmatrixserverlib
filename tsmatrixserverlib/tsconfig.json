@@ -16,6 +16,8 @@
        "index.ts"
    ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "typings/main",
+   "typings/dns.d.ts"
   ]
 }
