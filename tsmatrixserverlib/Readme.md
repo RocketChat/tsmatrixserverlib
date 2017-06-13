@@ -25,14 +25,4 @@ git checkout tsmatrixlib.
 
 cd tsmatrixserverlib
 
-npm install
-
-npm run compile:ts
-
-#### Running Tests
-
-npm test
-
-
-
-
+Run command : sh setup.sh
