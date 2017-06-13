@@ -4,7 +4,7 @@
   "description": "federation server written in typescript",
   "main": "none",
   "scripts": {
-    "compile:ts": "tsc --outDir ./build --module commonjs ./timestamp ./base64",
+    "compile:ts": "tsc --outDir ./build --module commonjs @compile.txt",
     "pretest": "echo 'about to run the test...'",
     "test": "mocha -r ts-node/register test_ts/**",
     "posttest": "echo 'the tests has been run!'"
