@@ -18,11 +18,9 @@ We selected TypeScript over JavaScript because:
 The is work in progress.  We will update this page from time to time.
 
 #### Set up tsmatrixserverlib
-
-git clone [Federation Repo](https://github.com/RocketChat/Rocket.Chat.Federation.git).
-
-git checkout tsmatrixlib.
-
-cd tsmatrixserverlib
-
-Run command : sh setup.sh
+```
+$ git clone [Federation Repo](https://github.com/RocketChat/Rocket.Chat.Federation.git)
+$ git checkout tsmatrixlib
+$ cd tsmatrixserverlib
+$ sh setup.sh
+```

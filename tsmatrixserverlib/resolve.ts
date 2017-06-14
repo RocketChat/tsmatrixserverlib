@@ -1,7 +1,7 @@
 import dns = require("dns");
 interface HostResult {
   CName: string;
-  //Addrs: []string;
+  Addrs: ;
 
 }
 

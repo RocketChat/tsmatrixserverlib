@@ -1,4 +1,4 @@
-/*interface StateKeyTuple {
+interface StateKeyTuple {
   EventType: string;
   StateKey: string;
 }
@@ -109,4 +109,4 @@ function newEventFromUntrustedJSON(eventJSON[]:Event) {
     return;
   }
   return;
-} */
+}
