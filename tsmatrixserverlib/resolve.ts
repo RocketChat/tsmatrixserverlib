@@ -1,7 +1,7 @@
 import dns = require("dns");
 interface HostResult {
   CName: string;
-  Addrs: ;
+  //ftAddrs:
 
 }
 
@@ -30,4 +30,5 @@ function LookupServer(serverName:DNSResult){
   if (err!=null){
     dns.TIMEOUT();
   }
+
 }

@@ -15,37 +15,32 @@ interface ClientEvent {
   Unsigned: "unsigned,omitempty";
 }
 
-function ToClientEvent(serverevs:number,format:number)
-// interface ClientEvent {
-   EventID: string;
-//   OriginServerTS:Date;
-//   RoomID: string;
-//   Sender: string;
-//   StateKey: string;
-//   Type: string;
-//   Unsigned: string;
-// }
-//
-// export function ToClientEvents(serverEvs:any[], format: any): ClientEvent {
-//   var evs = ClientEvent.slice(0, serverEvs.length);
-//   for (var _i = 0; _i < serverEvs.length; _i++) {
-//     evs[i] = ToClientEvent(se, format);
-//   }
-//   return;
-// }
-// let Event = new se;
-// let EventFormat = new format;
-// function ToClientEvent(se: any, format: any): ClientEvent {
-//     let ce: ClientEvent{
-//     Content: se.Content:();
-//     Type: se.Type();
-//     StateKey: se.StateKey();
-//     Unsigned: se.Unsigned();
-//     OriginServerTS: se.OriginServerTS();
-//     EventID: se.EventID();
-//   }
-//   if (format === FormatAll) {
-//     ce.RoomID = se.RoomID();
-//   }
-//   return ce;
-// }
+function ToClientEvents(serverEvs:any,format:any){
+  let ClientEvent = [];
+  let evs = ClientEvent.slice(0,serverEvs.length);
+  for (let i in serverEvs ){
+    let se;
+    evs[i] = ToClientEvent(se,format);
+  }
+  return evs;
+}
+
+function ToClientEvent(se:ClientEvent,format:ClientEvent){
+  let ce = [se.Content,
+  se.EventID,
+  se.OriginServerTS,
+  se.RoomID,
+  se.Sender,
+  se.StateKey,
+  se.Type,
+  se.Unsigned];
+
+  let formatALL:any;
+  if (format === formatALL){
+    ce[3] = se.RoomID;
+  }
+    return ce;
+  }
+
+
+//function ToClientEvent()
