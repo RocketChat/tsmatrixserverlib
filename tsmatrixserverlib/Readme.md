@@ -17,10 +17,17 @@ We selected TypeScript over JavaScript because:
 
 The is work in progress.  We will update this page from time to time.
 
-#### Set up tsmatrixserverlib
+#### Set up tsmatrixserverlib with TypeScript Unit Tests
 ```
-$ git clone [Federation Repo](https://github.com/RocketChat/Rocket.Chat.Federation.git)
+$ git clone https://github.com/RocketChat/Rocket.Chat.Federation.git
 $ git checkout tsmatrixlib
 $ cd tsmatrixserverlib
-$ sh setup.sh
+$ sh setup_TS.sh
+```
+#### Set up tsmatrixserverlib with Javascript Unit Tests
+```
+$ git clone https://github.com/RocketChat/Rocket.Chat.Federation.git
+$ git checkout tsmatrixlib
+$ cd tsmatrixserverlib
+$ sh setup_JS.sh
 ```

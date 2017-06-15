@@ -1,10 +1,10 @@
 import iota = require("iota");
 
 let EventFormat: number;
-declare const FormatAll;
+declare const FormatAll; //a bit of change may come 
 declare const FormatSync;
 
-interface ClientEvent {
+export interface ClientEvent {
   Content: "content";
   EventID: "event_id";
   OriginServerTS: "origin_server_ts";
@@ -15,7 +15,7 @@ interface ClientEvent {
   Unsigned: "unsigned,omitempty";
 }
 
-function ToClientEvents(serverEvs:any,format:any){
+export function ToClientEvents(serverEvs:any,format:any){
   let ClientEvent = [];
   let evs = ClientEvent.slice(0,serverEvs.length);
   for (let i in serverEvs ){
@@ -25,7 +25,7 @@ function ToClientEvents(serverEvs:any,format:any){
   return evs;
 }
 
-function ToClientEvent(se:ClientEvent,format:ClientEvent){
+export function ToClientEvent(se:ClientEvent,format:ClientEvent){
   let ce = [se.Content,
   se.EventID,
   se.OriginServerTS,
@@ -41,6 +41,3 @@ function ToClientEvent(se:ClientEvent,format:ClientEvent){
   }
     return ce;
   }
-
-
-//function ToClientEvent()

@@ -12,9 +12,7 @@
     "experimentalDecorators": true
 
   },
-  "files": [
-       "index.ts"
-   ],
+
   "exclude": [
     "node_modules",
     "typings/main",
