@@ -4,12 +4,12 @@ import { expect } from 'chai';
 // if you used the '@types/mocha' method to install mocha type definitions, uncomment the following line
  import {} from 'mocha';
 
-describe('function for timestamp', () => {
+describe('function for timestamp in TypeScript', () => {
   it('should return millisecond posix time', () => {
     //const result = asTimeStamp();
      expect(asTimeStamp(new Date())).to.be.a("number");
   });
-  it('must return UTC string', () =>{
+  it('must return UTC string in TypeScript', () =>{
     let timeInMilliseconds = new Date().getTime();
      let utctime = new Date(timeInMilliseconds);
      expect(utcTime(timeInMilliseconds)).to.deep.equal(utctime);

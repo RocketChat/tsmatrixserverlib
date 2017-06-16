@@ -22,12 +22,5 @@ The is work in progress.  We will update this page from time to time.
 $ git clone https://github.com/RocketChat/Rocket.Chat.Federation.git
 $ git checkout tsmatrixlib
 $ cd tsmatrixserverlib
-$ sh setup_TS.sh
-```
-#### Set up tsmatrixserverlib with Javascript Unit Tests
-```
-$ git clone https://github.com/RocketChat/Rocket.Chat.Federation.git
-$ git checkout tsmatrixlib
-$ cd tsmatrixserverlib
-$ sh setup_JS.sh
+$ sh run_tests.sh
 ```
