@@ -1,6 +1,6 @@
 var expect = require("chai").expect;
-var asTimeStamp = require("../timestamp").asTimeStamp,
-        utcTime         = require("../timestamp").utcTime;
+var asTimeStamp = require("../../timestamp").asTimeStamp,
+        utcTime         = require("../../timestamp").utcTime;
 
 describe("tests", function () {
     it("must return timestamp ie., milliseconds in JavaScript", function () {

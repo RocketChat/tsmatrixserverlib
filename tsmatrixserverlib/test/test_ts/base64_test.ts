@@ -1,5 +1,5 @@
-import {baseEncoding} from '../base64';
-import {baseDecoding} from '../base64';
+import {baseEncoding} from "../../base64";
+import {baseDecoding} from "../../base64";
 import { expect } from 'chai';
 
 import {} from 'mocha';

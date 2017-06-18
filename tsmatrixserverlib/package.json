@@ -6,7 +6,7 @@
   "scripts": {
     "compile:ts": "tsc --outDir ./build --module commonjs @compile.txt",
     "pretest": "echo 'about to run the test...'",
-    "test": "mocha -r ts-node/register tests/**",
+    "test": "mocha -r ts-node/register test/**/*.ts && mocha -r ts-node/register test/**/*.js ",
     "posttest": "echo 'the tests has been run!'"
   },
   "repository": {

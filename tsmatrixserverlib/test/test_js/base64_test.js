@@ -1,6 +1,6 @@
 var expect = require("chai").expect;
-var baseEncoding = require("../base64").baseEncoding,
-    baseDecoding = require("../base64").baseDecoding;
+var baseEncoding = require("../../base64").baseEncoding,
+    baseDecoding = require("../../base64").baseDecoding;
 
 
 it("must encode strings to base64 in JavaScript", function() {
