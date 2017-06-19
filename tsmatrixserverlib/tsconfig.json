@@ -1,0 +1,21 @@
+
+{
+  "compilerOptions": {
+    "target": "ES2016",
+    "sourceMap": true,
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+
+  },
+
+  "exclude": [
+    "node_modules",
+    "typings/main",
+   "typings/dns.d.ts"
+  ]
+}

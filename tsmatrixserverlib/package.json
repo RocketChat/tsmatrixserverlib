@@ -1,0 +1,33 @@
+{
+  "name": "tsmatrixserverlib",
+  "version": "0.1.0",
+  "description": "federation server written in typescript",
+  "main": "none",
+  "scripts": {
+    "compile:ts": "tsc --outDir ./build --module commonjs @compile.txt",
+    "pretest": "echo 'about to run the test...'",
+    "test": "mocha -r ts-node/register test/**/*.ts && mocha -r ts-node/register test/**/*.js ",
+    "posttest": "echo 'the tests has been run!'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RocketChat/Rocket.Chat.Federation.git"
+  },
+  "author": "Manish Kakoti,Singli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RocketChat/Rocket.Chat.Federation/issues"
+  },
+  "homepage": "https://github.com/RocketChat/Rocket.Chat.Federation#readme",
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
+    "chai": "^4.0.2",
+    "dns": "^0.2.2",
+    "iota": "0.0.0",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.0.6",
+    "typescript": "^2.3.4",
+    "typings": "^2.1.1"
+  }
+}

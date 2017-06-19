@@ -41,8 +41,8 @@ interface eventFields {
   Redacts: string;
   Depth: number;
   Unsigned: string;
-  OriginServerTS: Timestamp;
-  Origin: ServerName;
+  OriginServerTS: any;
+  Origin: any;
 
 }
 

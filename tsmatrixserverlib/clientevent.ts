@@ -1,39 +1,43 @@
+import iota = require("iota");
+
 let EventFormat: number;
+declare const FormatAll; //a bit of change may come 
+declare const FormatSync;
 
-const FormatAll: EventFormat = iota;
-const FormatSync;
-
-interface ClientEvent {
-  Content: string;
-  EventID: string;
-  OriginServerTS:Date;
-  RoomID: string;
-  Sender: string;
-  StateKey: string;
-  Type: string;
-  Unsigned: string;
+export interface ClientEvent {
+  Content: "content";
+  EventID: "event_id";
+  OriginServerTS: "origin_server_ts";
+  RoomID: "room_id,omitempty";
+  Sender: "sender";
+  StateKey: "state_key,omitempty";
+  Type: "type";
+  Unsigned: "unsigned,omitempty";
 }
 
-function ToClientEvents(serverEvs[]Event, format EventFormat): ClientEvent {
-  var evs = ClientEvent.slice(0, serverEvs.length);
-  for (var _i = 0; _i < serverEvs.length; _i++) {
-    evs[i] = ToClientEvent(se, format);
+export function ToClientEvents(serverEvs:any,format:any){
+  let ClientEvent = [];
+  let evs = ClientEvent.slice(0,serverEvs.length);
+  for (let i in serverEvs ){
+    let se;
+    evs[i] = ToClientEvent(se,format);
   }
-  return;
+  return evs;
 }
-let Event = new se;
-let EventFormat = new format;
-function ToClientEvent(se, format): ClientEvent {
-  var ce: ClientEvent{
-    Content: se.Content();
-    Type: se.Type();
-    StateKey: se.StateKey();
-    Unsigned: se.Unsigned();
-    OriginServerTS: se.OriginServerTS();
-    EventID: se.EventID();
+
+export function ToClientEvent(se:ClientEvent,format:ClientEvent){
+  let ce = [se.Content,
+  se.EventID,
+  se.OriginServerTS,
+  se.RoomID,
+  se.Sender,
+  se.StateKey,
+  se.Type,
+  se.Unsigned];
+
+  let formatALL:any;
+  if (format === formatALL){
+    ce[3] = se.RoomID;
   }
-  if (format === FormatAll) {
-    ce.RoomID = se.RoomID();
+    return ce;
   }
-  return ce;
-}
