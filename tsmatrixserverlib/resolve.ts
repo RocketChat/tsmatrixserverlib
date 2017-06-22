@@ -1,7 +1,7 @@
 import dns = require("dns");
 interface HostResult {
   CName: string;
-  //ftAddrs:
+  Addrs: string;
 
 }
 
@@ -9,7 +9,7 @@ interface DNSResult{
   SRVCName: string;
   SRVRecords: string;
   Host: HostResult;
-  //Addrs: []string;
+  Addrs: string;
 }
 let serverName:string;
 
