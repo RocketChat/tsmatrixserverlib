@@ -9,13 +9,12 @@
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+		"moduleResolution": "node"
 
   },
 
   "exclude": [
-    "node_modules",
-    "typings/main",
-   "typings/dns.d.ts"
+    "node_modules"
   ]
 }
