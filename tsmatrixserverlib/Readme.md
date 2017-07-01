@@ -1,6 +1,6 @@
-## nodematrixserverlib
+## tsmatrixserverlib
 
-Nodejs library for common functions compatible with gomatrixserverlib
+typescript library for common functions compatible with gomatrixserverlib
 
 #### JavaScript Library for Federation Server Project
 
