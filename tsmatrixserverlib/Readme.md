@@ -21,21 +21,21 @@ The is work in progress.  We will update this page from time to time.
 
 - [x] transaction.ts
 - [x] timestamp.ts
-- [] stateresolution.ts
-- [] signing.ts
-- [] resolve.ts
-- [] request.ts
-- [] redactevent.ts
-- [] keys.ts
-- [] keyring.ts
-- [] json.ts
-- [] federationtypes.ts
-- [] federationclient.ts
-- [] eventcrypto.ts
-- [] eventcontent.ts
-- [] eventauth.ts
-- [] event.ts
-- [] clientevent.ts
+- [ ] stateresolution.ts
+- [ ] signing.ts
+- [ ] resolve.ts
+- [ ] request.ts
+- [ ] redactevent.ts
+- [ ] keys.ts
+- [ ] keyring.ts
+- [ ] json.ts
+- [ ] federationtypes.ts
+- [ ] federationclient.ts
+- [ ] eventcrypto.ts
+- [ ] eventcontent.ts
+- [ ] eventauth.ts
+- [ ] event.ts
+- [ ] clientevent.ts
 - [x] client.ts
 - [x] base64.ts
 
