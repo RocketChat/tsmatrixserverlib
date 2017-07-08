@@ -1,40 +1,41 @@
-function redactEvent(eventJSON:string){
-  interface createContent{
-    creator:undefined;
+function redactEvent(eventJSON: string) {
+  interface createContent {
+    creator: string;
 
   }
 
-}
-interface joinRulesContent{
-    join_rule:undefined;
-}
 
-interface powerLevelContent{
-    users:undefined;
-    users_default:undefined;
-    events: undefined;
-    events_default: undefined;
-    state_default: undefined;
-    ban: undefined;
-    kick: undefined;
-    redact: undefined;
-}
+  interface joinRulesContent {
+    join_rule: string;
+  }
 
-interface memberContent{
+  interface powerLevelContent {
+    users: string;
+    users_default: string;
+    events: string;
+    events_default: string;
+    state_default: string;
+    ban: string;
+    kick: string;
+    redact: string;
+  }
+
+  interface memberContent {
     membership: string;
-}
+  }
 
-interface aliasesContent{
+  interface aliasesContent {
     aliases: string;
-}
+  }
 
-interface historyVisibilityContent{
+  interface historyVisibilityContent {
     history_visibility: string;
-}
+  }
+  type allContent = createContent | joinRulesContent | powerLevelContent | memberContent | aliasesContent | historyVisibilityContent;
 
-// not able to understand allContent in https://github.com/matrix-org/gomatrixserverlib/blob/master/redactevent.go#L104
 
-interface eventFields{
+
+  interface eventFields {
     event_id: string;
     sender: string;
     room_id: string;
@@ -51,4 +52,12 @@ interface eventFields{
     origin_server_ts: string;
     membership: string;
 
+  }
+  function describeContentfields(method: allContent){
+  switch (event.type) {
+    case "MRoomCreate":
+   
+
+  }
+}
 }
