@@ -21,34 +21,34 @@ interface powerLevelContent{
 }
 
 interface memberContent{
-    membership: undefined;
+    membership: string;
 }
 
 interface aliasesContent{
-    aliases: undefined;
+    aliases: string;
 }
 
 interface historyVisibilityContent{
-    history_visibility: undefined;
+    history_visibility: string;
 }
 
 // not able to understand allContent in https://github.com/matrix-org/gomatrixserverlib/blob/master/redactevent.go#L104
 
 interface eventFields{
-    event_id: undefined;
-    sender: undefined;
-    room_id: undefined;
-    hashes: undefined;
-    signatures: undefined;
-    content: undefined;
-    type: undefined;
-    state_key: undefined;
-    depth: undefined;
-    prev_events: undefined;
-    prev_state: undefined;
-    auth_events: undefined;
-    origin: undefined;
-    origin_server_ts: undefined;
-    membership: undefined;
+    event_id: string;
+    sender: string;
+    room_id: string;
+    hashes: string;
+    signatures: string;
+    content: string;
+    type: string;
+    state_key: string;
+    depth: string;
+    prev_events: string;
+    prev_state: string;
+    auth_events: string;
+    origin: string;
+    origin_server_ts: string;
+    membership: string;
 
 }
