@@ -1,63 +1,63 @@
+
 function redactEvent(eventJSON: string) {
+
   interface createContent {
-    creator: string;
+    Creator: "creator";
 
   }
 
 
   interface joinRulesContent {
-    join_rule: string;
+    JoinRule: "join_rule";
   }
 
   interface powerLevelContent {
-    users: string;
-    users_default: string;
-    events: string;
-    events_default: string;
-    state_default: string;
-    ban: string;
-    kick: string;
-    redact: string;
+    Users: "users";
+    UsersDefault: "users_default";
+    Events: "events";
+    EventsDefault: "events_default";
+    StateDefault: "state_default";
+    Ban: "ban";
+    Kick: "kick";
+    Redact: "redact";
   }
 
   interface memberContent {
-    membership: string;
+    Membership: "membership";
   }
 
   interface aliasesContent {
-    aliases: string;
+    Aliases: "aliases";
   }
 
   interface historyVisibilityContent {
-    history_visibility: string;
+    HistoryVisibility: "history_visibility";
   }
   type allContent = createContent | joinRulesContent | powerLevelContent | memberContent | aliasesContent | historyVisibilityContent;
 
 
-
   interface eventFields {
-    event_id: string;
-    sender: string;
-    room_id: string;
-    hashes: string;
-    signatures: string;
-    content: string;
-    type: string;
-    state_key: string;
-    depth: string;
-    prev_events: string;
-    prev_state: string;
-    auth_events: string;
-    origin: string;
-    origin_server_ts: string;
-    membership: string;
+    EventID: "event_id";
+    Sender: "sender";
+    RoomID: "room_id";
+    Hashes: "hashes";
+    Signatures: "signatures";
+    Content: "content";
+    Type: "type";
+    StateKey: "state_key";
+    Depth: "depth";
+    PrevEvents: "prev_events";
+    AuthEvents: "auth_events";
+    Origin: "origin";
+    OriginServerTS: "origin_server_ts";
+    Membership: "membership";
 
   }
-  function describeContentfields(method: allContent){
-  switch (event.type) {
-    case "MRoomCreate":
-   
+  var event: eventFields;
+  var newContent: allContent;
 
+  function describeContentfields() {
+
+
+    }
   }
-}
-}
