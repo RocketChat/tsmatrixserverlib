@@ -25,7 +25,7 @@ The is work in progress.  We will update this page from time to time.
 - [ ] signing.ts
 - [ ] resolve.ts
 - [ ] request.ts
-- [ ] redactevent.ts
+- [x] redactevent.ts
 - [ ] keys.ts
 - [ ] keyring.ts
 - [ ] json.ts
