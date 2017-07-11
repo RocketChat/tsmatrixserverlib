@@ -43,7 +43,7 @@ function redactEvent(eventJSON: string) {
     Hashes: "hashes";
     Signatures: "signatures";
     Content: "content";
-    Type: "type";
+    Type: string;
     StateKey: "state_key";
     Depth: "depth";
     PrevEvents: "prev_events";
@@ -53,11 +53,34 @@ function redactEvent(eventJSON: string) {
     Membership: "membership";
 
   }
-  var event: eventFields;
-  var newContent: allContent;
+  //let event: eventFields;
+  let event: eventFields;
+  let newContent: allContent;
+  let joinrule: joinRulesContent;
+  let powerlevel: powerLevelContent;
+  let historyvisibility: historyVisibilityContent;
+  let aliascontent: aliasesContent;
 
-  function describeContentfields() {
+  function eventfunction(method: allContent) {
 
+    switch (event.Type) {
+      case "MRoomCreate":
+        return event.Content;
 
+      case "MRoomMember":
+        return event.Membership;
+
+      case "MRoomjoinRules":
+        return joinrule.JoinRule;
+
+      case "MRoomPowerLevels":
+        return powerlevel;
+
+      case "MRoomHistoryVisibility":
+        return historyvisibility;
+
+      case "MRoomAliases":
+        return aliascontent;
     }
   }
+}
