@@ -53,7 +53,7 @@ function redactEvent(eventJSON: string) {
     Membership: "membership";
 
   }
-  //let event: eventFields;
+
   let event: eventFields;
   let newContent: allContent;
   let joinrule: joinRulesContent;
