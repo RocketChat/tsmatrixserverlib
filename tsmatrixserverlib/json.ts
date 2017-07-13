@@ -1,9 +1,9 @@
-function sortJSON(input) {
+export function sortJSON(input) {
   let value = JSON.stringify(input, Object.keys(input).sort());
   return value;
 }
 
-function readhexdigits(input: any){
+export function readhexdigits(input: any){
   let hex = input;
   hex = - 0x30303030;
   hex &= 0x1F1F1F1F;
