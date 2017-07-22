@@ -23,7 +23,7 @@ The is work in progress.  We will update this page from time to time.
 - [x] timestamp.ts
 - [ ] stateresolution.ts
 - [ ] signing.ts
-- [ ] resolve.ts
+- [x] resolve.ts
 - [ ] request.ts
 - [x] redactevent.ts
 - [ ] keys.ts
@@ -32,10 +32,10 @@ The is work in progress.  We will update this page from time to time.
 - [ ] federationtypes.ts
 - [ ] federationclient.ts
 - [ ] eventcrypto.ts
-- [ ] eventcontent.ts
+- [x] eventcontent.ts
 - [ ] eventauth.ts
 - [ ] event.ts
-- [ ] clientevent.ts
+- [x] clientevent.ts
 - [x] client.ts
 - [x] base64.ts
 
