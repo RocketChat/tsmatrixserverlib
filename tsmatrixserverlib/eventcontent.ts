@@ -45,3 +45,30 @@ interface memberContent{
   Membership:string;
   ThirdPartyInvite: undefined;
 }
+
+function newMemberContentFromAuthEvents(authEvents,userID:string){
+  let memberEvent;
+  let leave;
+  if (memberEvent==authEvents.Member(userID)){
+    return;
+  }
+  if(memberEvent==null){
+    let Membership=leave;
+  }
+  return newMemberContentFromEvent(memberEvent);
+}
+
+function newMemberContentFromEvent(event){
+
+}
+
+interface joinRuleContent{
+  JoinRule: string;
+}
+
+function newJoinRuleContentFromAuthEvents(authEvents,joinRuleContent){
+let joinRulesEvent;
+if (joinRulesEvent == authEvents.JoinRules()){
+    return;
+  }
+}
