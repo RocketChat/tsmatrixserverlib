@@ -26,7 +26,7 @@ if (senderDomain = domainFromID(createEvent.Sender())){
 return;
 }
 
-function domainAllowed(domain:string){
+export function domainAllowed(domain:string){
   if (domain ==senderDomain ){
     return null;
   }
@@ -46,7 +46,7 @@ interface memberContent{
   ThirdPartyInvite: undefined;
 }
 
-function newMemberContentFromAuthEvents(authEvents,userID:string){
+export function newMemberContentFromAuthEvents(authEvents,userID:string){
   let memberEvent;
   let leave;
   if (memberEvent==authEvents.Member(userID)){
@@ -66,9 +66,15 @@ interface joinRuleContent{
   JoinRule: string;
 }
 
-function newJoinRuleContentFromAuthEvents(authEvents,joinRuleContent){
+export function newJoinRuleContentFromAuthEvents(authEvents,joinRuleContent){
 let joinRulesEvent;
+let invite;
+let JoinRule;
 if (joinRulesEvent == authEvents.JoinRules()){
+    return;
+  }
+  if (joinRulesEvent == null){
+    JoinRule = invite;
     return;
   }
 }

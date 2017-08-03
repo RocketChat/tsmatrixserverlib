@@ -1,5 +1,5 @@
 
-function redactEvent(eventJSON: string) {
+export function redactEvent(eventJSON: string) {
 
   interface createContent {
     Creator: "creator";

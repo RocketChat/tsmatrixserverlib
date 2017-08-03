@@ -1,6 +1,6 @@
 let KeyID:string;
 
-function signJson(jsonObject, signatureName, signingKey) {
+export function signJson(jsonObject, signatureName, signingKey) {
     let signatures = delete jsonObject["signatures"];
     let unsigned = delete jsonObject["unsigned"];
 
@@ -20,13 +20,13 @@ function signJson(jsonObject, signatureName, signingKey) {
 
 }
 
-function ListKeyIDs(signingname:string,message:any[]){
+export function ListKeyIDs(signingname:string,message:any[]){
   //let keyID:string[];
   //let Signatures= Map<string, keyID> = new Map<string, keyID>();
 }
 
 
-function VerifyJson(jsonObject, signatureName, verifyKey) {
+export function VerifyJson(jsonObject, signatureName, verifyKey) {
     try {
         var signatures = jsonObject["signatures"];
     } catch (Error) {
