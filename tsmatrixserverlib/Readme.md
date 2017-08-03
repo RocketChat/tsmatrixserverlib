@@ -52,3 +52,4 @@ $ git checkout tsmatrixlib
 $ cd tsmatrixserverlib
 $ sh run_tests.sh
 ```
+*Contributions are welcome
