@@ -21,16 +21,42 @@ NOTE: This project is a work in progress.
 
 ```
 npm install --save hubot-freddie
-```
-
-Next, you must edit the `external-scripts.json` file to load Freddie:
 
 ```
-[
-  ...
-  "hubot-freddie"
-]
+# Steps to set up Hubot-Freddie
+
 ```
+Generate rocketchat-registration.yaml:
+node src/matrix/genASRegFile.js -r -u <URL of hubot-freddie's incoming webhook>
+
+Create a folder Config and copy the rocketchat-registration.yaml file to it.
+
+Run this docker code:
+
+docker run -it --rm \
+	-e ROCKETCHAT_URL= instance of rocket.chat  \
+	-e ROCKETCHAT_ROOM=GENERAL \
+	-e ROCKETCHAT_ROOM_ID=GENERAL \
+	-e ROCKETCHAT_USER=user name \
+	-e ROCKETCHAT_PASSWORD=password \
+	-e ROCKETCHAT_AUTH= \
+	-e ROCKETCHAT_USER_PREFIX=@rocketchat_ \
+	-e LISTEN_ON_ALL_PUBLIC=nottrue \
+	-e BOT_NAME=matrix \
+	-e HOMESERVER_URL=http://matrix's homeserver URL \
+	-e HOMESERVER_DOMAIN=IP address \
+	-e HOMESERVER_ROOM_ID=roomid:homeserver URL \
+	-e HOMESERVER_SENDER_LOCAL=rcbot \
+	-e INCOMING_PORT= \
+	-e WRITABLE_CONFIG_PATH=/home/hubot/scripts/config \
+	-e EXTERNAL_SCRIPTS=hubot-freddie,hubot-help \
+	-v $PWD/config:/home/hubot/scripts/config \
+	-v $PWD/node_modules/hubbot-freddie:/home/hubot/scripts \
+	-p 3001:3001 \
+	rocketchat/hubot-rocketchat
+```
+
+* the above setup can get hubot-freddie running
 
 # Home Server Application Service Registration
 

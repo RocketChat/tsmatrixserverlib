@@ -13,7 +13,7 @@ interface DNSResult{
 }
 let serverName:string;
 
-function LookupServer(serverName:DNSResult){
+export function LookupServer(serverName:DNSResult){
   let result;
   let str1:any;
   let val:any = str1.indexOf(serverName);
@@ -28,7 +28,8 @@ function LookupServer(serverName:DNSResult){
   }
   let err;
   if (err!=null){
-    dns.TIMEOUT();
+    dns
+    .TIMEOUT();
   }
 
 }
