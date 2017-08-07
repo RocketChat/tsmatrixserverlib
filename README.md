@@ -1,39 +1,55 @@
-# Federation 
+## tsmatrixserverlib
 
-Federation is now under active development.  The following is synopsis of the current activities.  
+typescript library for common functions compatible with gomatrixserverlib
 
-## Hubot Freddie - the Federation bridge npm module for Rocket.Chat
+#### JavaScript Library for Federation Server Project
 
-https://www.npmjs.com/package/hubot-freddie
+This is a JavaScript invocable set of library methods, in the form of an npm module, supporting chat federation via a matrix.org compatible protocol.
 
-This is a working bot that can be added to any Rocket.Chat server and allows one channel to be federated with other similarly configured Rocket.Chat server.   It works by bridging a channel from a Rocket.Chat server to a Matrix.org synapse homeserver. 
+This library is a port of the gomatrixservlib, currently a work-in-progress from matrix.org.
 
-#### Federated by hubot freddie
+tsmatrixserverlib is written in TypeScript, although calling client can be in JavaScript or TypeScript.
 
-You can see hubot freddie in action on our community server:
+We selected TypeScript over JavaScript because:
 
-The #general channel of our community server https://demo.rocket.chat/channel/general
+1) Golang is strongly typed, TypeScript adds type support to JavaScript; we feel this will make the porting exercise easier
+2) tsmatrixserverlib will likely gain complexity over time with multiple contributors, and TypeScript is more suitable for team collaborating on complex project
 
-is bridged via hubot freddie to this paired homeserver and room: 
+The is work in progress.  We will update this page from time to time.
 
-http://federation.rocket.chat/_matrix/client/#/room/!KgtAjQXVRcuoqmtfHC:federation.rocket.chat
+#### Understanding the Federation Project
 
-This room can be federated throughout the Matrix.org realm.  Any server in the realm can also be paired with another Rocket.Chat server via hubot freddie.
+The project aims at replacing Hubot-Freddie bridge with Federation API taking its place.The concept of Federation API is originally derived
+from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Understanding the Federation API document is really necessary in order to contribute to [Repository](https://github.com/RocketChat/Rocket.Chat.Federation/tree/tsmatrixlib/tsmatrixserverlib).The reference library is [gomatrixserverlib](https://github.com/matrix-org/gomatrixserverlib).
 
-#### Contributing
+#### Tsmatrixserverlib Task-List
 
-Ongoing development with hubot freddie is taking place here, contributions welcomed:
+- [x] transaction.ts
+- [x] timestamp.ts
+- [ ] stateresolution.ts
+- [ ] signing.ts
+- [x] resolve.ts
+- [ ] request.ts
+- [x] redactevent.ts
+- [ ] keys.ts
+- [ ] keyring.ts
+- [ ] json.ts
+- [ ] federationtypes.ts
+- [ ] federationclient.ts
+- [ ] eventcrypto.ts
+- [x] eventcontent.ts
+- [ ] eventauth.ts
+- [ ] event.ts
+- [x] clientevent.ts
+- [x] client.ts
+- [x] base64.ts
 
-https://github.com/RocketChat/Rocket.Chat.Federation/tree/develop/matrix.org
 
-## Federation Server
-
-The is our _native federation_ implementation.  It will enable Rocket.Chat to federate with other Rocket.Chat servers directly without bridges or intermdiary servers.  It will add matrix.org protocol compatibitily to Rocket.Chat.
-
-_Currently under active development._
-
-#### Future road map
-* synchronizes messages between (occassionally) connected Rocket.Chat servers
-* interoperate with other Chat servers/services supporting Federation: including Slack, Skype, IRC, Asterisk, and more
-* extend video chat, audio chat, and screensharing to users across the federated servers/services network
-* enable control, management, monitoring, communication, and collboration between intelligent devices (things) connected throughout a federated servers/services network; with zero-overhead lightweight junctions to accomodate legacy MQTT islands
+#### Set up tsmatrixserverlib with TypeScript & JavaScript Unit Tests
+```
+$ git clone https://github.com/RocketChat/Rocket.Chat.Federation.git
+$ git checkout tsmatrixlib
+$ cd tsmatrixserverlib
+$ sh run_tests.sh
+```
+*Contributions are welcome

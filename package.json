@@ -1,22 +1,33 @@
 {
-  "name": "Rocket.Chat.Federation",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "tsmatrixserverlib",
+  "version": "1.0.1",
+  "description": "federation server written in typescript",
+  "main": "none",
   "scripts": {
-    "test": "echo \"Test TBD\""
+    "compile:ts": "tsc --outDir ./build --module commonjs @compile.txt",
+    "pretest": "echo 'about to run the test...'",
+    "test": "mocha --require ts-node/register test/**/*.ts && mocha --require ts-node/register test/**/*.js",
+    "posttest": "echo 'the tests has been run!'"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rocketchat/Rocket.Chat.Federation"
+    "url": "git+https://github.com/RocketChat/Rocket.Chat.Federation.git"
   },
-  "author": "Sing Li <sli@makawave.com> (https://github.com/Sing-Li)",
-  "license": "ISC",
+  "author": "Manish Kakoti,Singli",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rocketchat/Rocket.Chat.Federation/issues"
+    "url": "https://github.com/RocketChat/Rocket.Chat.Federation/issues"
   },
-  "homepage": "https://github.com/rocketchat/Rocket.Chat.Federation",
-  "dependencies": {
-    
+  "homepage": "https://github.com/RocketChat/Rocket.Chat.Federation#readme",
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
+    "chai": "^4.0.2",
+    "dns": "^0.2.2",
+    "iota": "0.0.0",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.0.6",
+    "typescript": "^2.3.4",
+    "typings": "^2.1.1"
   }
 }
