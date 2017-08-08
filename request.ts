@@ -34,7 +34,7 @@ if (FederationRequest.Content != null) {
 Content = JSON.parse(FederationRequest.Content);
   }
 let httpreq;
-httpreq = this.http.get(urlStr, FederationRequest.Method, FederationRequest.Content);
+httpreq = http.request(urlStr);
 if (httpreq.URL.RequestURI() !== FederationRequest.RequestURI) {
 Error('Did not encode properly');
   }
