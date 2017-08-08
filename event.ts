@@ -63,3 +63,19 @@ return event.Type;
 function OriginServerTS() {
 return event.OriginServerTS;
 }
+
+function Content() {
+return event.Content;
+}
+
+function Redacts() {
+return event.Redacts;
+}
+
+function RoomID() {
+return event.RoomID;
+}
+
+function SplitID() {
+
+}
