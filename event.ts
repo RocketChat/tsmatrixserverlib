@@ -1,4 +1,5 @@
-import * as TimeStamp from './timestamp';
+import {asTimeStamp} from './timestamp';
+import {utcTime} from './timestamp';
 interface StateKeyTuple {
   EventType: string;
   StateKey: string;
@@ -36,6 +37,11 @@ Sender: string;
 Type: string;
 Content: string;
 Redacts: string;
-OriginServerTS: string;
+OriginServerTS: number;
 Origin: string;
+}
+
+function Build(eventID: string, now: string, origin: string, ) {
+let event: EventFields;
+event.OriginServerTS = asTimeStamp(now);
 }
