@@ -76,6 +76,8 @@ function RoomID() {
 return event.RoomID;
 }
 
-function SplitID() {
-
+export function SplitID(address) {
+let local = address.split(':')[0];
+let domain = address.split(':')[1];
+return local;
 }
