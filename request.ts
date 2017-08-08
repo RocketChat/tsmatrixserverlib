@@ -21,3 +21,11 @@ return FederationRequest.Method;
 function Content() {
 return FederationRequest.Content;
 }
+
+function RequestURI() {
+return FederationRequest.RequestURI;
+}
+
+function HTTPRequest() {
+let urlStr = sprintf('matrix://%s%s', FederationRequest.Destination, FederationRequest.RequestURI);
+}
