@@ -1,15 +1,23 @@
 interface Fields {
-Content: 'content';
+Content: string;
 Destination: string;
 Method: string;
 Origin: 'origin';
 RequestURI: string;
 }
+let FederationRequest: Fields;
 
 function NewFederationRequest (method: string, destination: string, requestURI: string) {
-let FederationRequest: Fields;
 FederationRequest.Destination = destination;
 FederationRequest.Method = method.toUpperCase();
 FederationRequest.RequestURI = requestURI;
 return FederationRequest;
+}
+
+function Method() {
+return FederationRequest.Method;
+}
+
+function Content() {
+return FederationRequest.Content;
 }
