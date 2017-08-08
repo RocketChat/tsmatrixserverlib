@@ -1,3 +1,4 @@
+import http = require('http');
 interface Fields {
 Content: string;
 Destination: string;
