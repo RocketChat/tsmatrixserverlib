@@ -56,4 +56,5 @@ Error('The request must be application/json');
     }
   }
 result.Content = content;
+return result;
 }
