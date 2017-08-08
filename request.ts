@@ -50,5 +50,10 @@ let result: Fields;
 result.Method = req.Method;
 result.RequestURI = req.URL.RequestURI();
 let content = JSON.parse(req.Body);
-
+if (content.length !== 0) {
+if (req.getHeader('Content-Type') !== 'application/json') {
+Error('The request must be application/json');
+    }
+  }
+result.Content = content;
 }
