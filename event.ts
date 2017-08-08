@@ -1,23 +1,19 @@
-interface StateKeyTuple{
+interface StateKeyTuple {
   EventType: string;
   StateKey: string;
 }
 
-interface EventReference{
+interface EventReference {
   EventID: string;
   EventSHA256: string;
 }
 
-interface EventBuilder{
+interface EventBuilder {
   Sender: string;
   RoomID: string;
   Type: string;
-  StateKey:string;
-  PrevEvents:"prev_events";
-  authEvents: "auth_events";
+  StateKey: string;
   Redacts: string;
-  Depth:number;
-  Content:"rawjson";
-  Unsigned:"unsigned";
-
+  Depth: number;
+  Content: string;
 }
