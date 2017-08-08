@@ -10,7 +10,7 @@ describe('function for timestamp in TypeScript', () => {
   });
   it('must return UTC string in TypeScript', () => {
     let timeInMilliseconds = new Date().getTime();
-     let utctime = new Date(timeInMilliseconds);
-     expect (utcTime(timeInMilliseconds)).to.deep.equal(utctime);
-  })
+    let utctime = new Date(timeInMilliseconds);
+    expect (utcTime(timeInMilliseconds)).to.deep.equal(utctime);
+  });
 });

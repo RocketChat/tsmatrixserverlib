@@ -8,5 +8,5 @@ describe('Splitting IDs to local and domain', () => {
     let address = 'alice:localhost:8080';
     let result = 'alice';
     expect(SplitID(address)).to.deep.equal(result);
-  });
+    });
   });
