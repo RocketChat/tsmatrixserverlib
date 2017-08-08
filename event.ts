@@ -40,8 +40,26 @@ Redacts: string;
 OriginServerTS: number;
 Origin: string;
 }
-
-function Build(eventID: string, now: string, origin: string, ) {
 let event: EventFields;
+function Build(eventID: string, now: string, origin: string, ) {
 event.OriginServerTS = asTimeStamp(now);
+}
+function Origin() {
+return event.Origin;
+}
+
+function EventID() {
+return event.EventID;
+}
+
+function Sender() {
+return event.Sender;
+}
+
+function Type() {
+return event.Type;
+}
+
+function OriginServerTS() {
+return event.OriginServerTS;
 }
