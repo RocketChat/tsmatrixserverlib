@@ -28,4 +28,13 @@ return FederationRequest.RequestURI;
 
 function HTTPRequest() {
 let urlStr = sprintf('matrix://%s%s', FederationRequest.Destination, FederationRequest.RequestURI);
+let Content;
+if (FederationRequest.Content != null) {
+Content = JSON.parse(FederationRequest.Content);
+  }
+let httpreq;
+httpreq = this.http.get(urlStr, FederationRequest.Method, FederationRequest.Content);
+if (httpreq.URL.RequestURI() !== FederationRequest.RequestURI) {
+Error('Did not encode properly');
+  }
 }
