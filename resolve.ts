@@ -1,11 +1,12 @@
 import dns = require('dns');
-interface HostResult {
+
+/*interface HostResult {
   CName: string;
   Addrs: string;
 
-}
+} */
 
-interface DNSResult {
+/*interface DNSResult {
   SRVCName: string;
   SRVRecords: string;
   Host: HostResult;
@@ -21,12 +22,29 @@ export function LookupServer(serverName: DNSResult) {
   let hosts = serverName.SRVRecords;
 
   if (val === -1) {
-result.SRVCName  = dns.lookup('matrix','tcp', serverName);
+result.SRVCName  = dns.lookup('matrix', 'tcp', serverName);
 result.SRVRecords = dns.lookup('matrix', 'tcp', serverName);
   }
-  let err;
-  if (err != null) {
+dns.lookup ('testwsserver', function(err, result) {
+return result;
+})
 
-  }
+} */
+function LookupServer() {
+  dns.resolve4('matrix', (err, addresses) => {
+    if (err) throw err;
+
+    console.log(`addresses: ${JSON.stringify(addresses)}`);
+
+    addresses.forEach((a) => {
+      dns.reverse(a, (err, matrix) => {
+        if (err) {
+          throw err;
+        }
+        console.log(`reverse for ${a}: ${JSON.stringify(matrix)}`);
+      });
+    });
+  });
+
 
 }
