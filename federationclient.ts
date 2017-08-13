@@ -63,3 +63,9 @@ let path = '/_matrix/federation/v1/state_ids/' + encodeURIComponent(roomID) + '/
 let req = NewFederationRequest('GET', ServerName, path);
 return;
 }
+
+function LookupRoomAlias(ServerName, roomAlias: string) {
+let path = '/_matrix/federation/v1/query/directory?room_alias=' + encodeURI(roomAlias);
+let req = NewFederationRequest('GET', ServerName, path);
+return;
+}
