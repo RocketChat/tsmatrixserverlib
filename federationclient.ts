@@ -37,6 +37,7 @@ let x = https.request(options, function(res){
 function SendTransaction(Transaction) {
 let path = '/_matrix/federation/v1/send/' + (Transaction.TransactionID) + '/';
 let req = NewFederationRequest('PUT', 'destination', path);
+
 return;
 }
 

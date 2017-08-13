@@ -1,13 +1,14 @@
-import * as Timestamp from './timestamp';
+// import * as TimeStamp from './timestamp';
+import {TimeStamp} from './timestamp';
 
-let EventFormat: number;
+type EventFormat =  number;
 declare const FormatAll;
 declare const FormatSync;
 
 export interface ClientEvent {
 Content: string;
 EventID: string;
-OriginServerTS: string;
+OriginServerTS: TimeStamp;
 RoomID: string;
 Sender: string;
 StateKey: string;
