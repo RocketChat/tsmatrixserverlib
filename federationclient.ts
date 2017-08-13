@@ -45,3 +45,9 @@ let path = '/_matrix/federation/v1/make_join/' + encodeURIComponent(roomID) + '/
 let req = NewFederationRequest('GET', ServerName, path);
 return;
 }
+
+function SendJoin(ServerName, Event) {
+let path = '/_matrix/federation/v1/send_join/' + encodeURIComponent(Event.RoomID()) + '/' + encodeURIComponent(Event.EventID());
+let req = NewFederationRequest('PUT', ServerName, path);
+return;
+}
