@@ -51,3 +51,9 @@ let path = '/_matrix/federation/v1/send_join/' + encodeURIComponent(Event.RoomID
 let req = NewFederationRequest('PUT', ServerName, path);
 return;
 }
+
+function LookupState(ServerName, roomID, eventID: string) {
+let path = '/_matrix/federation/v1/state_ids/' + encodeURIComponent(roomID) + '/?event_id=' + encodeURI(eventID);
+let req = NewFederationRequest('GET', ServerName, path);
+return;
+}
