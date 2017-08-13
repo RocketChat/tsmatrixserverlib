@@ -57,3 +57,9 @@ let path = '/_matrix/federation/v1/state_ids/' + encodeURIComponent(roomID) + '/
 let req = NewFederationRequest('GET', ServerName, path);
 return;
 }
+
+function LookupStateIDs(ServerName, roomID, eventID: string) {
+let path = '/_matrix/federation/v1/state_ids/' + encodeURIComponent(roomID) + '/?event_id=' + encodeURI(eventID);
+let req = NewFederationRequest('GET', ServerName, path);
+return;
+}
