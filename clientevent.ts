@@ -1,7 +1,9 @@
 // import * as TimeStamp from './timestamp';
 import {TimeStamp} from './timestamp';
+import {EventFields} from './event';
+import * as Event from './event';
 
-type EventFormat =  number;
+type EventFormat = number;
 declare const FormatAll;
 declare const FormatSync;
 
@@ -15,7 +17,7 @@ StateKey: string;
 Type: string;
 }
 
-export function ToClientEvents(serverEvs, format) {
+export function ToClientEvents(serverEvs: Event[], format: EventFormat) {
 let ClientEvent = [];
 let evs = ClientEvent.slice(0, serverEvs.length);
 for (let i in serverEvs ) {
@@ -25,18 +27,21 @@ evs[i] = ToClientEvent(se, format);
 return evs;
 }
 
-export function ToClientEvent(se: ClientEvent, format: ClientEvent) {
-let ce = [se.Content,
-  se.EventID,
-  se.OriginServerTS,
-  se.RoomID,
-  se.Sender,
-  se.StateKey,
-  se.Type];
+export function ToClientEvent(Event, EventFormat) {
+let ce = {Content: Event.Content(),
+Sender: Event.EventID(),
+Type: Event.Type(),
+StateKey: Event.StateKey(),
+Unsigned: Event.Sender(),
+OriginServerTS: Event.OriginServerTS(),
+EventID: Event.EventID(),
+RoomID: Event.RoomID()
+};
 
-let formatALL;
-if (format === formatALL) {
-ce[3] = se.RoomID;
+// let FormatAll;
+
+if (EventFormat === FormatAll) {
+ce.RoomID = Event.RoomID();
   }
 return ce;
   }
