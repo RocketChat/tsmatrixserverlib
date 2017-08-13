@@ -1,9 +1,9 @@
-interface createContent {
+interface CreateContent {
   senderDomain: string;
   RoomID: string;
   eventID: string;
-  Federate:'m.federate';
-  Creator:'creator';
+  Federate: 'm.federate';
+  Creator: 'creator';
   }
 let senderDomain;
 let Federate;
@@ -16,10 +16,10 @@ if (createEvent === null) {
     console.log('missing create event');
     return;
   }
-  //one more if
+
 let roomID = createEvent.RoomID();
 let eventID = createEvent.EventID();
-//domainFromID call
+
 if (senderDomain = domainFromID(createEvent.Sender())) {
   return;
   }
@@ -38,22 +38,22 @@ export function domainAllowed(domain: string) {
 }
 
 function domainFromID(id: string) {
-  //code to be written
+
 }
 
-interface memberContent {
+interface MemberContent {
   Membership: string;
   ThirdPartyInvite: undefined;
 }
 
-export function newMemberContentFromAuthEvents(authEvents, userID: string){
+export function newMemberContentFromAuthEvents(authEvents, userID: string) {
   let memberEvent;
   let leave;
-if (memberEvent === authEvents.Member(userID)) {
+  if (memberEvent === authEvents.Member(userID)) {
     return;
   }
 
-if (memberEvent === null) {
+  if (memberEvent === null) {
 let Membership = leave;
   }
   return newMemberContentFromEvent(memberEvent);
@@ -63,11 +63,11 @@ export function newMemberContentFromEvent(event) {
 
 }
 
-interface joinRuleContent {
+interface JoinRuleContent {
   JoinRule: string;
 }
 
-export function newJoinRuleContentFromAuthEvents(authEvents,joinRuleContent) {
+export function newJoinRuleContentFromAuthEvents(authEvents, JoinRuleContent) {
 let joinRulesEvent;
 let invite;
 let JoinRule;
