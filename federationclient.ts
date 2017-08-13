@@ -8,10 +8,10 @@ let bodyString = JSON.stringify ({
 let options = {
     host: 'localhost',
     port: 8448,
-    path: '/_matrix/federation/v1/send_join/room/!rlukPqHNcfqfWVHndH',
-    method: 'PUT',
+    uri: '/_matrix/federation/v1/send_join/room/!rlukPqHNcfqfWVHndH',
+    method: 'GET',
     headers: {
-'Authorization': 'X-Matrix origin=madguy02:my.domain.name',
+'Authorization': 'X-Matrix madguy02:my.domain.name',
 'sig': 'ABCDEF...',
 'key': 'ed25519:key1',
 'Content-Type': 'application/json',
