@@ -1,5 +1,11 @@
+import { Transaction as NewTransaction } from './transaction';
+import {NewFederationRequest} from './request';
 let https = require('https');
 let request = require('request');
+
+export namespace NewTransact {
+export const Transaction = NewTransaction;
+}
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 let bodyString = JSON.stringify ({
@@ -27,3 +33,9 @@ let x = https.request(options, function(res){
         console.log(String.fromCharCode.apply(null, new Uint16Array(data)));
     });
 }).write(bodyString);
+
+function SendTransaction(Transaction) {
+let path = '/_matrix/federation/v1/send/' + (Transaction.TransactionID) + '/';
+let req = NewFederationRequest('PUT', 'destination', path);
+return;
+}
