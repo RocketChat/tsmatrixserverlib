@@ -16,4 +16,17 @@ Ban: string | null | undefined;
 Kick: string | null | undefined;
 Redact: string | null | undefined;
   }
+
+interface MemberContent {
+Membership: string | null | undefined;
+  }
+interface AliasesContent {
+Aliases: string | null | undefined;
+  }
+
+interface  HistoryVisibilityContent {
+HistoryVisibility: string | null | undefined;
+  }
+type AllContent = CreateContent | JoinRulesContent | PowerLevelContent | MemberContent | AliasesContent | HistoryVisibilityContent;
+
 }
