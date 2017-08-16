@@ -48,5 +48,26 @@ OriginServerTS: string | null | undefined;
 let event: EventFields;
 JSON.stringify(event);
 let NewContent: AllContent;
-
+switch (event.Type) {
+case MRoomCreate: {
+NewContent.CreateContent = event.Content.CreateContent;
+}
+case MRoomMember: {
+NewContent.MemberContent = event.Content.MemberContent;
+}
+case MRoomJoinRules: {
+NewContent.JoinRulesContent = event.Content.JoinRulesContent;
+}
+case MRoomPowerLevels: {
+NewContent.PowerLevelContent = event.Content.PowerLevelContent;
+}
+case MRoomHistoryVisibility: {
+NewContent.HistoryVisibilityContent = event.Content.HistoryVisibilityContent;
+}
+case MRoomAliases: {
+NewContent.AliasesContent = event.Content.AliasesContent;
+}
+  }
+event.Content = NewContent;
+return event;
 }
