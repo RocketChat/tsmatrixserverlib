@@ -1,5 +1,6 @@
 import {asTimeStamp} from './timestamp';
 import {utcTime} from './timestamp';
+import {redactEvent} from './redactevent';
 interface StateKeyTuple {
   EventType: string;
   StateKey: string;
@@ -27,7 +28,7 @@ return;
 
 export interface  Event {
 redacted: boolean;
-eventJSON: string[];
+eventJSON: string;
 fields: EventFields;
 }
 
@@ -49,7 +50,7 @@ event.Origin = origin;
 event.EventID = eventID;
 }
 let result: Event;
-function NewEventFromTrustedJSON(eventJSON: string[], redacted) {
+function NewEventFromTrustedJSON(eventJSON: string, redacted) {
 
 result.redacted = redacted;
 result.eventJSON = eventJSON;
@@ -68,9 +69,10 @@ function Redact() {
 if (e.redacted) {
 return e;
 }
+
 let eventJSON = redactEvent(e.eventJSON); // redactEvent has to be added to redactEvent.ts
 result.redacted = true;
-result.eventJSON = eventJSON;
+result.redacted = eventJSON;
 return result;
 }
 
