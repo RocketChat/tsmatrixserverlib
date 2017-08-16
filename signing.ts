@@ -11,7 +11,7 @@ let signatureBase64 = btoa(signed.signature);
 
 let keyId =  (signingKey.alg, signingKey.version);
 
-    //signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
+// signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
 jsonObject['signatures'] = signatures;
 if (unsigned != null) {
   jsonObject['unsigned'] = unsigned;
@@ -22,8 +22,8 @@ return jsonObject;
 }
 
 export function ListKeyIDs(signingname: string, message: string[]) {
-  //let keyID:string[];
-  //let Signatures= Map<string, keyID> = new Map<string, keyID>();
+  // let keyID:string[];
+  // let Signatures= Map<string, keyID> = new Map<string, keyID>();
 }
 
 
@@ -37,14 +37,14 @@ export function VerifyJson(jsonObject, signatureName, verifyKey) {
     let keyId = (verifyKey.alg, verifyKey.version);
 
     try {
-        //var signatureB64 = signatures[signatureName][keyId];
+        // var signatureB64 = signatures[signatureName][keyId];
     } catch (Error) {
       throw new Error('Missing signature');
 
     }
 
     try {
-         //var signature = btoa(signatureB64);
+         // var signature = btoa(signatureB64);
     } catch (Error) {
         throw new Error('Invalid signature base64');
     }
