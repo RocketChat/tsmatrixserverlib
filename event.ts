@@ -10,7 +10,7 @@ interface EventReference {
   EventSHA256: string;
 }
 
-interface EventBuilder {
+export interface EventBuilder {
   Sender: string;
   RoomID: string;
   Type: string;
@@ -25,12 +25,13 @@ eb.Content = 'content';
 return;
 }
 
-interface  Event {
+export interface  Event {
 redacted: boolean;
+eventJSON: string[];
 fields: EventFields;
 }
 
-interface EventFields {
+export interface EventFields {
 RoomID: string;
 EventID: string;
 Sender: string;
@@ -41,38 +42,67 @@ OriginServerTS: number;
 Origin: string;
 }
 let event: EventFields;
-function Build(eventID: string, now: string, origin: string, ) {
+
+export function Build(eventID: string, now: string, origin: string, ) {
 event.OriginServerTS = asTimeStamp(now);
+event.Origin = origin;
+event.EventID = eventID;
 }
-function Origin() {
+let result: Event;
+function NewEventFromTrustedJSON(eventJSON: string[], redacted) {
+
+result.redacted = redacted;
+result.eventJSON = eventJSON;
+return;
+}
+let e: Event;
+function Redacted() {
+return e.redacted;
+}
+
+function JSON() {
+return e.eventJSON;
+}
+
+function Redact() {
+if (e.redacted) {
+return e;
+}
+let eventJSON = redactEvent(e.eventJSON); // redactEvent has to be added to redactEvent.ts
+result.redacted = true;
+result.eventJSON = eventJSON;
+return result;
+}
+
+export function Origin() {
 return event.Origin;
 }
 
-function EventID() {
+export function EventID() {
 return event.EventID;
 }
 
-function Sender() {
+export function Sender() {
 return event.Sender;
 }
 
-function Type() {
+export function Type() {
 return event.Type;
 }
 
-function OriginServerTS() {
+export function OriginServerTS() {
 return event.OriginServerTS;
 }
 
-function Content() {
+export function Content() {
 return event.Content;
 }
 
-function Redacts() {
+export function Redacts() {
 return event.Redacts;
 }
 
-function RoomID() {
+export function RoomID() {
 return event.RoomID;
 }
 
