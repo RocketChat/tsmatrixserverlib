@@ -47,9 +47,8 @@ from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Un
 
 #### Set up tsmatrixserverlib with TypeScript & JavaScript Unit Tests
 ```
-$ git clone https://github.com/RocketChat/Rocket.Chat.Federation.git
-$ git checkout tsmatrixlib
-$ cd tsmatrixserverlib
+$ git clone https://github.com/RocketChat/tsmatrixserverlib.git
+$ git checkout develop
 $ sh run_tests.sh
 ```
 *Contributions are welcome

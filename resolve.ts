@@ -1,35 +1,50 @@
-import dns = require("dns");
-interface HostResult {
+import dns = require('dns');
+
+/*interface HostResult {
   CName: string;
   Addrs: string;
 
-}
+} */
 
-interface DNSResult{
+/*interface DNSResult {
   SRVCName: string;
   SRVRecords: string;
   Host: HostResult;
   Addrs: string;
 }
-let serverName:string;
+let serverName: string;
 
-export function LookupServer(serverName:DNSResult){
+export function LookupServer(serverName: DNSResult) {
   let result;
-  let str1:any;
-  let val:any = str1.indexOf(serverName);
-  //result.Hosts = HostResult{};
+  let str1;
+  let val = str1.indexOf(serverName);
 
   let hosts = serverName.SRVRecords;
 
-  if(val === -1)
-  {
-    result.SRVCName  = dns.lookup("rocket.chat","tcp",serverName);
-    result.SRVRecords = dns.lookup("rocket.chat","tcp",serverName);
+  if (val === -1) {
+result.SRVCName  = dns.lookup('matrix', 'tcp', serverName);
+result.SRVRecords = dns.lookup('matrix', 'tcp', serverName);
   }
-  let err;
-  if (err!=null){
-    dns
-    .TIMEOUT();
-  }
+dns.lookup ('testwsserver', function(err, result) {
+return result;
+})
+
+} */
+function LookupServer() {
+  dns.resolve4('matrix', (err, addresses) => {
+    if (err) throw err;
+
+    console.log(`addresses: ${JSON.stringify(addresses)}`);
+
+    addresses.forEach((a) => {
+      dns.reverse(a, (err, matrix) => {
+        if (err) {
+          throw err;
+        }
+        console.log(`reverse for ${a}: ${JSON.stringify(matrix)}`);
+      });
+    });
+  });
+
 
 }

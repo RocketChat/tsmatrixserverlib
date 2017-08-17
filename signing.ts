@@ -1,57 +1,58 @@
-let KeyID:string;
+import btoa = require('btoa');
+let KeyID: string;
 
 export function signJson(jsonObject, signatureName, signingKey) {
-    let signatures = delete jsonObject["signatures"];
-    let unsigned = delete jsonObject["unsigned"];
+let signatures = delete jsonObject['signatures'];
+let unsigned = delete jsonObject['unsigned'];
 
-    let messageBytes = JSON.stringify(jsonObject);
-    let signed = signingKey.sign(messageBytes);
-    let signatureBase64 = btoa(signed.signature);
+let messageBytes = JSON.stringify(jsonObject);
+let signed = signingKey.sign(messageBytes);
+let signatureBase64 = btoa(signed.signature);
 
-    let keyId =  (signingKey.alg, signingKey.version);
+let keyId =  (signingKey.alg, signingKey.version);
 
-    //signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
-    jsonObject["signatures"] = signatures;
-    if (unsigned != null) {
-        jsonObject["unsigned"] = unsigned;
+// signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
+jsonObject['signatures'] = signatures;
+if (unsigned != null) {
+  jsonObject['unsigned'] = unsigned;
     }
 
-    return jsonObject;
+return jsonObject;
 
 }
 
-export function ListKeyIDs(signingname:string,message:any[]){
-  //let keyID:string[];
-  //let Signatures= Map<string, keyID> = new Map<string, keyID>();
+export function ListKeyIDs(signingname: string, message: string[]) {
+  // let keyID:string[];
+  // let Signatures= Map<string, keyID> = new Map<string, keyID>();
 }
 
 
 export function VerifyJson(jsonObject, signatureName, verifyKey) {
     try {
-        var signatures = jsonObject["signatures"];
+        let signatures = jsonObject['signatures'];
     } catch (Error) {
-        throw new Error("No signatures on this object");
+        throw new Error('No signatures on this object');
     }
 
     let keyId = (verifyKey.alg, verifyKey.version);
 
     try {
-        //var signatureB64 = signatures[signatureName][keyId];
+        // var signatureB64 = signatures[signatureName][keyId];
     } catch (Error) {
-        throw new Error("Missing signature");
+      throw new Error('Missing signature');
 
     }
 
     try {
-         //var signature = btoa(signatureB64);
+         // var signature = btoa(signatureB64);
     } catch (Error) {
-        throw new Error("Invalid signature base64");
+        throw new Error('Invalid signature base64');
     }
-    var dict;
-    var jsonObjectCopy = dict(jsonObject);
-    delete jsonObjectCopy["signatures"];
-    delete jsonObjectCopy["unsigned"];
-    var message = JSON.stringify(JSON.parse(jsonObjectCopy));
+    let dict;
+    let jsonObjectCopy = dict(jsonObject);
+    delete jsonObjectCopy['signatures'];
+    delete jsonObjectCopy['unsigned'];
+    let message = JSON.stringify(JSON.parse(jsonObjectCopy));
 
 
 }

@@ -1,6 +1,7 @@
 {
   "globalDependencies": {
-    "mocha": "registry:dt/mocha#2.2.5+20170311011848"
+    "mocha": "registry:dt/mocha#2.2.5+20170311011848",
+    "sprintf-js": "registry:dt/sprintf-js#0.0.0+20160510002910"
   },
   "dependencies": {
     "chai": "registry:npm/chai#3.5.0+20160723033700"

@@ -3,3 +3,4 @@ base64.ts
 transaction.ts
 json.ts
 redactevent.ts
+federationclient.ts

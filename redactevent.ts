@@ -1,86 +1,73 @@
-
-export function redactEvent(eventJSON: string) {
-
-  interface createContent {
-    Creator: "creator";
-
+function redactEvent(eventJSON: string) {
+interface CreateContent {
+Creator: string | null | undefined;
+  }
+interface JoinRulesContent {
+JoinRule: string | null | undefined;
   }
 
-
-  interface joinRulesContent {
-    JoinRule: "join_rule";
+interface  PowerLevelContent {
+Users: string | null | undefined;
+UsersDefault: string | null | undefined;
+Events: string |null | undefined;
+EventsDefault: string | null | undefined;
+StateDefault: string | null | undefined;
+Ban: string | null | undefined;
+Kick: string | null | undefined;
+Redact: string | null | undefined;
   }
 
-  interface powerLevelContent {
-    Users: "users";
-    UsersDefault: "users_default";
-    Events: "events";
-    EventsDefault: "events_default";
-    StateDefault: "state_default";
-    Ban: "ban";
-    Kick: "kick";
-    Redact: "redact";
+interface MemberContent {
+Membership: string | null | undefined;
+  }
+interface AliasesContent {
+Aliases: string | null | undefined;
   }
 
-  interface memberContent {
-    Membership: "membership";
+interface  HistoryVisibilityContent {
+HistoryVisibility: string | null | undefined;
   }
+type AllContent = CreateContent | JoinRulesContent | PowerLevelContent | MemberContent | AliasesContent | HistoryVisibilityContent;
 
-  interface aliasesContent {
-    Aliases: "aliases";
+interface EventFields {
+EventID: string | null | undefined;
+Sender: string | null | undefined;
+RoomID: string | null | undefined;
+Hashes: string | null | undefined;
+Signatures: string | null | undefined;
+Content: AllContent;
+Type: string;
+StateKey: string | null | undefined;
+Depth: string | null | undefined;
+PrevEvents: string | null | undefined;
+PrevState: string | null | undefined;
+AuthEvents: string | null | undefined;
+Origin: string | null | undefined;
+OriginServerTS: string | null | undefined;
   }
-
-  interface historyVisibilityContent {
-    HistoryVisibility: "history_visibility";
+let event: EventFields;
+JSON.stringify(event);
+let NewContent: AllContent;
+switch (event.Type) {
+case MRoomCreate: {
+NewContent.CreateContent = event.Content.CreateContent;
+}
+case MRoomMember: {
+NewContent.MemberContent = event.Content.MemberContent;
+}
+case MRoomJoinRules: {
+NewContent.JoinRulesContent = event.Content.JoinRulesContent;
+}
+case MRoomPowerLevels: {
+NewContent.PowerLevelContent = event.Content.PowerLevelContent;
+}
+case MRoomHistoryVisibility: {
+NewContent.HistoryVisibilityContent = event.Content.HistoryVisibilityContent;
+}
+case MRoomAliases: {
+NewContent.AliasesContent = event.Content.AliasesContent;
+}
   }
-  type allContent = createContent | joinRulesContent | powerLevelContent | memberContent | aliasesContent | historyVisibilityContent;
-
-
-  interface eventFields {
-    EventID: "event_id";
-    Sender: "sender";
-    RoomID: "room_id";
-    Hashes: "hashes";
-    Signatures: "signatures";
-    Content: "content";
-    Type: string;
-    StateKey: "state_key";
-    Depth: "depth";
-    PrevEvents: "prev_events";
-    AuthEvents: "auth_events";
-    Origin: "origin";
-    OriginServerTS: "origin_server_ts";
-    Membership: "membership";
-
-  }
-
-  let event: eventFields;
-  let newContent: allContent;
-  let joinrule: joinRulesContent;
-  let powerlevel: powerLevelContent;
-  let historyvisibility: historyVisibilityContent;
-  let aliascontent: aliasesContent;
-
-  function eventfunction(method: allContent) {
-
-    switch (event.Type) {
-      case "MRoomCreate":
-        return event.Content;
-
-      case "MRoomMember":
-        return event.Membership;
-
-      case "MRoomjoinRules":
-        return joinrule.JoinRule;
-
-      case "MRoomPowerLevels":
-        return powerlevel;
-
-      case "MRoomHistoryVisibility":
-        return historyvisibility;
-
-      case "MRoomAliases":
-        return aliascontent;
-    }
-  }
+event.Content = NewContent;
+return event;
 }
