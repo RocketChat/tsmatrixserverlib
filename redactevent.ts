@@ -1,4 +1,4 @@
-function redactEvent(eventJSON: string) {
+export function redactEvent(eventJSON: string) {
 interface CreateContent {
 Creator: string | null | undefined;
   }
@@ -48,26 +48,39 @@ OriginServerTS: string | null | undefined;
 let event: EventFields;
 JSON.stringify(event);
 let NewContent: AllContent;
+let membercontent: MemberContent;
+let joinrulescontent: JoinRulesContent;
+let powerlevelcontent: PowerLevelContent;
+let historyvisibilitycontent: HistoryVisibilityContent;
+let aliasescontent: AliasesContent;
 switch (event.Type) {
-case MRoomCreate: {
-NewContent.CreateContent = event.Content.CreateContent;
+case 'MRoomCreate': {
+// NewContent.CreateContent === event.Content.CreateContent;
+return event.Content;
 }
-case MRoomMember: {
-NewContent.MemberContent = event.Content.MemberContent;
+case 'MRoomMember': {
+// NewContent.MemberContent = event.Content.MemberContent;
+return membercontent;
 }
-case MRoomJoinRules: {
-NewContent.JoinRulesContent = event.Content.JoinRulesContent;
+case 'MRoomJoinRules': {
+ // NewContent.JoinRulesContent= event.Content.JoinRulesContent;
+ return joinrulescontent;
 }
-case MRoomPowerLevels: {
-NewContent.PowerLevelContent = event.Content.PowerLevelContent;
+case 'MRoomPowerLevels': {
+// NewContent.PowerLevelContent = event.Content.PowerLevelContent;
+return powerlevelcontent;
 }
-case MRoomHistoryVisibility: {
-NewContent.HistoryVisibilityContent = event.Content.HistoryVisibilityContent;
+case 'MRoomHistoryVisibility': {
+// NewContent.HistoryVisibilityContent = event.Content.HistoryVisibilityContent;
+return historyvisibilitycontent;
 }
-case MRoomAliases: {
-NewContent.AliasesContent = event.Content.AliasesContent;
+case 'MRoomAliases': {
+// NewContent.AliasesContent = event.Content.AliasesContent;
+return aliasescontent;
 }
   }
+
 event.Content = NewContent;
 return event;
+
 }
