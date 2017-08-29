@@ -1,3 +1,5 @@
+import nacl = require('tweetnacl');
+
 function SignJson(json_object, signature_name, signing_key) {
 let signatures = json_object.pop('signatures', {});
 let unsigned = json_object.pop('unsigned', null);
@@ -15,5 +17,16 @@ return json_object;
 }
 
 function SignatureIds(json_object, signature_name, ) {
+
+}
+
+function VerifySignedJson(json_object, signature_name, verify_key) {
+try {
+let signatures = json_object['signatures'];
+}
+catch (e) {
+console.log('No signature of this object');
+}
+let key_id = (verify_key.alg, verify_key.version);
 
 }
