@@ -35,5 +35,10 @@ let signature = baseDecoding(signature_b64);
 catch (e) {
 console.log('invalid signature');
 }
+let dict = [];
+let json_object_copy = dict[json_object];
+delete json_object_copy['signatures'];
+json_object_copy.pop('unsigned', null);
+let message = JSON.parse(JSON.stringify(json_object_copy).replace(/"\s+|\s+"/g, '"'));
 
 }
