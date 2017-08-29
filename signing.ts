@@ -1,58 +1,10 @@
-import btoa = require('btoa');
-let KeyID: string;
-
-export function signJson(jsonObject, signatureName, signingKey) {
-let signatures = delete jsonObject['signatures'];
-let unsigned = delete jsonObject['unsigned'];
-
-let messageBytes = JSON.stringify(jsonObject);
-let signed = signingKey.sign(messageBytes);
-let signatureBase64 = btoa(signed.signature);
-
-let keyId =  (signingKey.alg, signingKey.version);
-
-// signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
-jsonObject['signatures'] = signatures;
-if (unsigned != null) {
-  jsonObject['unsigned'] = unsigned;
-    }
-
-return jsonObject;
-
-}
-
-export function ListKeyIDs(signingname: string, message: string[]) {
-  // let keyID:string[];
-  // let Signatures= Map<string, keyID> = new Map<string, keyID>();
-}
-
-
-export function VerifyJson(jsonObject, signatureName, verifyKey) {
-    try {
-        let signatures = jsonObject['signatures'];
-    } catch (Error) {
-        throw new Error('No signatures on this object');
-    }
-
-    let keyId = (verifyKey.alg, verifyKey.version);
-
-    try {
-        // var signatureB64 = signatures[signatureName][keyId];
-    } catch (Error) {
-      throw new Error('Missing signature');
-
-    }
-
-    try {
-         // var signature = btoa(signatureB64);
-    } catch (Error) {
-        throw new Error('Invalid signature base64');
-    }
-    let dict;
-    let jsonObjectCopy = dict(jsonObject);
-    delete jsonObjectCopy['signatures'];
-    delete jsonObjectCopy['unsigned'];
-    let message = JSON.stringify(JSON.parse(jsonObjectCopy));
+function SignJson(json_object, signature_name, signing_key) {
+let signatures = json_object.pop('signatures', {});
+let unsigned = json_object.pop('unsigned');
+let data = JSON.parse(JSON.stringify(json_object).replace(/"\s+|\s+"/g, '"'));
+let message_bytes = data;
+let signed = signing_key.sign(message_bytes);
+let signature_base64 = new Buffer(signed.signature, 'base64');
 
 
 }
