@@ -14,7 +14,7 @@ return verify_key;
 
 function DecodeSigningKeyBase64(key_base64) {
 let key_bytes = new Buffer(key_base64, 'base64').toString('ascii');
-let key = nacl.sign.keyPair(key_bytes);
+let key = nacl.sign.keyPair();
 return key;
 }
 
@@ -39,8 +39,8 @@ return false;
 
 function DecodeVerifyKeyBytes(key_id, key_bytes) {
 if (key_id.startswith('ed25519' + ':')) {
-let key = nacl.signing.VerifyKey(key_bytes);
-key.version = version;
+let key = nacl.sign.keyPair.fromSecretKey(key_bytes);
+// key.version = version;
 return key;
 }
 }
@@ -51,15 +51,15 @@ let line;
 for (line in stream) {
 key_base64 = line.split();
 let key = new Buffer(key_base64, 'base64').toString('ascii');
-keys.append(key);
-	}
+keys.push(key);
+}
 }
 
 function WriteSigningKeys(stream, keys) {
 let key;
 for (key in keys) {
 key_base64 = new Buffer(key, 'base64').toString('ascii');
-stream.write('%s\n' % ( key_base64));
+stream.write(key_base64);
 }
 }
 let my_version = 'my_version';
@@ -78,7 +78,7 @@ console.log(decoder);
 
 // var signing_key_seed = DecodeSigningKeyBase64("YJDBA9Xnr2sVqXD9Vj7XVUnmFZcZrlw8Md7kMW+3XA1");
 let seed = 'YJDBA9Xnr2sVqXD9Vj7XVUnmFZcZrlw8Md7kMW+3XA1';
-let b = new Buffer(seed,'base64');
+let b = new Buffer(seed, 'base64');
 let s = b.toString();
 console.log(s);
 let setup = nacl.sign.keyPair.fromSeed(b).toString();
