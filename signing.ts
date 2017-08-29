@@ -1,5 +1,5 @@
 import nacl = require('tweetnacl');
-
+import {baseDecoding} from './base64';
 function SignJson(json_object, signature_name, signing_key) {
 let signatures = json_object.pop('signatures', {});
 let unsigned = json_object.pop('unsigned', null);
@@ -28,5 +28,12 @@ catch (e) {
 console.log('No signature of this object');
 }
 let key_id = (verify_key.alg, verify_key.version);
+let signature_b64;
+try {
+let signature = baseDecoding(signature_b64);
+}
+catch (e) {
+console.log('invalid signature');
+}
 
 }
