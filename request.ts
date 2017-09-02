@@ -17,7 +17,7 @@ this.RequestURI = requestURI;
 
 // }
 // let FederationRequest: Fields;
-NewFederationRequest () {
+NewFederationRequest() {
 // FederationRequest.Destination = destination;
 // FederationRequest.Method = method.toUpperCase();
 // FederationRequest.RequestURI = requestURI;

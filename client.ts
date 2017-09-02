@@ -1,4 +1,6 @@
 import http = require('http');
+import HttpTransport = require('http-transport');
+let transport = new HttpTransport();
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 let req = http.request({
     host: 'localhost',
