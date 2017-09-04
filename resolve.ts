@@ -6,6 +6,8 @@ console.log(err);
 console.log(rec);
 }); */
 
+// here i have met only 1 condition with resolving ip addresses
+// resolving using ports is not being implemented
 dns.resolve4('federation.rocket.chat', function (err, addresses) {
 if (err) throw err;
 console.log('addresses: ' + JSON.stringify(addresses));
