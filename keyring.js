@@ -1,5 +1,11 @@
 "use strict";
 exports.__esModule = true;
-var NamedTuple = require("named-tuple");
-var VerifyKeyRequest = NamedTuple('VerifyRequest', 'server_name', 'key_ids', 'json_object', 'deferred');
-console.log(VerifyKeyRequest);
+var HashMap = require("hashmap");
+var ServerName;
+var KeyID;
+function KeyFetcher() {
+    var map = new HashMap();
+    var NewMap = map.set(ServerName, KeyID);
+    var MapTimestamp = map.set(NewMap, TimeStamp);
+    var ServerKeypair = map.set(NewMap, ServerKeys);
+}
