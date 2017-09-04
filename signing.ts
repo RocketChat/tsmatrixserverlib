@@ -16,10 +16,6 @@ json_object['unsigned'] = unsigned;
 return json_object;
 }
 
-function SignatureIds(json_object, signature_name, ) {
-
-}
-
 function VerifySignedJson(json_object, signature_name, verify_key) {
 try {
 let signatures = json_object['signatures'];
