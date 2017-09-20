@@ -22,7 +22,7 @@ let transactions = new Transaction('transaction_id', 'origin', 'destination', 'p
 type TransactionID =  string; */
 type TransactionID = string;
 
-class Transaction {
+export class Transaction {
 TransactionID: TransactionID;
 Origin: string;
 Destination: 'origin_server_ts';

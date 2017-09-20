@@ -5,10 +5,10 @@ import HttpTransport = require('http-transport');
 let transport = new HttpTransport();
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 let req = http.request({
-    host: 'localhost',
-    port: 8448,
+    host: 'federation.rocket.chat',
+    port: 8008,
     path: '',
-    method: 'PUT'
+    method: 'GET'
 
 }, function(res){
 
