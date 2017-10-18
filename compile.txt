@@ -1,6 +1,10 @@
 timestamp.ts
 base64.ts
+resolve.ts
 transaction.ts
-json.ts
 redactevent.ts
-federationclient.ts
+request.ts
+event.ts
+eventcontent.ts
+client.ts
+resolve.ts

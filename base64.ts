@@ -5,11 +5,11 @@
 // This takes a pointer receiver because it needs to write the result of decoding.
 declare const Buffer;
 export function baseEncoding(tobeencoded) {
-    let encoded = new Buffer(tobeencoded).toString("base64");
+    let encoded = new Buffer(tobeencoded).toString('base64');
     return encoded;
 }
 
 export function baseDecoding(tobedecoded) {
-    let decoded = new Buffer(tobedecoded, "base64").toString();
+    let decoded = new Buffer(tobedecoded, 'base64').toString();
     return decoded;
 }

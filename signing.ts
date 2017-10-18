@@ -1,58 +1,40 @@
-import btoa = require('btoa');
-let KeyID: string;
+import nacl = require('tweetnacl');
+import {baseDecoding} from './base64';
+function SignJson(json_object, signature_name, signing_key) {
+let signatures = json_object.pop('signatures', {});
+let unsigned = json_object.pop('unsigned', null);
+let data = JSON.parse(JSON.stringify(json_object).replace(/"\s+|\s+"/g, '"'));
+let message_bytes = data;
+let signed = signing_key.sign(message_bytes);
+let signature_base64 = new Buffer(signed.signature, 'base64');
+signatures.signature_name = signature_base64;
+json_object['signatures'] = signatures;
 
-export function signJson(jsonObject, signatureName, signingKey) {
-let signatures = delete jsonObject['signatures'];
-let unsigned = delete jsonObject['unsigned'];
-
-let messageBytes = JSON.stringify(jsonObject);
-let signed = signingKey.sign(messageBytes);
-let signatureBase64 = btoa(signed.signature);
-
-let keyId =  (signingKey.alg, signingKey.version);
-
-// signatures.setdefault(signatureName, {})[keyId] = signatureBase64;
-jsonObject['signatures'] = signatures;
 if (unsigned != null) {
-  jsonObject['unsigned'] = unsigned;
-    }
-
-return jsonObject;
-
+json_object['unsigned'] = unsigned;
+}
+return json_object;
 }
 
-export function ListKeyIDs(signingname: string, message: string[]) {
-  // let keyID:string[];
-  // let Signatures= Map<string, keyID> = new Map<string, keyID>();
+function VerifySignedJson(json_object, signature_name, verify_key) {
+try {
+let signatures = json_object['signatures'];
 }
-
-
-export function VerifyJson(jsonObject, signatureName, verifyKey) {
-    try {
-        let signatures = jsonObject['signatures'];
-    } catch (Error) {
-        throw new Error('No signatures on this object');
-    }
-
-    let keyId = (verifyKey.alg, verifyKey.version);
-
-    try {
-        // var signatureB64 = signatures[signatureName][keyId];
-    } catch (Error) {
-      throw new Error('Missing signature');
-
-    }
-
-    try {
-         // var signature = btoa(signatureB64);
-    } catch (Error) {
-        throw new Error('Invalid signature base64');
-    }
-    let dict;
-    let jsonObjectCopy = dict(jsonObject);
-    delete jsonObjectCopy['signatures'];
-    delete jsonObjectCopy['unsigned'];
-    let message = JSON.stringify(JSON.parse(jsonObjectCopy));
-
+catch (e) {
+console.log('No signature of this object');
+}
+let key_id = (verify_key.alg, verify_key.version);
+let signature_b64;
+try {
+let signature = baseDecoding(signature_b64);
+}
+catch (e) {
+console.log('invalid signature');
+}
+let dict = [];
+let json_object_copy = dict[json_object];
+delete json_object_copy['signatures'];
+json_object_copy.pop('unsigned', null);
+let message = JSON.parse(JSON.stringify(json_object_copy).replace(/"\s+|\s+"/g, '"'));
 
 }

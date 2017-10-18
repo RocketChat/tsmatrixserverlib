@@ -1,4 +1,5 @@
-export class Transaction {
+import {TimeStamp} from './timestamp';
+/*export class Transaction {
 // A Transaction is used to push data from one matrix server to another matrix
 // server.export function Transaction {
   // The IDs of the most recent transactions sent by the origin server to
@@ -18,4 +19,15 @@ PreviousIds:string['previous_ids'], PDUs:string['pdus']) {}
 // The ID must be safe to insert into a URL path segment. The ID should have a
 // format matching '^[0-9A-Za-z\-_]*$'
 let transactions = new Transaction('transaction_id', 'origin', 'destination', 'previous_ids', 'pdus');
-type TransactionID =  string;
+type TransactionID =  string; */
+type TransactionID = string;
+
+export class Transaction {
+TransactionID: TransactionID;
+Origin: string;
+Destination: 'origin_server_ts';
+OriginServerTS: TimeStamp;
+PreviousIds: TransactionID[];
+PDUs: Event[];
+// constructor ()
+}

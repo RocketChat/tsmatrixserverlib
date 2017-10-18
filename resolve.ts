@@ -1,50 +1,25 @@
 import dns = require('dns');
+/*dns.resolve('federation.rocket.chat', 'A', function(err, rec) {
+if (err) {
+console.log(err);
+ }
+console.log(rec);
+}); */
 
-/*interface HostResult {
-  CName: string;
-  Addrs: string;
-
-} */
-
-/*interface DNSResult {
-  SRVCName: string;
-  SRVRecords: string;
-  Host: HostResult;
-  Addrs: string;
-}
-let serverName: string;
-
-export function LookupServer(serverName: DNSResult) {
-  let result;
-  let str1;
-  let val = str1.indexOf(serverName);
-
-  let hosts = serverName.SRVRecords;
-
-  if (val === -1) {
-result.SRVCName  = dns.lookup('matrix', 'tcp', serverName);
-result.SRVRecords = dns.lookup('matrix', 'tcp', serverName);
-  }
-dns.lookup ('testwsserver', function(err, result) {
-return result;
-})
-
-} */
-function LookupServer() {
-  dns.resolve4('matrix', (err, addresses) => {
-    if (err) throw err;
-
-    console.log(`addresses: ${JSON.stringify(addresses)}`);
-
-    addresses.forEach((a) => {
-      dns.reverse(a, (err, matrix) => {
-        if (err) {
-          throw err;
-        }
-        console.log(`reverse for ${a}: ${JSON.stringify(matrix)}`);
-      });
+// here i have met only 1 condition with resolving ip addresses
+// resolving using ports is not being implemented
+dns.resolve4('federation.rocket.chat', function (err, addresses) {
+if (err) throw err;
+console.log('addresses: ' + JSON.stringify(addresses));
+addresses.forEach(function (a) {
+    dns.reverse(a, function (err, domains) {
+      if (err) {
+        console.log('reverse for ' + a + ' failed: ' +
+          err.message);
+      } else {
+        console.log('reverse for ' + a + ': ' +
+          JSON.stringify(domains));
+      }
     });
   });
-
-
-}
+});
