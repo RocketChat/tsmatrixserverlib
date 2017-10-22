@@ -1,23 +1,19 @@
-import https = require('https');
-import fs = require('fs');
-import sprintf = require('sprintf');
-import request = require('request');
-
-let options = {
-method: 'GET',
-path: '/_matrix/federation/v1/send/',
-host: 'federation.rocket.chat',
-port: '8089'
+"use strict";
+exports.__esModule = true;
+var https = require("https");
+var options = {
+    method: 'GET',
+    path: '/_matrix/federation/v1/send/',
+    host: 'federation.rocket.chat',
+    port: '8089'
 };
 console.log('Federating to matrix......');
-
-let x = https.request(options, function(res){
-console.log('Connected');
-res.on('data', function(data){
-console.log(data);
-// console.log(String.fromCharCode.apply(null, new Uint16Array()));
- });
-
+var x = https.request(options, function (res) {
+    console.log('Connected');
+    res.on('data', function (data) {
+        console.log(data);
+        // console.log(String.fromCharCode.apply(null, new Uint16Array()));
+    });
 });
 x.end();
 /* export class Fields {
@@ -44,15 +40,12 @@ return this.Destination + '' + this.Method + this.RequestURI;
 /*Method() {
 return this.Method;
 } */
-
 /*Content() {
 return this.Content;
 }*/
-
 /*export function RequestURI() {
 return this.RequestURI;
 }*/
-
 /* HTTPRequest() {
 let urlStr = sprintf('matrix://%s%s', this.Destination, this.RequestURI);
 let Content;
