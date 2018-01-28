@@ -3,7 +3,24 @@ import fs = require('fs');
 import sprintf = require('sprintf');
 import request = require('request');
 
-export class Fields {
+let options = {
+method: 'GET',
+path: '/_matrix/federation/v1/send/',
+host: 'federation.rocket.chat',
+port: '8089'
+};
+console.log('Federating to matrix......');
+
+let x = https.request(options, function(res){
+console.log('Connected');
+res.on('data', function(data){
+console.log(data);
+// console.log(String.fromCharCode.apply(null, new Uint16Array()));
+ });
+
+});
+x.end();
+/* export class Fields {
 Content: string;
 Destination: string;
 Method: string;
@@ -36,7 +53,7 @@ return this.Content;
 return this.RequestURI;
 }*/
 
-HTTPRequest() {
+/* HTTPRequest() {
 let urlStr = sprintf('matrix://%s%s', this.Destination, this.RequestURI);
 let Content;
 if (this.Content != null) {
@@ -66,7 +83,7 @@ Error('The request must be application/json');
 result.Content = content;
 return result;
   }
-}
+} */
 // let Field = new Fields('localhost:8448', 'GET', '/_matrix/federation/v1/query/directory?room_alias=%23test%3Alocalhost%3A8448');
 // console.log(Field);
 // console.log(https.request());

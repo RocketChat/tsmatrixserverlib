@@ -1,6 +1,6 @@
 import {asTimeStamp} from './timestamp';
 import {utcTime} from './timestamp';
-// import {redactEvent} from './redactevent';
+import {redactEvent} from './redactevent';
 interface StateKeyTuple {
   EventType: string;
   StateKey: string;
