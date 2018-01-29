@@ -99,8 +99,11 @@ interface FederationRequest {
   Signatures: string;
 }
 
-function NewFederationRequest(r: FederationRequest) {
-  return r;
+function NewFederationRequest(method: string, destination: string, requestURI: string, r: FederationRequest) {
+r.Destination = destination;
+r.Method = method;
+r.RequestURI = requestURI;
+return r;
 }
 
 function SetContent(r: FederationRequest) {
