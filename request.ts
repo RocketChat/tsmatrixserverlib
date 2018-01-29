@@ -1,25 +1,25 @@
-import https = require('https');
-import fs = require('fs');
-import sprintf = require('sprintf');
-import request = require('request');
+// import https = require('https');
+// import fs = require('fs');
+// import sprintf = require('sprintf');
+// import request = require('request');
 
-let options = {
-method: 'GET',
-path: '/_matrix/federation/v1/send/',
-host: 'federation.rocket.chat',
-port: '8089'
-};
-console.log('Federating to matrix......');
+// let options = {
+// method: 'GET',
+// path: '/_matrix/federation/v1/send/',
+// host: 'federation.rocket.chat',
+// port: '8089'
+// };
+// console.log('Federating to matrix......');
 
-let x = https.request(options, function(res){
-console.log('Connected');
-res.on('data', function(data){
-console.log(data);
-// console.log(String.fromCharCode.apply(null, new Uint16Array()));
- });
+// let x = https.request(options, function(res){
+// console.log('Connected');
+// res.on('data', function(data){
+// console.log(data);
+// // console.log(String.fromCharCode.apply(null, new Uint16Array()));
+//  });
 
-});
-x.end();
+// });
+// x.end();
 /* export class Fields {
 Content: string;
 Destination: string;
@@ -87,3 +87,108 @@ return result;
 // let Field = new Fields('localhost:8448', 'GET', '/_matrix/federation/v1/query/directory?room_alias=%23test%3Alocalhost%3A8448');
 // console.log(Field);
 // console.log(https.request());
+
+import sprintf = require('sprintf');
+import request = require('request');
+interface FederationRequest {
+  Content: string;
+  Destination: string;
+  Method: string;
+  Origin: string;
+  RequestURI: string;
+  Signatures: string;
+}
+
+function NewFederationRequest(r: FederationRequest) {
+  return r;
+}
+
+function SetContent(r: FederationRequest) {
+  if (r.Content != null) {
+    return 'Content already set on the request';
+  }
+  if (r.Signatures != null) {
+    return 'the request is being signed and cannot be modified';
+  }
+  let data = Content;
+
+  return data;
+}
+
+function Method(r: FederationRequest) {
+  return r.Method;
+}
+
+function Content(r: FederationRequest) {
+  return r.Content;
+}
+
+function Origin(r: FederationRequest) {
+  return r.Origin;
+}
+
+function RequestURI(r: FederationRequest) {
+  return r.RequestURI;
+}
+function Sign(
+  serverName: string,
+  KeyID: string,
+  privatekey: string,
+  r: FederationRequest
+) {
+  if (r.Origin !== '' && r.Origin !== serverName) {
+    return 'the request is already signed by a different server';
+  }
+  r.Origin = serverName;
+  let data = r.Origin;
+  let SignedData = SignJSON(serverName, KeyID, privatekey, data);
+  return SignedData;
+}
+function HTTPRequest(r: FederationRequest) {
+  let urlStr = sprintf('matrix://%s%s', r.Destination, r.RequestURI);
+  let content;
+  let byte = [];
+  for (let i = 0; i < content.length(); i++) {
+    byte.push(content.charCodeAt(i));
+  }
+  let httpreq = request(r.Method, urlStr, content);
+  // require a sanity check to be done
+  if (r.Content != null) {
+    httpreq.setHeader('Content-Type', 'application/json');
+  }
+}
+
+function IsSafeInHttpQuotedString(text: string) {
+  let texts = [];
+  for (let i = 0; i < text.length; i++) {
+    let c = texts[i];
+
+    switch (c) {
+      case c === '\t': {
+        continue;
+      }
+
+      case c === ' ': {
+        continue;
+      }
+
+      case c === 0x21: {
+        continue;
+      }
+
+      case 0x23 <= c && c <= 0x5b: {
+        continue;
+      }
+
+      case (0x5d <= c && c <= 0x7e): {
+        continue;
+      }
+
+      case (0x80 <= c && c <= 0xff): {
+        continue;
+      }
+      default:
+        return false;
+    }
+  }
+}
