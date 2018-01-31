@@ -1,82 +1,91 @@
 export function redactEvent(eventJSON: string) {
 interface CreateContent {
-Creator: string | null | undefined;
+Creator;
   }
 interface JoinRulesContent {
-JoinRule: string | null | undefined;
+JoinRule;
   }
 
 interface  PowerLevelContent {
-Users: string | null | undefined;
-UsersDefault: string | null | undefined;
-Events: string |null | undefined;
-EventsDefault: string | null | undefined;
-StateDefault: string | null | undefined;
-Ban: string | null | undefined;
-Kick: string | null | undefined;
-Redact: string | null | undefined;
-  }
+Users;
+UsersDefault;
+Events;
+EventsDefault;
+StateDefault;
+Ban;
+Kick;
+Redact;
+}
 
 interface MemberContent {
-Membership: string | null | undefined;
+Membership;
   }
 interface AliasesContent {
-Aliases: string | null | undefined;
+Aliases;
   }
 
 interface  HistoryVisibilityContent {
-HistoryVisibility: string | null | undefined;
+HistoryVisibility;
   }
-type AllContent = CreateContent | JoinRulesContent | PowerLevelContent | MemberContent | AliasesContent | HistoryVisibilityContent;
+// type AllContent = CreateContent | JoinRulesContent | PowerLevelContent | MemberContent | AliasesContent | HistoryVisibilityContent;
+interface AllContent {
+CreateContent;
+JoinRulesContent;
+PowerLevelContent;
+MemberContent;
+AliasesContent;
+HistoryVisibilityContent;
+
+}
 
 interface EventFields {
-EventID: string | null | undefined;
-Sender: string | null | undefined;
-RoomID: string | null | undefined;
-Hashes: string | null | undefined;
-Signatures: string | null | undefined;
+EventID;
+Sender;
+RoomID;
+Hashes;
+Signatures;
 Content: AllContent;
-Type: string;
-StateKey: string | null | undefined;
-Depth: string | null | undefined;
-PrevEvents: string | null | undefined;
-PrevState: string | null | undefined;
-AuthEvents: string | null | undefined;
-Origin: string | null | undefined;
-OriginServerTS: string | null | undefined;
+Type;
+StateKey;
+Depth;
+PrevEvents;
+PrevState;
+AuthEvents;
+Origin;
+OriginServerTS;
   }
 let event: EventFields;
 JSON.stringify(event);
 let NewContent: AllContent;
-let membercontent: MemberContent;
-let joinrulescontent: JoinRulesContent;
-let powerlevelcontent: PowerLevelContent;
-let historyvisibilitycontent: HistoryVisibilityContent;
-let aliasescontent: AliasesContent;
+// let membercontent: MemberContent;
+// let joinrulescontent: JoinRulesContent;
+// let powerlevelcontent: PowerLevelContent;
+// let historyvisibilitycontent: HistoryVisibilityContent;
+// let aliasescontent: AliasesContent;
 switch (event.Type) {
 case 'MRoomCreate': {
-// NewContent.CreateContent === event.Content.CreateContent;
+NewContent.CreateContent === event.Content.CreateContent;
 return event.Content;
 }
 case 'MRoomMember': {
-// NewContent.MemberContent = event.Content.MemberContent;
-return membercontent;
+ NewContent.MemberContent = event.Content.MemberContent;
+// return membercontent;
 }
 case 'MRoomJoinRules': {
- // NewContent.JoinRulesContent= event.Content.JoinRulesContent;
- return joinrulescontent;
+NewContent.JoinRulesContent = event.Content.JoinRulesContent;
+ // return joinrulescontent;
 }
 case 'MRoomPowerLevels': {
-// NewContent.PowerLevelContent = event.Content.PowerLevelContent;
-return powerlevelcontent;
+NewContent.PowerLevelContent = event.Content.PowerLevelContent;
+// return powerlevelcontent;
 }
 case 'MRoomHistoryVisibility': {
-// NewContent.HistoryVisibilityContent = event.Content.HistoryVisibilityContent;
-return historyvisibilitycontent;
+NewContent.HistoryVisibilityContent = event.Content.HistoryVisibilityContent;
+// return historyvisibilitycontent;
 }
 case 'MRoomAliases': {
-// NewContent.AliasesContent = event.Content.AliasesContent;
-return aliasescontent;
+NewContent.AliasesContent = event.Content.AliasesContent;
+// return aliasescontent;
 }
   }
 
