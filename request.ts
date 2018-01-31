@@ -195,3 +195,31 @@ function IsSafeInHttpQuotedString(text: string) {
     }
   }
 }
+function parseAuthorization(header, scheme, origin, key, sig) {
+let parts = header.split(' ').slice(2);
+scheme = parts[0];
+if (scheme !== 'X-Matrix') {
+return;
+}
+if (parts.length !== 2) {
+return;
+}
+// requirement for a loop functionality over 208 // TBD
+let data = parts[1].split(',');
+let pair = data.split('=').slice(2);
+// if (pair.length !== 2) {
+// continue; // review required
+// }
+let name = pair[0];
+let value = pair[1].trim('\'');
+if (name === 'origin') {
+origin = value; // review required
+}
+if (name === 'key') {
+key = value;  // review required
+}
+if (name === 'sig') {
+sig = value;
+}
+return;
+ }
