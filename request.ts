@@ -90,6 +90,7 @@ return result;
 
 import sprintf = require('sprintf');
 import request = require('request');
+import { SignJson } from './signing';
 interface FederationRequest {
   Content: string;
   Destination: string;
@@ -139,7 +140,7 @@ function Sign(serverName: string, KeyID: string, privatekey: string, r: Federati
   }
   r.Origin = serverName;
   let data = r.Origin;
-  let SignedData = SignJSON(serverName, KeyID, privatekey, data);
+  let SignedData = SignJson(serverName, KeyID, privatekey, data);
   return SignedData;
 }
 function HTTPRequest(r: FederationRequest) {
