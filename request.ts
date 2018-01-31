@@ -193,7 +193,16 @@ function IsSafeInHttpQuotedString(text: string) {
 }
 
 function VerifyHTTPRequest(req, now, destination, keys) {
-
+let request = readHTTPRequest(req);
+request.Destination = destination;
+let toVerify = request.FederationRequest;
+if (request.Origin() === '') {
+let message = 'Missing authorization headers';
+return message;
+}
+// the next piece of code requires keyring, once  done with keyring module and
+// imported, this piece will be written
+return request;
 }
 
 function readHTTPRequest(req) {
@@ -208,8 +217,10 @@ return 'the request must be application/json';
 }
 result.Content = content;
 }
+
 let authorization = req.headers['Authorization'];
-let scheme, origin, key, sig = parseAuthorization(authorization);
+
+let scheme, origin, key, sig: [] = parseAuthorization(authorization); // review req.d
 // let origin = parseAuthorization(authorization);
 // let key = parseAuthorization(authorization);
 if (scheme !== 'X-Matrix') {
@@ -231,6 +242,7 @@ return result;
 }
 
 function parseAuthorization(header) {
+let sig: string;
 let parts = header.split(' ').slice(2);
 let scheme = parts[0];
 if (scheme !== 'X-Matrix') {
