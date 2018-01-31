@@ -1,21 +1,24 @@
 "use strict";
+// import https = require('https');
+// import fs = require('fs');
+// import sprintf = require('sprintf');
+// import request = require('request');
 exports.__esModule = true;
-var https = require("https");
-var options = {
-    method: 'GET',
-    path: '/_matrix/federation/v1/send/',
-    host: 'federation.rocket.chat',
-    port: '8089'
-};
-console.log('Federating to matrix......');
-var x = https.request(options, function (res) {
-    console.log('Connected');
-    res.on('data', function (data) {
-        console.log(data);
-        // console.log(String.fromCharCode.apply(null, new Uint16Array()));
-    });
-});
-x.end();
+// let options = {
+// method: 'GET',
+// path: '/_matrix/federation/v1/send/',
+// host: 'federation.rocket.chat',
+// port: '8089'
+// };
+// console.log('Federating to matrix......');
+// let x = https.request(options, function(res){
+// console.log('Connected');
+// res.on('data', function(data){
+// console.log(data);
+// // console.log(String.fromCharCode.apply(null, new Uint16Array()));
+//  });
+// });
+// x.end();
 /* export class Fields {
 Content: string;
 Destination: string;
@@ -80,3 +83,83 @@ return result;
 // let Field = new Fields('localhost:8448', 'GET', '/_matrix/federation/v1/query/directory?room_alias=%23test%3Alocalhost%3A8448');
 // console.log(Field);
 // console.log(https.request());
+var sprintf = require("sprintf");
+var request = require("request");
+function NewFederationRequest(method, destination, requestURI, r) {
+    r.Destination = destination;
+    r.Method = method;
+    r.RequestURI = requestURI;
+    return r;
+}
+function SetContent(r) {
+    if (r.Content != null) {
+        return 'Content already set on the request';
+    }
+    if (r.Signatures != null) {
+        return 'the request is being signed and cannot be modified';
+    }
+    var data = Content;
+    return data;
+}
+function Method(r) {
+    return r.Method;
+}
+function Content(r) {
+    return r.Content;
+}
+function Origin(r) {
+    return r.Origin;
+}
+function RequestURI(r) {
+    return r.RequestURI;
+}
+function Sign(serverName, KeyID, privatekey, r) {
+    if (r.Origin !== '' && r.Origin !== serverName) {
+        return 'the request is already signed by a different server';
+    }
+    r.Origin = serverName;
+    var data = r.Origin;
+    var SignedData = SignJSON(serverName, KeyID, privatekey, data);
+    return SignedData;
+}
+function HTTPRequest(r) {
+    var urlStr = sprintf('matrix://%s%s', r.Destination, r.RequestURI);
+    var content;
+    var byte = [];
+    for (var i = 0; i < content.length(); i++) {
+        byte.push(content.charCodeAt(i));
+    }
+    var httpreq = request(r.Method, urlStr, content);
+    // require a sanity check to be done
+    if (r.Content != null) {
+        httpreq.setHeader('Content-Type', 'application/json');
+    }
+}
+function IsSafeInHttpQuotedString(text) {
+    var texts = [];
+    for (var i = 0; i < text.length; i++) {
+        var c = texts[i];
+        switch (c) {
+            case c === '\t': {
+                continue;
+            }
+            case c === ' ': {
+                continue;
+            }
+            case c === 0x21: {
+                continue;
+            }
+            case 0x23 <= c && c <= 0x5b: {
+                continue;
+            }
+            case (0x5d <= c && c <= 0x7e): {
+                continue;
+            }
+            case (0x80 <= c && c <= 0xff): {
+                continue;
+            }
+            default:
+                return false;
+        }
+    }
+}
