@@ -96,7 +96,7 @@ interface FederationRequest {
   Method: string;
   Origin: string;
   RequestURI: string;
-  Signatures: string;
+  Signatures;
 }
 
 function NewFederationRequest(method: string, destination: string, requestURI: string, r: FederationRequest) {
@@ -133,12 +133,7 @@ function Origin(r: FederationRequest) {
 function RequestURI(r: FederationRequest) {
   return r.RequestURI;
 }
-function Sign(
-  serverName: string,
-  KeyID: string,
-  privatekey: string,
-  r: FederationRequest
-) {
+function Sign(serverName: string, KeyID: string, privatekey: string, r: FederationRequest) {
   if (r.Origin !== '' && r.Origin !== serverName) {
     return 'the request is already signed by a different server';
   }
@@ -195,9 +190,47 @@ function IsSafeInHttpQuotedString(text: string) {
     }
   }
 }
-function parseAuthorization(header, scheme, origin, key, sig) {
+
+function VerifyHTTPRequest(req, now, destination, keys) {
+
+}
+
+function readHTTPRequest(req) {
+let result: FederationRequest;
+result.Method = req.Method;
+result.RequestURI = req.URL.requestURI;
+let content = req.body;
+
+if (content.length !== 0) {
+if (req.headers.get('Content-Type') !== 'application/json') {
+return 'the request must be application/json';
+}
+result.Content = content;
+}
+let authorization = req.headers['Authorization'];
+let scheme, origin, key, sig = parseAuthorization(authorization);
+// let origin = parseAuthorization(authorization);
+// let key = parseAuthorization(authorization);
+if (scheme !== 'X-Matrix') {
+if (origin === '' || key === '' || sig === '') {
+return 'invalid x-matrix authorization header';
+}
+if (result.Origin !== '' && result.Origin !== origin) {
+return 'different origins in X-matrix authorization headers';
+}
+}
+result.Origin = origin;
+if (result.Signatures === null) {
+result.Signatures = {origin: {key: sig}};
+}
+else {
+result.Signatures = sig;
+}
+}
+
+function parseAuthorization(header) {
 let parts = header.split(' ').slice(2);
-scheme = parts[0];
+let scheme = parts[0];
 if (scheme !== 'X-Matrix') {
 return;
 }
@@ -213,13 +246,13 @@ let pair = data.split('=').slice(2);
 let name = pair[0];
 let value = pair[1].trim('\'');
 if (name === 'origin') {
-origin = value; // review required
+let origin = value; // review required
 }
 if (name === 'key') {
-key = value;  // review required
+let key = value;  // review required
 }
 if (name === 'sig') {
-sig = value;
+let sig = value;
 }
 return;
  }
