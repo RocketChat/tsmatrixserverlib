@@ -226,6 +226,7 @@ result.Signatures = {origin: {key: sig}};
 else {
 result.Signatures = sig;
 }
+return result;
 }
 
 function parseAuthorization(header) {
