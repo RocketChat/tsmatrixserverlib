@@ -8,21 +8,21 @@ let key = nacl.sign.keyPair(); // nacl.sign.keyPair();
 return key;
 }
 
-function GetVerifyKey(signing_key) {
+export function GetVerifyKey(signing_key) {
 let verify_key = signing_key.verify_key;
-verify_key.version = signing_key.version;
+// verify_key.version = signing_key.version;
 
 return verify_key;
 }
 
-function DecodeSigningKeyBase64(key_base64) {
-let key_bytes = new Buffer(key_base64, 'base64').toString('ascii');
+export function DecodeSigningKeyBase64(key_base64) {
+let key_bytes = key_base64.toString('base64'); // new Buffer(key_base64, 'base64').toString('ascii');
 let key = GenerateSigningKey(key_bytes);
 return key;
 }
 
-function EncodeSigningKeyBase64(key) {
-let encoded = new Buffer(key).toString('base64');
+export function EncodeSigningKeyBase64(key) {
+let encoded = key.toString('base64');
 return encoded;
 }
 
@@ -31,17 +31,15 @@ let encoded = new Buffer(key).toString('base64');
 return encoded;
 }
 
-function IsSigningSupportedAlgorithm(key_id) {
-if (key_id.startswith('ed25519' + ':')) {
+export function IsSigningSupportedAlgorithm(key_id) {
+if (key_id.startsWith('ed25519' + ':')) {
 return true;
 }
-else {
-return false;
-}
+
 }
 
 function DecodeVerifyKeyBytes(key_id, key_bytes) {
-if (key_id.startswith('ed25519' + ':')) {
+if (key_id.startsWith('ed25519' + ':')) {
 let key = nacl.sign.keyPair.fromSecretKey(key_bytes);
 // key.version = version;
 return key;
