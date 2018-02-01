@@ -1,4 +1,4 @@
-import {GenerateSigningKey, EncodeSigningKeyBase64, DecodeSigningKeyBase64, GetVerifyKey} from '../../keys';
+import {GenerateSigningKey, EncodeSigningKeyBase64, DecodeSigningKeyBase64, GetVerifyKey, IsSigningSupportedAlgorithm} from '../../keys';
 import { expect } from 'chai';
 import {} from 'mocha';
 
@@ -22,3 +22,9 @@ describe('Encode and verify signing keys', () => {
       expect(decode_key).to.have.property('secretKey');
       });
     });
+
+describe('Return true or false based on the function', () => {
+  it ('must return true here', () => {
+  expect(IsSigningSupportedAlgorithm('ed25519:an_id')).to.be.true;
+  });
+});
