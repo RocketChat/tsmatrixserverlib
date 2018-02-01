@@ -31,7 +31,7 @@ from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Un
 - [x] resolve.ts
 - [ ] request.ts
 - [x] redactevent.ts
-- [ ] keys.ts
+- [x] keys.ts
 - [ ] keyring.ts
 - [ ] json.ts
 - [ ] federationtypes.ts

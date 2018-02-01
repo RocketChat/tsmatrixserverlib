@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/chai": "^4.0.0",
     "@types/mocha": "^2.2.41",
+    "assert": "^1.4.1",
     "btoa": "^1.1.2",
     "chai": "^4.0.2",
     "dns": "^0.2.2",

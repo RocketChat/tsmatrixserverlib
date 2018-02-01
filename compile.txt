@@ -1,10 +1,1 @@
-timestamp.ts
-base64.ts
-resolve.ts
-transaction.ts
-redactevent.ts
-request.ts
-event.ts
-eventcontent.ts
-client.ts
-resolve.ts
+keys.ts
