@@ -1,9 +1,9 @@
 import { Transaction} from './transaction';
-import {Fields} from './request';
+// import {Fields} from './request';
 let https = require('https');
 let request = require('request');
 
-let field: Fields;
+// let field: Fields;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 let bodyString = JSON.stringify ({
 'message': 'hello'
