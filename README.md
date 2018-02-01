@@ -39,7 +39,7 @@ from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Un
 - [ ] eventcrypto.ts
 - [x] eventcontent.ts
 - [ ] eventauth.ts
-- [ ] event.ts
+- [x] event.ts
 - [x] clientevent.ts
 - [x] client.ts
 - [x] base64.ts
