@@ -19,7 +19,7 @@ The is work in progress.  We will update this page from time to time.
 
 #### Understanding the Federation Project
 
-The project aims at replacing Hubot-Freddie bridge with Federation API taking its place.The concept of Federation API is originally derived
+The project aims to rewrite the matrix's server-server API in TypeScript .The concept of Federation API is originally derived
 from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Understanding the Federation API document is really necessary in order to contribute to [Repository](https://github.com/RocketChat/Rocket.Chat.Federation/tree/tsmatrixlib/tsmatrixserverlib).The reference library is [gomatrixserverlib](https://github.com/matrix-org/gomatrixserverlib).
 
 #### Tsmatrixserverlib Task-List
