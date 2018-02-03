@@ -37,7 +37,7 @@ function IsSigningSupportedAlgorithm(key_id) {
 }
 exports.IsSigningSupportedAlgorithm = IsSigningSupportedAlgorithm;
 function DecodeVerifyKeyBytes(key_id, key_bytes) {
-    if (key_id.startswith('ed25519' + ':')) {
+    if (key_id.startsWith('ed25519' + ':')) {
         var key = nacl.sign.keyPair.fromSecretKey(key_bytes);
         // key.version = version;
         return key;
