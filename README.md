@@ -43,6 +43,7 @@ from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Un
 - [x] clientevent.ts
 - [x] client.ts
 - [x] base64.ts
+- [x] hexstring.ts
 
 
 #### Set up tsmatrixserverlib with TypeScript & JavaScript Unit Tests
