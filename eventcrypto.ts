@@ -2,6 +2,7 @@ import sha256 = require('crypto-js/sha256');
 import { baseEncoding } from './base64';
 import { baseDecoding } from './base64';
 import { redactEvent } from './redactevent';
+import {SignJson} from './signing';
 
 function addContentHashesToEvent (eventJSON) {
 let event;
@@ -61,4 +62,22 @@ let sha256hash = sha256.digest(hashableEventJSON);
 let eventID;
 event['event_id'] = eventID;
 return eventID;
+}
+
+function signEvent(signingName: string, keyID, privatekey, eventJSON ) {
+let redactedJSON = redactEvent(eventJSON);
+let signedJSON = SignJson(signingName, keyID, privatekey, redactedJSON);
+interface SignedEvent {
+Signatures;
+}
+let event;
+let se: SignedEvent;
+event['signatures'] = se.Signatures;
+return event;
+}
+
+function verifyEventSignature(signingName: string, keyID, publickey, eventJSON) {
+let redactedJSON = redactEvent(eventJSON);
+// return VerifyJSON from signing,
+// todo: WRITE VERIFYJSON ON SIGNINNG
 }
