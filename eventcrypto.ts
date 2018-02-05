@@ -3,6 +3,8 @@ import { baseEncoding } from './base64';
 import { baseDecoding } from './base64';
 import { redactEvent } from './redactevent';
 import {SignJson} from './signing';
+import {VerifySignedJson } from './signing';
+import ctx = require('node-context');
 
 function addContentHashesToEvent (eventJSON) {
 let event;
@@ -78,6 +80,9 @@ return event;
 
 function verifyEventSignature(signingName: string, keyID, publickey, eventJSON) {
 let redactedJSON = redactEvent(eventJSON);
-// return VerifyJSON from signing,
-// todo: WRITE VERIFYJSON ON SIGNINNG
+return VerifySignedJson(signingName, keyID, publickey);
+}
+
+function verifyEventSignatures(ctx, events, keyRing) {
+// let toVerify = VerifyJSONRequest(0, events.length);
 }
