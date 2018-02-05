@@ -200,8 +200,12 @@ if (request.Origin() === '') {
 let message = 'Missing authorization headers';
 return message;
 }
-// the next piece of code requires keyring, once  done with keyring module and
-// imported, this piece will be written
+
+let results = keys.VerifyJSONs({
+  ServerName: request.Origin,
+  AtTS: asTimeStamp(now),
+  Message: toVerify
+});
 return request;
 }
 
