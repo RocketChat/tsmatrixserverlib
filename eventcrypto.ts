@@ -78,7 +78,7 @@ event['signatures'] = se.Signatures;
 return event;
 }
 
-function verifyEventSignature(signingName: string, keyID, publickey, eventJSON) {
+export function verifyEventSignature(signingName: string, keyID, publickey, eventJSON) {
 let redactedJSON = redactEvent(eventJSON);
 return VerifySignedJson(signingName, keyID, publickey);
 }

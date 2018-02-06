@@ -17,7 +17,7 @@ json_object['unsigned'] = unsigned;
 return json_object;
 }
 
-function VerifySignedJson(json_object, signature_name, verify_key) {
+export function VerifySignedJson(json_object, signature_name, verify_key) {
 try {
 let signatures = json_object['signatures'];
 }
