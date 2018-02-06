@@ -27,7 +27,7 @@ from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Un
 - [x] transaction.ts
 - [x] timestamp.ts
 - [ ] stateresolution.ts
-- [ ] signing.ts
+- [x] signing.ts
 - [x] resolve.ts
 - [ ] request.ts
 - [x] redactevent.ts
