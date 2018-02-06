@@ -91,7 +91,8 @@ return result;
 import sprintf = require('sprintf');
 import request = require('request');
 import { SignJson } from './signing';
-interface FederationRequest {
+
+export interface FederationRequest {
   Content: string;
   Destination: string;
   Method: string;
@@ -100,14 +101,16 @@ interface FederationRequest {
   Signatures;
 }
 
-function NewFederationRequest(method: string, destination: string, requestURI: string, r: FederationRequest) {
+export function NewFederationRequest(method: string, destination: string, requestURI: string) {
+r: FederationRequest;
 r.Destination = destination;
 r.Method = method;
 r.RequestURI = requestURI;
 return r;
 }
 
-function SetContent(r: FederationRequest) {
+export function SetContent() {
+  r: FederationRequest;
   if (r.Content != null) {
     return 'Content already set on the request';
   }
@@ -134,7 +137,8 @@ function Origin(r: FederationRequest) {
 function RequestURI(r: FederationRequest) {
   return r.RequestURI;
 }
-function Sign(serverName: string, KeyID: string, privatekey: string, r: FederationRequest) {
+export function Sign(serverName: string, KeyID: string, privatekey: string) {
+  r: FederationRequest;
   if (r.Origin !== '' && r.Origin !== serverName) {
     return 'the request is already signed by a different server';
   }
@@ -143,7 +147,8 @@ function Sign(serverName: string, KeyID: string, privatekey: string, r: Federati
   let SignedData = SignJson(serverName, KeyID, privatekey, data);
   return SignedData;
 }
-function HTTPRequest(r: FederationRequest) {
+export function HTTPRequest() {
+  r: FederationRequest;
   let urlStr = sprintf('matrix://%s%s', r.Destination, r.RequestURI);
   let content;
   let byte = [];

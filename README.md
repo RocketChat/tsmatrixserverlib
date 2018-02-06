@@ -29,13 +29,13 @@ from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Un
 - [ ] stateresolution.ts
 - [x] signing.ts
 - [x] resolve.ts
-- [ ] request.ts
+- [x] request.ts
 - [x] redactevent.ts
 - [x] keys.ts
 - [ ] keyring.ts
 - [ ] json.ts
 - [ ] federationtypes.ts
-- [ ] federationclient.ts
+- [x] federationclient.ts
 - [ ] eventcrypto.ts
 - [x] eventcontent.ts
 - [ ] eventauth.ts

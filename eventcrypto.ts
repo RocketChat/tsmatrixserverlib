@@ -85,4 +85,11 @@ return VerifySignedJson(signingName, keyID, publickey);
 
 function verifyEventSignatures(ctx, events, keyRing) {
 // let toVerify = VerifyJSONRequest(0, events.length);
+let VerifyJSONRequest;
+let toVerify = VerifyJSONRequest.slice(0, events.length());
+// verificationMap
+for (let eventIdx of events) {
+let redactedJSON = redactEvent(eventIdx.eventJSON);
+}
+
 }
