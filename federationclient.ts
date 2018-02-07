@@ -11,13 +11,13 @@ import {HTTPRequest} from './request';
 import {NewFederationRequest} from './request';
 import {EventBuilder} from './event';
 
-interface FederationClient {
+export interface FederationClient {
 Client;
 serverName;
 serverKeyID;
 serverPrivateKey;
 }
-function doRequest(ctx, r: FederationRequest, resBody) {
+export function doRequest(ctx, r: FederationRequest, resBody) {
 let ac: FederationClient;
 Sign (ac.serverName, ac.serverKeyID, ac.serverPrivateKey);
 let req = HTTPRequest;
@@ -25,26 +25,27 @@ return ac.Client.DoRequestAndParseResponse(ctx, req, resBody);
 }
 
 let federationPathPrefix = '/_matrix/federation/v1';
-function SendTransaction(Transaction) {
+
+export function SendTransaction(Transaction) {
 let path = '/_matrix/federation/v1/send/' + (Transaction.TransactionID) + '/';
 let req = this.field.NewFederationRequest('PUT', 'destination', path);
 
 return;
 }
 
-function MakeJoin(ServerName, roomID: string, userID: string) {
+export function MakeJoin(ServerName, roomID: string, userID: string) {
 let path = '/_matrix/federation/v1/make_join/' + encodeURIComponent(roomID) + '/' + encodeURIComponent(userID);
 let req = this.field.NewFederationRequest('GET', ServerName, path);
 return;
 }
 
-function SendJoin(ServerName, Event) {
+export function SendJoin(ServerName, Event) {
 let path = '/_matrix/federation/v1/send_join/' + encodeURIComponent(Event.RoomID()) + '/' + encodeURIComponent(Event.EventID());
 let req = this.field.NewFederationRequest('PUT', ServerName, path);
 return;
 }
 
-function SendInvite(ctx, ServerName, Event, res) {
+export function SendInvite(ctx, ServerName, Event, res) {
 let ac: FederationClient;
 let path = federationPathPrefix + '/invite/' + encodeURIComponent(Event.RoomID()) + '/' + encodeURIComponent(Event.EventID());
 let req = NewFederationRequest('PUT', ServerName, path);
@@ -53,7 +54,7 @@ doRequest(ctx, req, res);
 return;
 }
 
-function ExchangeThirdPartyInvite(ctx, ServerName, builder: EventBuilder) {
+export function ExchangeThirdPartyInvite(ctx, ServerName, builder: EventBuilder) {
 let path = federationPathPrefix + '/exchange_third_party_invite/' + encodeURIComponent(builder.RoomID);
 let req = NewFederationRequest('PUT', 'ServerName', path);
 req.SetContent(builder);
@@ -61,19 +62,19 @@ doRequest(ctx, req, null);
 return;
 }
 
-function LookupState(ServerName, roomID, eventID: string) {
+export function LookupState(ServerName, roomID, eventID: string) {
 let path = '/_matrix/federation/v1/state_ids/' + encodeURIComponent(roomID) + '/?event_id=' + encodeURI(eventID);
 let req = this.field.NewFederationRequest('GET', ServerName, path);
 return;
 }
 
-function LookupStateIDs(ServerName, roomID, eventID: string) {
+export function LookupStateIDs(ServerName, roomID, eventID: string) {
 let path = '/_matrix/federation/v1/state_ids/' + encodeURIComponent(roomID) + '/?event_id=' + encodeURI(eventID);
 let req = this.field.NewFederationRequest('GET', ServerName, path);
 return;
 }
 
-function LookupRoomAlias(ServerName, roomAlias: string) {
+export function LookupRoomAlias(ServerName, roomAlias: string) {
 let path = '/_matrix/federation/v1/query/directory?room_alias=' + encodeURI(roomAlias);
 let req = this.field.NewFederationRequest('GET', ServerName, path);
 return;
