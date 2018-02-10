@@ -1,12 +1,11 @@
-export function redactEvent(eventJSON: string) {
-interface CreateContent {
+export interface CreateContent {
 Creator;
   }
-interface JoinRulesContent {
+export interface JoinRulesContent {
 JoinRule;
   }
 
-interface  PowerLevelContent {
+export interface  PowerLevelContent {
 Users;
 UsersDefault;
 Events;
@@ -17,18 +16,18 @@ Kick;
 Redact;
 }
 
-interface MemberContent {
+export interface MemberContent {
 Membership;
   }
-interface AliasesContent {
+export interface AliasesContent {
 Aliases;
   }
 
-interface  HistoryVisibilityContent {
+export interface  HistoryVisibilityContent {
 HistoryVisibility;
   }
 // type AllContent = CreateContent | JoinRulesContent | PowerLevelContent | MemberContent | AliasesContent | HistoryVisibilityContent;
-interface AllContent {
+export interface AllContent {
 CreateContent;
 JoinRulesContent;
 PowerLevelContent;
@@ -38,7 +37,7 @@ HistoryVisibilityContent;
 
 }
 
-interface EventFields {
+export interface EventFields {
 EventID;
 Sender;
 RoomID;
@@ -54,7 +53,65 @@ AuthEvents;
 Origin;
 OriginServerTS;
   }
-let event: EventFields;
+
+export let event: EventFields;
+export function redactEvent(eventJSON: string) {
+// interface CreateContent {
+// Creator;
+//   }
+// interface JoinRulesContent {
+// JoinRule;
+//   }
+
+// interface  PowerLevelContent {
+// Users;
+// UsersDefault;
+// Events;
+// EventsDefault;
+// StateDefault;
+// Ban;
+// Kick;
+// Redact;
+// }
+
+// interface MemberContent {
+// Membership;
+//   }
+// interface AliasesContent {
+// Aliases;
+//   }
+
+// interface  HistoryVisibilityContent {
+// HistoryVisibility;
+//   }
+// // type AllContent = CreateContent | JoinRulesContent | PowerLevelContent | MemberContent | AliasesContent | HistoryVisibilityContent;
+// interface AllContent {
+// CreateContent;
+// JoinRulesContent;
+// PowerLevelContent;
+// MemberContent;
+// AliasesContent;
+// HistoryVisibilityContent;
+
+// }
+
+// interface EventFields {
+// EventID;
+// Sender;
+// RoomID;
+// Hashes;
+// Signatures;
+// Content: AllContent;
+// Type;
+// StateKey;
+// Depth;
+// PrevEvents;
+// PrevState;
+// AuthEvents;
+// Origin;
+// OriginServerTS;
+//   }
+// let event: EventFields;
 JSON.stringify(event);
 let NewContent: AllContent;
 // let membercontent: MemberContent;
