@@ -125,6 +125,18 @@ result.redacted = true;
 return result;
 }
 
+export function StateKey() {
+let fields: EventFields;
+return fields.StateKey;
+}
+
+export function StateKeyEquals(statekey) {
+let fields: EventFields;
+if (fields.StateKey === null) {
+return false;
+}
+return fields.StateKey = statekey;
+}
 export function Origin() {
 let fields: EventFields;
 return fields.Origin;
