@@ -117,3 +117,38 @@ default:
 return 'unexpected auth event';
 }
 }
+
+
+function removeauthEvent(eventType, statekey) {
+let r: StateResolver;
+switch (eventType) {
+case 'MRoomCreate': {
+if (statekey === '') {
+r.resolvedCreate = null;
+}
+}
+
+case 'MRoomPowerLevels': {
+if (statekey === '') {
+r.resolvedPowerLevels = null;
+}
+}
+
+case 'MRoomJoinRules': {
+if (statekey === '') {
+r.resolvedJoinRules = null;
+}
+}
+
+case 'MRoomMember': {
+r.resolvedMembers[statekey] = null;
+}
+
+case 'MRoomThirdPartyInvite': {
+r.resolvedThirdPartyInvites[statekey] = null;
+}
+
+default:
+return 'unexpected autherror';
+}
+}
