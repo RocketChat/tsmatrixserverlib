@@ -1,5 +1,4 @@
 keys.ts
 hexstring.ts
 signing.ts
-clientevent.ts
 event.ts
