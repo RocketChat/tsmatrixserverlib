@@ -38,7 +38,7 @@ eb.Unsigned = unsigned;
 }
 
 export interface  Event {
-redacted: boolean;
+redacted;
 eventJSON;
 fields: EventFields;
 }
@@ -96,19 +96,19 @@ result.eventJSON = eventJSON;
 return;
 }
 // let result: Event;
-function NewEventFromTrustedJSON(eventJSON, redacted) {
+export function NewEventFromTrustedJSON(eventJSON, redacted) {
 let result: Event;
 result.redacted = redacted;
 result.eventJSON = eventJSON;
-return;
+return redacted;
 }
 
-function Redacted() {
+export function Redacted() {
 let e: Event;
 return e.redacted;
 }
 
-function JSON() {
+export function JSON() {
 let e: Event;
 return e.eventJSON;
 }

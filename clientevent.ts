@@ -4,8 +4,8 @@ import {EventFields} from './event';
 import * as Event from './event';
 
 type EventFormat = number;
-declare const FormatAll;
-declare const FormatSync;
+export declare const FormatAll;
+export declare const FormatSync;
 
 export interface ClientEvent {
 Content: string;

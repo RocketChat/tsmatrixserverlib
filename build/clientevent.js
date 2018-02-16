@@ -21,7 +21,7 @@ function ToClientEvent(Event, EventFormat) {
         RoomID: Event.RoomID()
     };
     // let FormatAll;
-    if (EventFormat === FormatAll) {
+    if (EventFormat === exports.FormatAll) {
         ce.RoomID = Event.RoomID();
     }
     return ce;

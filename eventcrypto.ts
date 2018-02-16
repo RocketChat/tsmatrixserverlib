@@ -4,9 +4,10 @@ import { baseDecoding } from './base64';
 import { redactEvent } from './redactevent';
 import {SignJson} from './signing';
 import {VerifySignedJson } from './signing';
+import {event} from './redactevent';
 import ctx = require('node-context');
 
-function addContentHashesToEvent (eventJSON) {
+export function addContentHashesToEvent (eventJSON) {
 let event;
 let unsignedJSON = event['unsigned'];
 delete event.unsigned;
@@ -66,7 +67,7 @@ event['event_id'] = eventID;
 return eventID;
 }
 
-function signEvent(signingName: string, keyID, privatekey, eventJSON ) {
+export function signEvent(signingName: string, keyID, privatekey, eventJSON ) {
 let redactedJSON = redactEvent(eventJSON);
 let signedJSON = SignJson(signingName, keyID, privatekey, redactedJSON);
 interface SignedEvent {
@@ -87,9 +88,31 @@ function verifyEventSignatures(ctx, events, keyRing) {
 // let toVerify = VerifyJSONRequest(0, events.length);
 let VerifyJSONRequest;
 let toVerify = VerifyJSONRequest.slice(0, events.length());
-// verificationMap
+for (let i in events) {
+for (let j of events) {
+let verificationMap = events[i][j];
+}
+}
 for (let eventIdx of events) {
+  for (let event of events) {
 let redactedJSON = redactEvent(eventIdx.eventJSON);
 }
-
 }
+// let domains = ServerName; // yet to be implemented, just the call here
+// domains[event.Origin()] = true;
+// if (event.Type() === 'MRoomMember' && event.StateKey() !== null) {
+// let targetDomain = domainfromID(event.StateKey()); // yet to be implemented
+// if (ServerName(targetDomain) !== event.Origin()) {
+// let c = newMemberContentfromEvent(event) // the module containing this function
+// // is yet to be written
+// if (c.Membership === 'invite') {
+// domains[ServerName(targetDomain)] = true;
+// }
+// }
+}
+// for (let domain of domains) {
+// VerifyJSONRequest [Message] = redactedJSON;
+// let verificationMap[evtIdx] = verificationMap.push(evtIdx)
+// }
+
+// }
