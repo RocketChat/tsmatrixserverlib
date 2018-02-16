@@ -4,6 +4,24 @@ import * as event from './event';
 function ResolveStateConflicts (conflicted, authEvents) {
 let r: StateResolver;
 // r.resolvedThirdPartyInvites
+r.resolvedThirdPartyInvites = Event;
+r.resolvedMembers = Event;
+addConflicted(conflicted);
+for (let i in authEvents) {
+addAuthEvent(authEvents[i]);
+}
+resolveAndAddAuthBlocks(r.creates);
+resolveAndAddAuthBlocks(r.powerLevels);
+resolveAndAddAuthBlocks(r.joinRules);
+resolveAndAddAuthBlocks(r.thirdpartyinvites);
+resolveAndAddAuthBlocks(r.members);
+
+for (let block of r.others) {
+if (event === resolveNormalBlock(block)) {
+r.result.push(event);
+}
+}
+return r.result;
 }
 
 interface StateResolver {
@@ -151,4 +169,61 @@ r.resolvedThirdPartyInvites[statekey] = null;
 default:
 return 'unexpected autherror';
 }
+}
+
+function resolveAndAddAuthBlocks(blocks) {
+let r: StateResolver;
+let start = r.result.length;
+for (let block of blocks) {
+if (block.length === 0) {
+continue;
+}
+let event;
+if ( event === resolveAuthBlock(block)) {
+r.result.push(event);
+}
+}
+for (let i = start; i < r.result.length; i++) {
+addAuthEvent(r.result[i]);
+}
+}
+
+function resolveAuthBlock(events) {
+let block = sortConflictedEventByDepthAndSHA1(events);
+let result = block[0].event;
+addAuthEvent(result);
+for (let i = 1; i < block.lenNamegth; i++) {
+let event = block[i].event;
+result = event;
+addAuthEvent(result);
+}
+removeauthEvent(result.Type(), result.StateKey());
+return result;
+}
+
+function resolveNormalBlock(events) {
+let r: StateResolver;
+let block = sortConflictedEventByDepthAndSHA1(events);
+for (let i = block.length() - 1; i > 0; i--) {
+let event = block[i].event;
+return event;
+}
+return block[0].event;
+}
+
+function sortConflictedEventByDepthAndSHA1(events) {
+let ConflictedEvent;
+let block  = ConflictedEvent.slice(0, events.length);
+for (let i of events) {
+let event = events[i];
+block[i] = ConflictedEvent.push({ 'depth' : event.Depth(), 'eventIDSHA1': crypto.createHash('sha1').update(event.eventID()).digest('hex'), 'event': event });
+}
+ConflictedEvent.sort(block);
+return block;
+}
+
+interface  ConflictedEvent {
+depth;
+eventIDSHA1;
+event;
 }
