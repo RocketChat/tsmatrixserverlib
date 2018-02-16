@@ -26,17 +26,17 @@ from [Federation API](https://matrix.org/docs/spec/r0.0.1/server_server.html).Un
 
 - [x] transaction.ts
 - [x] timestamp.ts
-- [ ] stateresolution.ts
+- [x] stateresolution.ts
 - [x] signing.ts
 - [x] resolve.ts
 - [x] request.ts
 - [x] redactevent.ts
 - [x] keys.ts
 - [ ] keyring.ts
-- [ ] json.ts
+- [ ] json.ts (TBD)
 - [ ] federationtypes.ts
 - [x] federationclient.ts
-- [ ] eventcrypto.ts
+- [x] eventcrypto.ts
 - [x] eventcontent.ts
 - [ ] eventauth.ts
 - [x] event.ts
