@@ -211,7 +211,7 @@ return event;
 return block[0].event;
 }
 
-function sortConflictedEventByDepthAndSHA1(events) {
+export function sortConflictedEventByDepthAndSHA1(events) {
 let ConflictedEvent;
 let block  = ConflictedEvent.slice(0, events.length);
 for (let i of events) {
