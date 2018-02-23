@@ -10,6 +10,7 @@ import {Sign} from './request';
 import {HTTPRequest} from './request';
 import {NewFederationRequest} from './request';
 import {EventBuilder} from './event';
+import {SetContent} from './event';
 
 export interface FederationClient {
 Client;
@@ -49,7 +50,7 @@ export function SendInvite(ctx, ServerName, Event, res) {
 let ac: FederationClient;
 let path = federationPathPrefix + '/invite/' + encodeURIComponent(Event.RoomID()) + '/' + encodeURIComponent(Event.EventID());
 let req = NewFederationRequest('PUT', ServerName, path);
-req.SetContent(Event);
+SetContent(Event);
 doRequest(ctx, req, res);
 return;
 }
@@ -57,7 +58,7 @@ return;
 export function ExchangeThirdPartyInvite(ctx, ServerName, builder: EventBuilder) {
 let path = federationPathPrefix + '/exchange_third_party_invite/' + encodeURIComponent(builder.RoomID);
 let req = NewFederationRequest('PUT', 'ServerName', path);
-req.SetContent(builder);
+SetContent(builder);
 doRequest(ctx, req, null);
 return;
 }
