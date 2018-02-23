@@ -4,7 +4,7 @@ import {redactEvent} from './redactevent';
 import {addContentHashesToEvent} from  './eventcrypto';
 import {signEvent} from './eventcrypto';
 
-interface StateKeyTuple {
+export interface StateKeyTuple {
   EventType: string;
   StateKey: string;
 }
@@ -28,7 +28,7 @@ export interface EventBuilder {
 }
 let eb: EventBuilder;
 
-function SetContent(content) {
+export function SetContent(content) {
 eb.Content = content;
 return;
 }

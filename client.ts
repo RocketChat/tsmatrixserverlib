@@ -3,27 +3,29 @@ import tls = require('tls');
 import fs = require('fs');
 import HttpTransport = require('http-transport');
 let transport = new HttpTransport();
+
+// interface UserInfo {
+// Sub: string;
+// }
+// interface FederationTripper {
+// }
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 let req = http.request({
     host: 'federation.rocket.chat',
     port: 8008,
     path: '',
     method: 'GET'
-
 }, function(res){
-
     let body = [];
     res.on('data', function(data){
         body.push(data);
     });
-
     res.on('end', function(){
         console.log( body.join('') );
     });
-
 });
-req.end();
 
+req.end();
 req.on('error', function(err){
     console.log(err);
 });
