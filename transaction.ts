@@ -22,12 +22,11 @@ let transactions = new Transaction('transaction_id', 'origin', 'destination', 'p
 type TransactionID =  string; */
 type TransactionID = string;
 
-export class Transaction {
+export interface Transaction {
 TransactionID: TransactionID;
 Origin: string;
-Destination: 'origin_server_ts';
+Destination: string;
 OriginServerTS: TimeStamp;
 PreviousIds: TransactionID[];
 PDUs: Event[];
-// constructor ()
 }
