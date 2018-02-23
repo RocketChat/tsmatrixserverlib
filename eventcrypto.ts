@@ -5,6 +5,7 @@ import { redactEvent } from './redactevent';
 import {SignJson} from './signing';
 import {VerifySignedJson } from './signing';
 import {event} from './redactevent';
+import {domainFromID} from './eventcontent';
 import ctx = require('node-context');
 
 export function addContentHashesToEvent (eventJSON) {
@@ -97,6 +98,7 @@ for (let eventIdx of events) {
   for (let event of events) {
 let redactedJSON = redactEvent(eventIdx.eventJSON);
 }
+  let senderDomain = domainFromID(event.Sender());
 }
 // let domains = ServerName; // yet to be implemented, just the call here
 // domains[event.Origin()] = true;

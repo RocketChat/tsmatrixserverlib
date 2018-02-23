@@ -37,8 +37,12 @@ export function domainAllowed(domain: string) {
 
 }
 
-function domainFromID(id: string) {
-
+export function domainFromID(id: string) {
+let parts = id.split(':');
+if (parts.length !== 2) {
+return 'invalid ID';
+}
+return parts[1];
 }
 
 interface MemberContent {
