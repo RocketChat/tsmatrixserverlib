@@ -1,3 +1,4 @@
+import {MRoomCreate, MRoomMember, MRoomJoinRules, MRoomPowerLevels, MRoomHistoryVisibility, MRoomAliases} from './eventAuth';
 export interface CreateContent {
 Creator;
   }
@@ -120,27 +121,27 @@ let NewContent: AllContent;
 // let historyvisibilitycontent: HistoryVisibilityContent;
 // let aliasescontent: AliasesContent;
 switch (event.Type) {
-case 'MRoomCreate': {
+case MRoomCreate: {
 NewContent.CreateContent === event.Content.CreateContent;
 return event.Content;
 }
-case 'MRoomMember': {
+case MRoomMember: {
  NewContent.MemberContent = event.Content.MemberContent;
 // return membercontent;
 }
-case 'MRoomJoinRules': {
+case MRoomJoinRules: {
 NewContent.JoinRulesContent = event.Content.JoinRulesContent;
  // return joinrulescontent;
 }
-case 'MRoomPowerLevels': {
+case MRoomPowerLevels: {
 NewContent.PowerLevelContent = event.Content.PowerLevelContent;
 // return powerlevelcontent;
 }
-case 'MRoomHistoryVisibility': {
+case MRoomHistoryVisibility: {
 NewContent.HistoryVisibilityContent = event.Content.HistoryVisibilityContent;
 // return historyvisibilitycontent;
 }
-case 'MRoomAliases': {
+case MRoomAliases: {
 NewContent.AliasesContent = event.Content.AliasesContent;
 // return aliasescontent;
 }
