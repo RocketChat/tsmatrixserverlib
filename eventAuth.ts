@@ -1,6 +1,6 @@
-import { StateKeyTuple, EventReference, EventBuilder, StateKey, Type } from './event';
+import { StateKeyTuple, EventReference, EventBuilder, StateKey, Type, StateKeyEquals, Sender, RoomID, PrevEvents } from './event';
 import { MemberContent } from './redactevent';
-
+import {domainFromID} from './eventcontent';
 export const join = 'join';
 export const ban = 'ban';
 export const leave = 'leave';
@@ -209,4 +209,38 @@ function ThirdPartyInvite(stateKey: string) {
     let a: AuthEvents;
     a.events.EventType = MRoomThirdPartyInvite;
     a.events.StateKey = stateKey;
+}
+
+
+// NewAuthEvents returns an AuthEventProvider backed by the given events. New events can be added by
+// calling AddEvent().
+// NewAuthEvents yet to be added
+
+interface NotAllowed {
+Message: string;
+}
+
+function Error() {
+let a: NotAllowed;
+return  'eventauth' + a.Message;
+}
+
+function Allowed(event: Event, authEvents: AuthEventProvider) {
+// switch (event.fields.Type()) { switch case required
+
+}
+
+function createEventAllowed() {
+if (!StateKeyEquals('')) {
+return 'create event state key is not empty';
+}
+
+let roomIDDomain = domainFromID(RoomID());
+let senderDomain = domainFromID(Sender());
+if (senderDomain !== roomIDDomain) {
+return 'create event roomID doesnot match sender';
+}
+if (PrevEvents() > 0) {
+return 'create event must be the first event in the room';
+}
 }

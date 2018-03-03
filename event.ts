@@ -153,23 +153,33 @@ return fields.Sender;
 }
 
 export function Type() {
+let e: Event;
 let fields: EventFields;
-return fields.Type;
+return e.fields.Type;
 }
 
 export function OriginServerTS() {
+let e: Event;
 let fields: EventFields;
-return fields.OriginServerTS;
+return e.fields.OriginServerTS;
 }
 
 export function Content() {
+let e: Event;
 let fields: EventFields;
-return fields.Content;
+return e.fields.Content;
 }
 
-export function AuthEvents() {
+export function PrevEvents() {
+let e: Event;
 let fields: EventFields;
-return fields.AuthEvents;
+return e.fields.PrevEvents;
+
+}
+export function AuthEvents() {
+let e: Event;
+let fields: EventFields;
+return e.fields.AuthEvents;
 }
 
 export function AuthEventIDs() {
@@ -182,18 +192,21 @@ return result;
 }
 
 export function Redacts() {
+let e: Event;
 let fields: EventFields;
-return fields.Redacts;
+return e.fields.Redacts;
 }
 
 export function RoomID() {
+let e: Event;
 let fields: EventFields;
-return fields.RoomID;
+return e.fields.RoomID;
 }
 
 export function Depth() {
+let e: Event;
 let fields: EventFields;
-return fields.Depth;
+return e.fields.Depth;
 }
 
 export function SplitID(address) {
