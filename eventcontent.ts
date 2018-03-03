@@ -1,4 +1,4 @@
-interface CreateContent {
+export interface CreateContent {
   senderDomain: string;
   RoomID: string;
   eventID: string;
@@ -7,7 +7,7 @@ interface CreateContent {
   }
 let senderDomain;
 let Federate;
-function newCreateContentFromAuthEvents(authEvents) {
+export function newCreateContentFromAuthEvents(authEvents): any {
 let createEvent;
 if (createEvent === authEvents.Create()) {
       return;
@@ -64,14 +64,16 @@ let Membership = leave;
 }
 
 export function newMemberContentFromEvent(event) {
-
+let c: MemberContent;
+return event.Content();
 }
 
 interface JoinRuleContent {
   JoinRule: string;
 }
 
-export function newJoinRuleContentFromAuthEvents(authEvents, JoinRuleContent) {
+export function newJoinRuleContentFromAuthEvents(authEvents): any {
+let c: JoinRuleContent;
 let joinRulesEvent;
 let invite;
 let JoinRule;

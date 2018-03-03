@@ -1,6 +1,6 @@
 import { StateKeyTuple, EventReference, EventBuilder, StateKey, Type, StateKeyEquals, Sender, RoomID, PrevEvents } from './event';
-import { MemberContent } from './redactevent';
-import {domainFromID} from './eventcontent';
+import { MemberContent, PowerLevelContent, JoinRulesContent} from './redactevent';
+import {domainFromID, newCreateContentFromAuthEvents, CreateContent, newMemberContentFromEvent, newMemberContentFromAuthEvents, newJoinRuleContentFromAuthEvents} from './eventcontent';
 export const join = 'join';
 export const ban = 'ban';
 export const leave = 'leave';
@@ -243,4 +243,46 @@ return 'create event roomID doesnot match sender';
 if (PrevEvents() > 0) {
 return 'create event must be the first event in the room';
 }
+}
+
+function memberEventAllowed() {
+
+}
+
+interface MembershipAllower {
+targetID: string;
+senderID: string;
+senderMember: MemberContent;
+oldMember: MemberContent;
+newMember: MemberContent;
+create: CreateContent;
+powerLevels: PowerLevelContent;
+joinRule: JoinRulesContent;
+// thirdPartyInvite: ThirdPartyContent; to be taken care of
+}
+
+function newMembershipAllower(authEvents: AuthEventProvider, event: Event) {
+let m: MembershipAllower;
+let stateKey = StateKey();
+m.targetID = stateKey;
+m.senderID = Sender();
+if (m.create === newCreateContentFromAuthEvents(authEvents)) {
+return;
+}
+if (m.newMember === newMemberContentFromEvent(event)) {
+return;
+}
+if (m.oldMember === newMemberContentFromAuthEvents(authEvents, m.targetID)) {
+return;
+}
+
+if (m.senderMember === newMemberContentFromAuthEvents(authEvents, m.senderID)) {
+return;
+}
+if (m.newMember.Membership === 'join') {
+if (m.joinRule === newJoinRuleContentFromAuthEvents(authEvents)) {
+return;
+}
+}
+return;
 }
