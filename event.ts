@@ -9,7 +9,7 @@ export interface StateKeyTuple {
   StateKey: string;
 }
 
-interface EventReference {
+export interface EventReference {
   EventID: string;
   EventSHA256;
 }
