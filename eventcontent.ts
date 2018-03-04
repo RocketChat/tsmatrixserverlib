@@ -37,6 +37,12 @@ export function domainAllowed(domain: string) {
 
 }
 
+export function userIDAllowed(id: string) {
+let c: CreateContent;
+let domain = domainFromID(id);
+return domainAllowed(domain);
+}
+
 export function domainFromID(id: string) {
 let parts = id.split(':');
 if (parts.length !== 2) {
