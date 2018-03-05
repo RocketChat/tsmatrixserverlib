@@ -56,6 +56,18 @@ interface MemberContent {
   ThirdPartyInvite: undefined;
 }
 
+interface MemberThirdPartInvite {
+DisplayName: string;
+Signed: MemberThirdPartyInviteSIgned;
+
+}
+
+interface MemberThirdPartyInviteSIgned {
+MXID: string;
+Signatures: string;
+Token: string;
+}
+
 export function newMemberContentFromAuthEvents(authEvents, userID: string) {
   let memberEvent;
   let leave;
