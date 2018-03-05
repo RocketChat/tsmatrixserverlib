@@ -1,6 +1,7 @@
 import { StateKeyTuple, EventReference, EventBuilder, StateKey, Type, StateKeyEquals, Sender, RoomID, PrevEvents } from './event';
 import { MemberContent, PowerLevelContent, JoinRulesContent} from './redactevent';
 import {domainFromID, newCreateContentFromAuthEvents, CreateContent, newMemberContentFromEvent, newMemberContentFromAuthEvents, newJoinRuleContentFromAuthEvents} from './eventcontent';
+import dedupe = require('dedupe');
 export const join = 'join';
 export const ban = 'ban';
 export const leave = 'leave';
@@ -115,6 +116,22 @@ let content: MemberContent;
 if (builder.Type === MRoomMember) {
     return builder.Content;
 }
+}
+
+function StateNeededForAuth(events) {
+let result: StateNeeded;
+for (let undscre of events) {
+  for (let event in events) {
+let content: MemberContent;
+if (Type() === MRoomMember) {
+let c = newMemberContentFromEvent(event);
+}
+undscre = accumulateStateNeeded(result, Type(), Sender(), StateKey(), content);
+}
+}
+result.Member = dedupe(result.Member);
+// TBD: ThirdPartyInvite is required?
+return;
 }
 
 function accumulateStateNeeded(result: StateNeeded, eventType, sender: string, stateKey: string, content: MemberContent) {
