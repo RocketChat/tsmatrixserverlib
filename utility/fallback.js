@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var dns = require("dns");
+var dnsLookup = require("dns-lookup");
 function ResolveAddr(address) {
     dns.resolve6(address, function (err, result) {
         // if (err) throw err;
@@ -10,8 +11,11 @@ function ResolveAddr(address) {
             });
         }
         else {
-            console.log(JSON.stringify(result));
+            console.log(JSON.stringify(result[0]));
         }
     });
 }
 ResolveAddr('matrix.org');
+dnsLookup('open.rocket.chat', function (err, address, family) {
+    console.log(address);
+});
