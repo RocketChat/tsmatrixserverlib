@@ -65,8 +65,8 @@ export function Sign(serverName: string, KeyID: string, privatekey: string, r) {
     return 'the request is already signed by a different server';
   }
   r.Origin = serverName;
-  let data = r.Origin;
-  let SignedData = SignJson(serverName, KeyID, privatekey, data);
+  let data = JSON.stringify(r);
+  let SignedData = SignJson(r, "ed25519", "test");
   return SignedData;
 }
 export function HTTPRequest() {

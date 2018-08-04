@@ -1,20 +1,28 @@
 import nacl = require('tweetnacl');
-import {baseDecoding} from './base64';
+import {baseDecoding, baseEncoding} from './base64';
+import json = require('canonicaljson');
+import crypto = require('crypto');
+import ed25519 = require('ed25519');
+type KeyID = string;
 
-export function SignJson(json_object, signature_name, signing_key, data) {
-let signatures = json_object.pop('signatures', {});
-let unsigned = json_object.pop('unsigned', null);
-data = JSON.parse(JSON.stringify(json_object).replace(/"\s+|\s+"/g, '"'));
-let message_bytes = data;
-let signed = signing_key.sign(message_bytes);
-let signature_base64 = new Buffer(signed.signature, 'base64');
-signatures.signature_name = signature_base64;
-json_object['signatures'] = signatures;
 
-if (unsigned != null) {
-json_object['unsigned'] = unsigned;
+// var signingKey = ed25519.MakeKeypair(seed);
+export function SignJson(jsonObject, signatureName, signingKey) {
+var seed = crypto.randomBytes(32);
+var test = ed25519.MakeKeypair(seed);
+let signatures = delete jsonObject.signatures;
+let unsigned = delete jsonObject.unsigned;
+
+let messageBytes = json.stringify(jsonObject);
+let signed = ed25519.Sign(new Buffer(messageBytes, 'utf8'), test);
+let signatureBase64 = baseEncoding(signed);
+signatures = signatureBase64;
+jsonObject.signatures = signatures;
+
+if (unsigned !== null) {
+    jsonObject.unsigned = unsigned;
 }
-return json_object;
+return jsonObject;
 }
 
 export function VerifySignedJson(json_object, signature_name, verify_key) {

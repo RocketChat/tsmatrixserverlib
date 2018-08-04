@@ -1,19 +1,24 @@
 "use strict";
 exports.__esModule = true;
 var base64_1 = require("./base64");
-function SignJson(json_object, signature_name, signing_key, data) {
-    var signatures = json_object.pop('signatures', {});
-    var unsigned = json_object.pop('unsigned', null);
-    data = JSON.parse(JSON.stringify(json_object).replace(/"\s+|\s+"/g, '"'));
-    var message_bytes = data;
-    var signed = signing_key.sign(message_bytes);
-    var signature_base64 = new Buffer(signed.signature, 'base64');
-    signatures.signature_name = signature_base64;
-    json_object['signatures'] = signatures;
-    if (unsigned != null) {
-        json_object['unsigned'] = unsigned;
+var json = require("canonicaljson");
+var crypto = require("crypto");
+var ed25519 = require("ed25519");
+// var signingKey = ed25519.MakeKeypair(seed);
+function SignJson(jsonObject, signatureName, signingKey) {
+    var seed = crypto.randomBytes(32);
+    var test = ed25519.MakeKeypair(seed);
+    var signatures = delete jsonObject.signatures;
+    var unsigned = delete jsonObject.unsigned;
+    var messageBytes = json.stringify(jsonObject);
+    var signed = ed25519.Sign(new Buffer(messageBytes, 'utf8'), test);
+    var signatureBase64 = base64_1.baseEncoding(signed);
+    signatures = signatureBase64;
+    jsonObject.signatures = signatures;
+    if (unsigned !== null) {
+        jsonObject.unsigned = unsigned;
     }
-    return json_object;
+    return jsonObject;
 }
 exports.SignJson = SignJson;
 function VerifySignedJson(json_object, signature_name, verify_key) {

@@ -48,8 +48,8 @@ function Sign(serverName, KeyID, privatekey, r) {
         return 'the request is already signed by a different server';
     }
     r.Origin = serverName;
-    var data = r.Origin;
-    var SignedData = signing_1.SignJson(serverName, KeyID, privatekey, data);
+    var data = JSON.stringify(r);
+    var SignedData = signing_1.SignJson(r, "ed25519", "test");
     return SignedData;
 }
 exports.Sign = Sign;
