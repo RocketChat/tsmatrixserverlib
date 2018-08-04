@@ -16,22 +16,29 @@ export interface FederationRequest {
 
 
 export function NewFederationRequest(method: string, destination: string, requestURI: string) {
-  var r = {"method": method, "destination": destination, "uri": requestURI};
+  let r = {"method": method, "destination": destination, "uri": requestURI};
   return r;
 }
 
 export function SetContent(content) {
-  let r: FederationRequest;
-  let Content = "Hello";
-  if (r.Content != null) {
-    return 'Content already set on the request';
+let r: FederationRequest;
+if (content.Content !== null) {
+    throw new Error("tsmatrixserverlib: content already set on the request");
   }
-  if (r.Signatures != null) {
-    return 'the request is being signed and cannot be modified';
-  }
-  let data = Content;
 
-  return data;
+if (content.Signatures !== null) {
+  throw new Error("tsmatrixserverlib: the request is signed and cannot be modified");
+}
+try {
+var data = JSON.stringify(content);
+}
+
+catch(e) {
+  throw new Error(e);
+}
+
+content.Content = JSON.parse(data);
+return content; // not sure, if to return complete content or just Content field
 }
 
 function Method() {

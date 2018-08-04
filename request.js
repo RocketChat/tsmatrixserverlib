@@ -11,15 +11,20 @@ function NewFederationRequest(method, destination, requestURI) {
 exports.NewFederationRequest = NewFederationRequest;
 function SetContent(content) {
     var r;
-    var Content = "Hello";
-    if (r.Content != null) {
-        return 'Content already set on the request';
+    if (content.Content !== null) {
+        throw new Error("gomatrixserverlib: content already set on the request");
     }
-    if (r.Signatures != null) {
-        return 'the request is being signed and cannot be modified';
+    if (content.Signatures !== null) {
+        throw new Error("gomatrixserverlib: the request is signed and cannot be modified");
     }
-    var data = Content;
-    return data;
+    try {
+        var data = JSON.stringify(content);
+    }
+    catch (e) {
+        throw new Error(e);
+    }
+    content.Content = JSON.parse(data);
+    return content; // not sure, if to return complete content or just Content field
 }
 exports.SetContent = SetContent;
 function Method() {
