@@ -59,8 +59,8 @@ export function RequestURI(r) {
   
   return r.RequestURI;
 }
-export function Sign(serverName: string, KeyID: string, privatekey: string) {
-  let r: FederationRequest;
+export function Sign(serverName: string, KeyID: string, privatekey: string, r) {
+
   if (r.Origin !== '' && r.Origin !== serverName) {
     return 'the request is already signed by a different server';
   }

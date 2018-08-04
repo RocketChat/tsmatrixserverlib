@@ -43,8 +43,7 @@ function RequestURI(r) {
     return r.RequestURI;
 }
 exports.RequestURI = RequestURI;
-function Sign(serverName, KeyID, privatekey) {
-    var r;
+function Sign(serverName, KeyID, privatekey, r) {
     if (r.Origin !== '' && r.Origin !== serverName) {
         return 'the request is already signed by a different server';
     }
