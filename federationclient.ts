@@ -29,7 +29,7 @@ let federationPathPrefix = '/_matrix/federation/v1';
 
 export function SendTransaction(Transaction) {
 let path = '/_matrix/federation/v1/send/' + (Transaction.TransactionID) + '/';
-let req = this.field.NewFederationRequest('PUT', 'destination', path);
+let req = this.field.NewFederationRequest('PUT', 'localhost:3000', path);
 
 return;
 }

@@ -1,27 +1,28 @@
 import sprintf = require('sprintf');
 import request = require('request');
+import http = require('http');
 import { SignJson } from './signing';
 import {asTimeStamp} from './timestamp';
 
+type ServerName = string;
 export interface FederationRequest {
   Content: string;
-  Destination: string;
+  Destination: ServerName,
   Method: string;
   Origin: string;
   RequestURI: string;
   Signatures;
 }
 
+
 export function NewFederationRequest(method: string, destination: string, requestURI: string) {
-let r: FederationRequest;
-r.Destination = destination;
-r.Method = method;
-r.RequestURI = requestURI;
-return r;
+  var r = {"method": method, "destination": destination, "uri": requestURI};
+  return r;
 }
 
-export function SetContent() {
+export function SetContent(content) {
   let r: FederationRequest;
+  let Content = "Hello";
   if (r.Content != null) {
     return 'Content already set on the request';
   }

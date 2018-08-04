@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var eventAuth_1 = require("./eventAuth");
 function redactEvent(eventJSON) {
     // interface CreateContent {
     // Creator;
@@ -60,27 +61,27 @@ function redactEvent(eventJSON) {
     // let historyvisibilitycontent: HistoryVisibilityContent;
     // let aliasescontent: AliasesContent;
     switch (exports.event.Type) {
-        case 'MRoomCreate': {
+        case eventAuth_1.MRoomCreate: {
             NewContent.CreateContent === exports.event.Content.CreateContent;
             return exports.event.Content;
         }
-        case 'MRoomMember': {
+        case eventAuth_1.MRoomMember: {
             NewContent.MemberContent = exports.event.Content.MemberContent;
             // return membercontent;
         }
-        case 'MRoomJoinRules': {
+        case eventAuth_1.MRoomJoinRules: {
             NewContent.JoinRulesContent = exports.event.Content.JoinRulesContent;
             // return joinrulescontent;
         }
-        case 'MRoomPowerLevels': {
+        case eventAuth_1.MRoomPowerLevels: {
             NewContent.PowerLevelContent = exports.event.Content.PowerLevelContent;
             // return powerlevelcontent;
         }
-        case 'MRoomHistoryVisibility': {
+        case eventAuth_1.MRoomHistoryVisibility: {
             NewContent.HistoryVisibilityContent = exports.event.Content.HistoryVisibilityContent;
             // return historyvisibilitycontent;
         }
-        case 'MRoomAliases': {
+        case eventAuth_1.MRoomAliases: {
             NewContent.AliasesContent = exports.event.Content.AliasesContent;
             // return aliasescontent;
         }
