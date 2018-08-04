@@ -7,7 +7,7 @@ import {asTimeStamp} from './timestamp';
 type ServerName = string;
 export interface FederationRequest {
   Content: string;
-  Destination: ServerName,
+  Destination: ServerName;
   Method: string;
   Origin: string;
   RequestURI: string;
@@ -15,9 +15,10 @@ export interface FederationRequest {
 }
 
 
+
 export function NewFederationRequest(method: string, destination: string, requestURI: string) {
-  let r = {"method": method, "destination": destination, "uri": requestURI};
-  return r;
+   let r = {"method": method, "destination": destination, "uri": requestURI};
+   return r;
 }
 
 export function SetContent(content) {
@@ -41,23 +42,21 @@ content.Content = JSON.parse(data);
 return content; // not sure, if to return complete content or just Content field
 }
 
-function Method() {
-  let r: FederationRequest;
+export function Method(r) {
   return r.Method;
 }
 
-function Content() {
-  let r: FederationRequest;
+export function Content(r) {
+
   return r.Content;
 }
 
-function Origin() {
-  let r: FederationRequest;
+export function Origin(r) {
   return r.Origin;
 }
 
-function RequestURI() {
-  let r: FederationRequest;
+export function RequestURI(r) {
+  
   return r.RequestURI;
 }
 export function Sign(serverName: string, KeyID: string, privatekey: string) {
@@ -125,10 +124,10 @@ let fields: FederationRequest;
 let request = readHTTPRequest(req);
 fields.Destination = destination;
 let toVerify = fields;
-if (Origin() === '') {
-let message = 'Missing authorization headers';
-return message;
-}
+// if (Origin(r) === '') {
+// let message = 'Missing authorization headers';
+// return message;
+// }
 
 let results = keys.VerifyJSONs({
   ServerName: fields.Origin,

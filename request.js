@@ -12,10 +12,10 @@ exports.NewFederationRequest = NewFederationRequest;
 function SetContent(content) {
     var r;
     if (content.Content !== null) {
-        throw new Error("gomatrixserverlib: content already set on the request");
+        throw new Error("tsmatrixserverlib: content already set on the request");
     }
     if (content.Signatures !== null) {
-        throw new Error("gomatrixserverlib: the request is signed and cannot be modified");
+        throw new Error("tsmatrixserverlib: the request is signed and cannot be modified");
     }
     try {
         var data = JSON.stringify(content);
@@ -27,22 +27,22 @@ function SetContent(content) {
     return content; // not sure, if to return complete content or just Content field
 }
 exports.SetContent = SetContent;
-function Method() {
-    var r;
+function Method(r) {
     return r.Method;
 }
-function Content() {
-    var r;
+exports.Method = Method;
+function Content(r) {
     return r.Content;
 }
-function Origin() {
-    var r;
+exports.Content = Content;
+function Origin(r) {
     return r.Origin;
 }
-function RequestURI() {
-    var r;
+exports.Origin = Origin;
+function RequestURI(r) {
     return r.RequestURI;
 }
+exports.RequestURI = RequestURI;
 function Sign(serverName, KeyID, privatekey) {
     var r;
     if (r.Origin !== '' && r.Origin !== serverName) {
@@ -102,10 +102,10 @@ function VerifyHTTPRequest(req, now, destination, keys) {
     var request = readHTTPRequest(req);
     fields.Destination = destination;
     var toVerify = fields;
-    if (Origin() === '') {
-        var message = 'Missing authorization headers';
-        return message;
-    }
+    // if (Origin(r) === '') {
+    // let message = 'Missing authorization headers';
+    // return message;
+    // }
     var results = keys.VerifyJSONs({
         ServerName: fields.Origin,
         AtTS: timestamp_1.asTimeStamp(now),
