@@ -5,7 +5,8 @@ import crypto = require('crypto');
 import ed25519 = require('ed25519');
 type KeyID = string;
 
-
+var alg = "ed25519";
+var version = "key_version";
 // var signingKey = ed25519.MakeKeypair(seed);
 export function SignJson(jsonObject, signatureName, signingKey) {
 var seed = crypto.randomBytes(32);
@@ -17,6 +18,8 @@ let messageBytes = json.stringify(jsonObject);
 let signed = ed25519.Sign(new Buffer(messageBytes, 'utf8'), test);
 let signatureBase64 = baseEncoding(signed);
 signatures = signatureBase64;
+// let keyId = (signingKey.alg, signingKey.version) + "";
+// console.log(keyId);
 jsonObject.signatures = signatures;
 
 if (unsigned !== null) {

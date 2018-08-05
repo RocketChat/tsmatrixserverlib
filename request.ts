@@ -6,28 +6,33 @@ import {asTimeStamp} from './timestamp';
 
 type ServerName = string;
 export interface FederationRequest {
-  Content: string;
-  Destination: ServerName;
-  Method: string;
-  Origin: string;
-  RequestURI: string;
-  Signatures;
+  Content?: string;
+  Destination?: ServerName;
+  Method?: string;
+  Origin?: string;
+  RequestURI?: string;
+  Signatures?;
 }
 
-
-
 export function NewFederationRequest(method: string, destination: string, requestURI: string) {
-   let r = {"method": method, "destination": destination, "uri": requestURI};
-   return r;
+  //  let r = {"method": method, "destination": destination, "uri": requestURI};
+  //  return r;
+
+  let r: FederationRequest = {};
+  r.Method = method;
+  r.Destination = destination;
+  r.RequestURI = requestURI;
+
+  return r;
 }
 
 export function SetContent(content) {
-let r: FederationRequest;
-if (content.Content !== null) {
+let r: FederationRequest = {};
+if (r.Content !== null) {
     throw new Error("tsmatrixserverlib: content already set on the request");
   }
 
-if (content.Signatures !== null) {
+if (r.Signatures !== null) {
   throw new Error("tsmatrixserverlib: the request is signed and cannot be modified");
 }
 try {
@@ -42,46 +47,75 @@ content.Content = JSON.parse(data);
 return content; // not sure, if to return complete content or just Content field
 }
 
-export function Method(r) {
+export function Method() {
+  let r: FederationRequest = {};
   return r.Method;
 }
-
-export function Content(r) {
-
+export function Content() {
+  let r: FederationRequest = {};
   return r.Content;
 }
-
-export function Origin(r) {
+export function Origin() {
+  let r: FederationRequest = {};
   return r.Origin;
 }
-
-export function RequestURI(r) {
-  
+export function RequestURI() {
+  let r: FederationRequest = {};
   return r.RequestURI;
 }
-export function Sign(serverName: string, KeyID: string, privatekey: string, r) {
 
-  if (r.Origin !== '' && r.Origin !== serverName) {
-    return 'the request is already signed by a different server';
-  }
+export function Sign(serverName: string, KeyID: string, privatekey: string) {
+  let r: FederationRequest = {};
+  // if (r.Origin !== '' && r.Origin !== serverName) {
+  //   return 'the request is already signed by a different server';
+  // }
   r.Origin = serverName;
   let data = JSON.stringify(r);
-  let SignedData = SignJson(r, "ed25519", "test");
+  let SignedData = SignJson(r, serverName+"", "test");
   return SignedData;
 }
-export function HTTPRequest() {
-  let r: FederationRequest;
-  let urlStr = sprintf('matrix://%s%s', r.Destination, r.RequestURI);
-  let content;
+
+export function HTTPRequest(method, destination, requestURI, content) {
+  let r: FederationRequest = {};
+  r.Destination = destination;
+  r.RequestURI = requestURI;
+  r.Content = content;
+  r.Method = method;
+  let urlStr = sprintf(r.Destination, r.RequestURI);
+  console.log("this" + urlStr);
+   // content = r.Content;
   let byte = [];
-  for (let i = 0; i < content.length(); i++) {
+  for (let i = 0; i < 32; i++) {
     byte.push(content.charCodeAt(i));
   }
-  let httpreq = request(r.Method, urlStr, content);
-  // require a sanity check to be done
-  if (r.Content != null) {
-    httpreq.setHeader('Content-Type', 'application/json');
+  if (content == null) {
+  let options = {
+    method: r.Method,
+    host: urlStr,
+    
   }
+  var httpreq = http.get(options, function(body){
+    console.log(body);
+  });
+}
+  // require a sanity check to be done
+  if (content !== null) {
+    // httpreq.setHeader('Content-Type', 'application/json');
+    let options = {
+      method: r.Method,
+      host: urlStr,
+      headers: {
+        'Content-Type': 'application/json',
+    }
+    }
+    httpreq = http.request(options, function(res){
+      res.on('data', function(chunk){
+         console.log(chunk.toString());
+      });
+    });
+    httpreq.write(content);
+  }
+  return httpreq;
 }
 
 function IsSafeInHttpQuotedString(text: string) {
