@@ -27,7 +27,7 @@ function SignJson(jsonObject, signatureName, signingKey) {
 exports.SignJson = SignJson;
 function VerifySignedJson(json_object, signature_name, verify_key) {
     try {
-        var signatures = json_object['signatures'];
+        var signatures = json_object.signatures;
     }
     catch (e) {
         console.log('No signature of this object');

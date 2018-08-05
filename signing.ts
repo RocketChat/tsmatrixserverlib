@@ -30,7 +30,7 @@ return jsonObject;
 
 export function VerifySignedJson(json_object, signature_name, verify_key) {
 try {
-let signatures = json_object['signatures'];
+let signatures = json_object.signatures;
 }
 catch (e) {
 console.log('No signature of this object');
