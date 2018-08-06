@@ -10,6 +10,6 @@ export function baseEncoding(tobeencoded) {
 }
 
 export function baseDecoding(tobedecoded) {
-    let decoded = new Buffer(tobedecoded, 'base64').toString();
+    let decoded = new Buffer(tobedecoded, 'base64');
     return decoded;
 }

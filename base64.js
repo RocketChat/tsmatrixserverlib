@@ -6,7 +6,7 @@ function baseEncoding(tobeencoded) {
 }
 exports.baseEncoding = baseEncoding;
 function baseDecoding(tobedecoded) {
-    var decoded = new Buffer(tobedecoded, 'base64').toString();
+    var decoded = new Buffer(tobedecoded, 'base64');
     return decoded;
 }
 exports.baseDecoding = baseDecoding;

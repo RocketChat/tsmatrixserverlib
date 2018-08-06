@@ -27,8 +27,10 @@ return verifyKey;
 export function DecodeSigningKeyBase64(algorithm, version, keyBase64) {
 
 if (algorithm = NACL_ED25519) {
-let keyBytes = baseDecoding(keyBase64);
-let key = ed25519.MakeKeypair(keyBytes);
+ let key = baseDecoding(keyBase64);
+
+// let keyBytes = Buffer.from(decoded, 'base64');
+// let key = ed25519.MakeKeypair(keyBytes);
 key.version = version;
 key.alg = NACL_ED25519;
 return key;
@@ -40,8 +42,9 @@ else {
 }
 
 export function EncodeSigningKeyBase64(key) {
-// var encoded = new Buffer(key).toString('base64');
-return baseEncoding(key);
+let keyString = JSON.stringify(key);
+var encoded = Buffer.from(keyString).toString("base64");;
+return encoded;
 }
 
 export function EncodeVerifyKeyBase64(key) {

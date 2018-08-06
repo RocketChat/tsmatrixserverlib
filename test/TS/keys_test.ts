@@ -1,6 +1,7 @@
 import {GenerateSigningKey, EncodeSigningKeyBase64, DecodeSigningKeyBase64, GetVerifyKey, IsSigningSupportedAlgorithm, EncodeVerifyKeyBase64, DecodeVerifyKeyBytes, ReadSigningKeys} from '../../keys';
 import { expect } from 'chai';
 import {} from 'mocha';
+import { version } from 'punycode';
 
 describe('Test for generation of keys', () => {
   it('must check the keys', () => {
@@ -10,6 +11,20 @@ describe('Test for generation of keys', () => {
     expect(my_key.version).to.equal(my_version);
     });
   });
+
+  describe('Decode Test Case', () => {
+    it('must encode verify key', () => {
+      let my_version = "my_version";
+      let key = GenerateSigningKey(my_version);
+      let keyBase64 = EncodeSigningKeyBase64(key);
+      // let verifyKey  = GetVerifyKey(key);
+      // let verifyKeyBase64 = EncodeVerifyKeyBase64(verifyKey);
+      let decodedKey = DecodeSigningKeyBase64("ed25519", version, keyBase64);
+      expect(decodedKey.alg).to.deep.equal("ed25519");
+      expect(decodedKey.version).to.deep.equal("2.0.0");
+    });
+  });
+
 
 // describe('Encode and verify signing keys', () => {
 //     it('encode to base 64 and verify it', () => {

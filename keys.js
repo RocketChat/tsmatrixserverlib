@@ -17,6 +17,7 @@ function GenerateSigningKey(version) {
 exports.GenerateSigningKey = GenerateSigningKey;
 function GetVerifyKey(signingKey) {
     var verifyKey = signingKey.verifyKey;
+    console.log(verifyKey);
     verifyKey.version = signingKey.version;
     verifyKey.alg = signingKey.alg;
     return verifyKey;
@@ -24,8 +25,9 @@ function GetVerifyKey(signingKey) {
 exports.GetVerifyKey = GetVerifyKey;
 function DecodeSigningKeyBase64(algorithm, version, keyBase64) {
     if (algorithm = exports.NACL_ED25519) {
-        var keyBytes = base64_1.baseDecoding(keyBase64);
-        var key = ed25519.MakeKeypair(keyBytes);
+        var key = base64_1.baseDecoding(keyBase64);
+        // let keyBytes = Buffer.from(decoded, 'base64');
+        // let key = ed25519.MakeKeypair(keyBytes);
         key.version = version;
         key.alg = exports.NACL_ED25519;
         return key;
@@ -36,8 +38,10 @@ function DecodeSigningKeyBase64(algorithm, version, keyBase64) {
 }
 exports.DecodeSigningKeyBase64 = DecodeSigningKeyBase64;
 function EncodeSigningKeyBase64(key) {
-    // var encoded = new Buffer(key).toString('base64');
-    return base64_1.baseEncoding(key);
+    var keyString = JSON.stringify(key);
+    var encoded = Buffer.from(keyString).toString("base64");
+    ;
+    return encoded;
 }
 exports.EncodeSigningKeyBase64 = EncodeSigningKeyBase64;
 function EncodeVerifyKeyBase64(key) {
