@@ -1,8 +1,10 @@
 import nacl = require('tweetnacl');
 import {baseDecoding, baseEncoding} from './base64';
+import keys = require('./keys');
 import json = require('canonicaljson');
 import crypto = require('crypto');
 import ed25519 = require('ed25519');
+import { SUPPORTED_ALGORITHMS } from './keys';
 type KeyID = string;
 
 var alg = "ed25519";
@@ -28,15 +30,16 @@ if (unsigned !== null) {
 return jsonObject;
 }
 
-export function VerifySignedJson(json_object, signature_name, verify_key) {
+
+export function VerifySignedJson(json_object, signature_name, verifyKey) {
 try {
 let signatures = json_object.signatures;
 }
 catch (e) {
 console.log('No signature of this object');
 }
-let key_id = (verify_key.alg, verify_key.version);
-let signature_b64;
+let key_id = sprintf(verifyKey.alg, verifyKey.version);
+let signature_b64 = signature_name.key_id;
 try {
 let signature = baseDecoding(signature_b64);
 }
@@ -44,9 +47,11 @@ catch (e) {
 console.log('invalid signature');
 }
 let dict = [];
-let json_object_copy = dict[json_object];
-delete json_object_copy['signatures'];
-json_object_copy.pop('unsigned', null);
-let message = JSON.parse(JSON.stringify(json_object_copy).replace(/"\s+|\s+"/g, '"'));
+let json_object_copy = json_object;
+delete json_object_copy.signatures;
+delete json_object_copy.unsigned;
+let message = json.stringify(json_object_copy);
+
+return message;
 
 }
