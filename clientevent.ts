@@ -2,9 +2,11 @@
 import {TimeStamp} from './timestamp';
 import {EventFields} from './event';
 import * as Event from './event';
+import iota = require('iota');
+
 
 type EventFormat = number;
-export declare const FormatAll;
+export declare const FormatAll: EventFormat;
 export declare const FormatSync;
 
 export interface ClientEvent {

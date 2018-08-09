@@ -4,6 +4,7 @@ var base64_1 = require("./base64");
 var json = require("canonicaljson");
 var crypto = require("crypto");
 var ed25519 = require("ed25519");
+var sprintf = require("sprintf");
 var alg = "ed25519";
 var version = "key_version";
 // var signingKey = ed25519.MakeKeypair(seed);
@@ -25,15 +26,15 @@ function SignJson(jsonObject, signatureName, signingKey) {
     return jsonObject;
 }
 exports.SignJson = SignJson;
-function VerifySignedJson(json_object, signature_name, verify_key) {
+function VerifySignedJson(json_object, signature_name, verifyKey) {
     try {
         var signatures = json_object.signatures;
     }
     catch (e) {
         console.log('No signature of this object');
     }
-    var key_id = (verify_key.alg, verify_key.version);
-    var signature_b64;
+    var key_id = sprintf(verifyKey.alg, verifyKey.version);
+    var signature_b64 = signature_name.key_id;
     try {
         var signature = base64_1.baseDecoding(signature_b64);
     }
@@ -41,9 +42,10 @@ function VerifySignedJson(json_object, signature_name, verify_key) {
         console.log('invalid signature');
     }
     var dict = [];
-    var json_object_copy = dict[json_object];
-    delete json_object_copy['signatures'];
-    json_object_copy.pop('unsigned', null);
-    var message = JSON.parse(JSON.stringify(json_object_copy).replace(/"\s+|\s+"/g, '"'));
+    var json_object_copy = json_object;
+    delete json_object_copy.signatures;
+    delete json_object_copy.unsigned;
+    var message = json.stringify(json_object_copy);
+    return message;
 }
 exports.VerifySignedJson = VerifySignedJson;

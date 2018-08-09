@@ -4,6 +4,7 @@ import keys = require('./keys');
 import json = require('canonicaljson');
 import crypto = require('crypto');
 import ed25519 = require('ed25519');
+import sprintf = require('sprintf');
 import { SUPPORTED_ALGORITHMS } from './keys';
 type KeyID = string;
 

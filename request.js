@@ -72,10 +72,10 @@ function HTTPRequest(method, destination, requestURI, content) {
     var urlStr = sprintf(r.Destination, r.RequestURI);
     console.log("this" + urlStr);
     // content = r.Content;
-    var byte = [];
-    for (var i = 0; i < 32; i++) {
-        byte.push(content.charCodeAt(i));
-    }
+    // let byte = [];
+    // for (let i = 0; i < 32; i++) {
+    //   byte.push(content[i]);
+    // }
     if (content == null) {
         var options = {
             method: r.Method,
@@ -91,6 +91,8 @@ function HTTPRequest(method, destination, requestURI, content) {
         var options = {
             method: r.Method,
             host: urlStr,
+            port: 8181,
+            path: "/api/v1/chat.sendMessage",
             headers: {
                 'Content-Type': 'application/json'
             }

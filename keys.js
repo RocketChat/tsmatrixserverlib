@@ -17,7 +17,6 @@ function GenerateSigningKey(version) {
 exports.GenerateSigningKey = GenerateSigningKey;
 function GetVerifyKey(signingKey) {
     var verifyKey = signingKey.verifyKey;
-    console.log(verifyKey);
     verifyKey.version = signingKey.version;
     verifyKey.alg = signingKey.alg;
     return verifyKey;

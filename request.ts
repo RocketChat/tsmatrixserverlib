@@ -4,6 +4,7 @@ import http = require('http');
 import { SignJson } from './signing';
 import {asTimeStamp} from './timestamp';
 
+var ServerName;
 type ServerName = string;
 export interface FederationRequest {
   Content?: string;
@@ -66,9 +67,9 @@ export function RequestURI() {
 
 export function Sign(serverName: string, KeyID: string, privatekey: string) {
   let r: FederationRequest = {};
-  // if (r.Origin !== '' && r.Origin !== serverName) {
-  //   return 'the request is already signed by a different server';
-  // }
+  if (r.Origin !== '' && r.Origin !== serverName) {
+    return 'the request is already signed by a different server';
+  }
   r.Origin = serverName;
   let data = JSON.stringify(r);
   let SignedData = SignJson(r, serverName+"", "test");
@@ -84,10 +85,10 @@ export function HTTPRequest(method, destination, requestURI, content) {
   let urlStr = sprintf(r.Destination, r.RequestURI);
   console.log("this" + urlStr);
    // content = r.Content;
-  let byte = [];
-  for (let i = 0; i < 32; i++) {
-    byte.push(content.charCodeAt(i));
-  }
+  // let byte = [];
+  // for (let i = 0; i < 32; i++) {
+  //   byte.push(content[i]);
+  // }
   if (content == null) {
   let options = {
     method: r.Method,
@@ -104,6 +105,9 @@ export function HTTPRequest(method, destination, requestURI, content) {
     let options = {
       method: r.Method,
       host: urlStr,
+      port: 8181,
+      path: "/api/v1/chat.sendMessage",
+     
       headers: {
         'Content-Type': 'application/json',
     }
@@ -118,7 +122,7 @@ export function HTTPRequest(method, destination, requestURI, content) {
   return httpreq;
 }
 
-function IsSafeInHttpQuotedString(text: string) {
+export function IsSafeInHttpQuotedString(text: string) {
   let texts = [];
   for (let i = 0; i < text.length; i++) {
     let c = texts[i];
@@ -153,11 +157,11 @@ function IsSafeInHttpQuotedString(text: string) {
   }
 }
 
-function VerifyHTTPRequest(req, now, destination, keys) {
+export function VerifyHTTPRequest(req, now, destination, keys) {
 let fields: FederationRequest;
 let request = readHTTPRequest(req);
 fields.Destination = destination;
-let toVerify = fields;
+let toVerify = request;
 // if (Origin(r) === '') {
 // let message = 'Missing authorization headers';
 // return message;
@@ -171,14 +175,15 @@ let results = keys.VerifyJSONs({
 return request;
 }
 
-function readHTTPRequest(req) {
-let result: FederationRequest;
+var myMap = new Map();
+export function readHTTPRequest(req) {
+let result: FederationRequest = {};
 result.Method = req.Method;
-result.RequestURI = req.URL.requestURI;
+result.RequestURI = req.URL.RequestURI();
 let content = req.body;
 
 if (content.length !== 0) {
-if (req.headers.get('Content-Type') !== 'application/json') {
+if (req.get('Content-Type') !== 'application/json') {
 return 'the request must be application/json';
 }
 result.Content = content;
@@ -186,20 +191,24 @@ result.Content = content;
 
 let authorization = req.headers['Authorization'];
 
-let scheme, origin, key, sig = parseAuthorization(authorization); // review req.d
-// let origin = parseAuthorization(authorization);
-// let key = parseAuthorization(authorization);
+let scheme: any = parseAuthorization(authorization); // review req.d
+let origin: any = parseAuthorization(authorization);
+let key: any = parseAuthorization(authorization);
+let sig: any = parseAuthorization(authorization);
 if (scheme !== 'X-Matrix') {
-// if (origin === '' || key === '' || sig === '') {
-// return 'invalid x-matrix authorization header';
-// }
+console.log("go to next If statement");
+}
+
+if (origin === "" || key === "" || sig === "") {
+throw new Error ("gomatrixserverlib: invalid X-Matrix authorization header");
+}
 if (result.Origin !== '' && result.Origin !== origin) {
-return 'different origins in X-matrix authorization headers';
+throw new Error ('different origins in X-matrix authorization headers');
 }
-}
+
 result.Origin = origin;
 if (result.Signatures === null) {
-result.Signatures = {origin: {key: sig}};
+result.Signatures =  {origin: {key: sig}};
 }
 else {
 result.Signatures = sig;
