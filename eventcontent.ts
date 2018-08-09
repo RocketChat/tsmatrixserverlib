@@ -1,4 +1,4 @@
-interface CreateContent {
+export interface CreateContent {
   senderDomain: string;
   RoomID: string;
   eventID: string;
@@ -7,7 +7,7 @@ interface CreateContent {
   }
 let senderDomain;
 let Federate;
-function newCreateContentFromAuthEvents(authEvents) {
+export function newCreateContentFromAuthEvents(authEvents): any {
 let createEvent;
 if (createEvent === authEvents.Create()) {
       return;
@@ -37,13 +37,35 @@ export function domainAllowed(domain: string) {
 
 }
 
-function domainFromID(id: string) {
+export function userIDAllowed(id: string) {
+let c: CreateContent;
+let domain = domainFromID(id);
+return domainAllowed(domain);
+}
 
+export function domainFromID(id: string) {
+let parts = id.split(':');
+if (parts.length !== 2) {
+return 'invalid ID';
+}
+return parts[1];
 }
 
 interface MemberContent {
   Membership: string;
   ThirdPartyInvite: undefined;
+}
+
+interface MemberThirdPartInvite {
+DisplayName: string;
+Signed: MemberThirdPartyInviteSIgned;
+
+}
+
+interface MemberThirdPartyInviteSIgned {
+MXID: string;
+Signatures: string;
+Token: string;
 }
 
 export function newMemberContentFromAuthEvents(authEvents, userID: string) {
@@ -60,14 +82,16 @@ let Membership = leave;
 }
 
 export function newMemberContentFromEvent(event) {
-
+let c: MemberContent;
+return event.Content();
 }
 
 interface JoinRuleContent {
   JoinRule: string;
 }
 
-export function newJoinRuleContentFromAuthEvents(authEvents, JoinRuleContent) {
+export function newJoinRuleContentFromAuthEvents(authEvents): any {
+let c: JoinRuleContent;
 let joinRulesEvent;
 let invite;
 let JoinRule;

@@ -1,72 +1,247 @@
-import https = require('https');
-import fs = require('fs');
 import sprintf = require('sprintf');
 import request = require('request');
+import http = require('http');
+import { SignJson } from './signing';
+import {asTimeStamp} from './timestamp';
 
-export class Fields {
-Content: string;
-Destination: string;
-Method: string;
-Origin: string;
-RequestURI: string;
-constructor(destination: string, method: string, requestURI: string) {
-this.Destination = destination;
-this.Method = method;
-this.RequestURI = requestURI;
-  }
-
-// }
-// let FederationRequest: Fields;
-NewFederationRequests() {
-// FederationRequest.Destination = destination;
-// FederationRequest.Method = method.toUpperCase();
-// FederationRequest.RequestURI = requestURI;
-return this.Destination + '' + this.Method + this.RequestURI;
+var ServerName;
+type ServerName = string;
+export interface FederationRequest {
+  Content?: string;
+  Destination?: ServerName;
+  Method?: string;
+  Origin?: string;
+  RequestURI?: string;
+  Signatures?;
 }
 
-/*Method() {
-return this.Method;
-} */
+export function NewFederationRequest(method: string, destination: string, requestURI: string) {
+  //  let r = {"method": method, "destination": destination, "uri": requestURI};
+  //  return r;
 
-/*Content() {
-return this.Content;
-}*/
+  let r: FederationRequest = {};
+  r.Method = method;
+  r.Destination = destination;
+  r.RequestURI = requestURI;
 
-/*export function RequestURI() {
-return this.RequestURI;
-}*/
-
-HTTPRequest() {
-let urlStr = sprintf('matrix://%s%s', this.Destination, this.RequestURI);
-let Content;
-if (this.Content != null) {
-Content = fs.readFileSync(this.Content);
-  }
-let httpreq;
-httpreq = https.request(urlStr);
-if (httpreq.URL.RequestURI() !== this.RequestURI) {
-Error('Did not encode properly');
-  }
-if (this.Content != null) {
-httpreq.setHeader('Content-Type', 'application/json');
-  }
-return httpreq;
+  return r;
 }
 
-readHTTPRequest(req, res, Body: string) {
-let result: Fields;
-result.Method = req.Method;
-result.RequestURI = req.URL.RequestURI();
-let content = JSON.parse(req.Body);
-if (content.length !== 0) {
-if (req.getHeader('Content-Type') !== 'application/json') {
-Error('The request must be application/json');
+export function SetContent(content) {
+let r: FederationRequest = {};
+if (r.Content !== null) {
+    throw new Error("tsmatrixserverlib: content already set on the request");
+  }
+
+if (r.Signatures !== null) {
+  throw new Error("tsmatrixserverlib: the request is signed and cannot be modified");
+}
+try {
+var data = JSON.stringify(content);
+}
+
+catch(e) {
+  throw new Error(e);
+}
+
+content.Content = JSON.parse(data);
+return content; // not sure, if to return complete content or just Content field
+}
+
+export function Method() {
+  let r: FederationRequest = {};
+  return r.Method;
+}
+export function Content() {
+  let r: FederationRequest = {};
+  return r.Content;
+}
+export function Origin() {
+  let r: FederationRequest = {};
+  return r.Origin;
+}
+export function RequestURI() {
+  let r: FederationRequest = {};
+  return r.RequestURI;
+}
+
+export function Sign(serverName: string, KeyID: string, privatekey: string) {
+  let r: FederationRequest = {};
+  if (r.Origin !== '' && r.Origin !== serverName) {
+    return 'the request is already signed by a different server';
+  }
+  r.Origin = serverName;
+  let data = JSON.stringify(r);
+  let SignedData = SignJson(r, serverName+"", "test");
+  return SignedData;
+}
+
+export function HTTPRequest(method, destination, requestURI, content) {
+  let r: FederationRequest = {};
+  r.Destination = destination;
+  r.RequestURI = requestURI;
+  r.Content = content;
+  r.Method = method;
+  let urlStr = sprintf(r.Destination, r.RequestURI);
+  console.log("this" + urlStr);
+   // content = r.Content;
+  // let byte = [];
+  // for (let i = 0; i < 32; i++) {
+  //   byte.push(content[i]);
+  // }
+  if (content == null) {
+  let options = {
+    method: r.Method,
+    host: urlStr,
+    
+  }
+  var httpreq = http.get(options, function(body){
+    console.log(body);
+  });
+}
+  // require a sanity check to be done
+  if (content !== null) {
+    // httpreq.setHeader('Content-Type', 'application/json');
+    let options = {
+      method: r.Method,
+      host: urlStr,
+      port: 8181,
+      path: "/api/v1/chat.sendMessage",
+     
+      headers: {
+        'Content-Type': 'application/json',
+    }
+    }
+    httpreq = http.request(options, function(res){
+      res.on('data', function(chunk){
+         console.log(chunk.toString());
+      });
+    });
+    httpreq.write(content);
+  }
+  return httpreq;
+}
+
+export function IsSafeInHttpQuotedString(text: string) {
+  let texts = [];
+  for (let i = 0; i < text.length; i++) {
+    let c = texts[i];
+
+    switch (c) {
+      case c === '\t': {
+        continue;
+      }
+
+      case c === ' ': {
+        continue;
+      }
+
+      case c === 0x21: {
+        continue;
+      }
+
+      case 0x23 <= c && c <= 0x5b: {
+        continue;
+      }
+
+      case (0x5d <= c && c <= 0x7e): {
+        continue;
+      }
+
+      case (0x80 <= c && c <= 0xff): {
+        continue;
+      }
+      default:
+        return false;
     }
   }
-result.Content = content;
-return result;
-  }
 }
-// let Field = new Fields('localhost:8448', 'GET', '/_matrix/federation/v1/query/directory?room_alias=%23test%3Alocalhost%3A8448');
-// console.log(Field);
-// console.log(https.request());
+
+export function VerifyHTTPRequest(req, now, destination, keys) {
+let fields: FederationRequest;
+let request = readHTTPRequest(req);
+fields.Destination = destination;
+let toVerify = request;
+// if (Origin(r) === '') {
+// let message = 'Missing authorization headers';
+// return message;
+// }
+
+let results = keys.VerifyJSONs({
+  ServerName: fields.Origin,
+  AtTS: asTimeStamp(now),
+  Message: toVerify
+});
+return request;
+}
+
+var myMap = new Map();
+export function readHTTPRequest(req) {
+let result: FederationRequest = {};
+result.Method = req.Method;
+result.RequestURI = req.URL.RequestURI();
+let content = req.body;
+
+if (content.length !== 0) {
+if (req.get('Content-Type') !== 'application/json') {
+return 'the request must be application/json';
+}
+result.Content = content;
+}
+
+let authorization = req.headers['Authorization'];
+
+let scheme: any = parseAuthorization(authorization); // review req.d
+let origin: any = parseAuthorization(authorization);
+let key: any = parseAuthorization(authorization);
+let sig: any = parseAuthorization(authorization);
+if (scheme !== 'X-Matrix') {
+console.log("go to next If statement");
+}
+
+if (origin === "" || key === "" || sig === "") {
+throw new Error ("gomatrixserverlib: invalid X-Matrix authorization header");
+}
+if (result.Origin !== '' && result.Origin !== origin) {
+throw new Error ('different origins in X-matrix authorization headers');
+}
+
+result.Origin = origin;
+if (result.Signatures === null) {
+result.Signatures =  {origin: {key: sig}};
+}
+else {
+result.Signatures = sig;
+}
+return result;
+}
+
+function parseAuthorization(header) {
+let sig: string;
+let parts = header.split(' ').slice(2);
+let scheme = parts[0];
+if (scheme !== 'X-Matrix') {
+return;
+}
+if (parts.length !== 2) {
+return;
+}
+// requirement for a loop functionality over 208 // TBD
+let data = parts[1].split(',');
+let pair = data.split('=').slice(2);
+// if (pair.length !== 2) {
+// continue; // review required
+// }
+let name = pair[0];
+let value = pair[1].trim('\'');
+if (name === 'origin') {
+let origin = value; // review required
+}
+if (name === 'key') {
+let key = value;  // review required
+}
+if (name === 'sig') {
+let sig = value;
+}
+return;
+ }

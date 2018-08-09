@@ -1,30 +1,46 @@
 import nacl = require('tweetnacl');
-import {baseDecoding} from './base64';
-function SignJson(json_object, signature_name, signing_key) {
-let signatures = json_object.pop('signatures', {});
-let unsigned = json_object.pop('unsigned', null);
-let data = JSON.parse(JSON.stringify(json_object).replace(/"\s+|\s+"/g, '"'));
-let message_bytes = data;
-let signed = signing_key.sign(message_bytes);
-let signature_base64 = new Buffer(signed.signature, 'base64');
-signatures.signature_name = signature_base64;
-json_object['signatures'] = signatures;
+import {baseDecoding, baseEncoding} from './base64';
+import keys = require('./keys');
+import json = require('canonicaljson');
+import crypto = require('crypto');
+import ed25519 = require('ed25519');
+import sprintf = require('sprintf');
+import { SUPPORTED_ALGORITHMS } from './keys';
+type KeyID = string;
 
-if (unsigned != null) {
-json_object['unsigned'] = unsigned;
+var alg = "ed25519";
+var version = "key_version";
+// var signingKey = ed25519.MakeKeypair(seed);
+export function SignJson(jsonObject, signatureName, signingKey) {
+var seed = crypto.randomBytes(32);
+var test = ed25519.MakeKeypair(seed);
+let signatures = delete jsonObject.signatures;
+let unsigned = delete jsonObject.unsigned;
+
+let messageBytes = json.stringify(jsonObject);
+let signed = ed25519.Sign(new Buffer(messageBytes, 'utf8'), test);
+let signatureBase64 = baseEncoding(signed);
+signatures = signatureBase64;
+// let keyId = (signingKey.alg, signingKey.version) + "";
+// console.log(keyId);
+jsonObject.signatures = signatures;
+
+if (unsigned !== null) {
+    jsonObject.unsigned = unsigned;
 }
-return json_object;
+return jsonObject;
 }
 
-function VerifySignedJson(json_object, signature_name, verify_key) {
+
+export function VerifySignedJson(json_object, signature_name, verifyKey) {
 try {
-let signatures = json_object['signatures'];
+let signatures = json_object.signatures;
 }
 catch (e) {
 console.log('No signature of this object');
 }
-let key_id = (verify_key.alg, verify_key.version);
-let signature_b64;
+let key_id = sprintf(verifyKey.alg, verifyKey.version);
+let signature_b64 = signature_name.key_id;
 try {
 let signature = baseDecoding(signature_b64);
 }
@@ -32,9 +48,11 @@ catch (e) {
 console.log('invalid signature');
 }
 let dict = [];
-let json_object_copy = dict[json_object];
-delete json_object_copy['signatures'];
-json_object_copy.pop('unsigned', null);
-let message = JSON.parse(JSON.stringify(json_object_copy).replace(/"\s+|\s+"/g, '"'));
+let json_object_copy = json_object;
+delete json_object_copy.signatures;
+delete json_object_copy.unsigned;
+let message = json.stringify(json_object_copy);
+
+return message;
 
 }

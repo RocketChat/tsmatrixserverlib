@@ -3,7 +3,7 @@
 // import {baseDecoding} from './base64';
 // import {signJson} from './signing';
 import {ToClientEvent} from './clientevent';
-import {Fields} from './request';
+// import {Fields} from './request';
 import https = require('https');
 import request = require('request');
 // let myValidator = asTimeStamp('2009 02 13 23:31:30');
@@ -20,7 +20,7 @@ let req = {
 // key: 'ed25519:a_Obwu'
 
 };
-let Fielding = new Fields('localhost:8448', 'GET' , '/_matrix/federation/v1/query/directory?room_alias=%23test%3Alocalhost%3A8448 HTTP/1.1');
+// let Fielding = new Fields('localhost:8448', 'GET' , '/_matrix/federation/v1/query/directory?room_alias=%23test%3Alocalhost%3A8448 HTTP/1.1');
 let x = https.request(req, function(res){
     console.log('Connected');
     res.on('data', function(data){

@@ -18,6 +18,7 @@ function newCreateContentFromAuthEvents(authEvents) {
     }
     return;
 }
+exports.newCreateContentFromAuthEvents = newCreateContentFromAuthEvents;
 function domainAllowed(domain) {
     if (domain === senderDomain) {
         return null;
@@ -28,8 +29,20 @@ function domainAllowed(domain) {
     console.log('room is unfederable');
 }
 exports.domainAllowed = domainAllowed;
-function domainFromID(id) {
+function userIDAllowed(id) {
+    var c;
+    var domain = domainFromID(id);
+    return domainAllowed(domain);
 }
+exports.userIDAllowed = userIDAllowed;
+function domainFromID(id) {
+    var parts = id.split(':');
+    if (parts.length !== 2) {
+        return 'invalid ID';
+    }
+    return parts[1];
+}
+exports.domainFromID = domainFromID;
 function newMemberContentFromAuthEvents(authEvents, userID) {
     var memberEvent;
     var leave;
@@ -43,9 +56,12 @@ function newMemberContentFromAuthEvents(authEvents, userID) {
 }
 exports.newMemberContentFromAuthEvents = newMemberContentFromAuthEvents;
 function newMemberContentFromEvent(event) {
+    var c;
+    return event.Content();
 }
 exports.newMemberContentFromEvent = newMemberContentFromEvent;
-function newJoinRuleContentFromAuthEvents(authEvents, JoinRuleContent) {
+function newJoinRuleContentFromAuthEvents(authEvents) {
+    var c;
     var joinRulesEvent;
     var invite;
     var JoinRule;
